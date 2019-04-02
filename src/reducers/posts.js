@@ -91,6 +91,10 @@ import {
   FETCH_SWITCH_REQUEST,
   FETCH_SWITCH_SUCCESS,
   FETCH_SWITCH_FAILURE,
+
+  CHANGE_SWITCH_STATUS_REQUEST,
+  CHANGE_SWITCH_STATUS_SUCCESS,
+  CHANGE_SWITCH_STATUS_FAILURE
 } from '../actions/configuration'
 
 
@@ -410,7 +414,7 @@ export default function posts(
         categoriesType2: action.posts.type_2,
       });
 
-    /* fetch flag information */
+    /* fetch switch information */
     case FETCH_SWITCH_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
@@ -427,6 +431,24 @@ export default function posts(
         isFetching: false,
         switches: action.posts
       });
+
+    /* change switch information */
+    case CHANGE_SWITCH_STATUS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+
+    case CHANGE_SWITCH_STATUS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: action.message,
+      });
+
+    case CHANGE_SWITCH_STATUS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+      });
+
 
     /* fetch collection distribution */
     case FETCH_COLLECTION_DISTRIBUTION_REQUEST:

@@ -258,6 +258,16 @@ app.get('/configuration/switch', (req, res) => {
   })
 });
 
+app.post('/configuration/switchChange', (req, res) => {
+  connection.query("UPDATE configuration set stringify_data = ? where type = ?", [req.body.status, req.body.type], (err, rows) => {
+    if (err) {
+      res.status(401).json({message: err});
+      console.log(err)
+    }
+    res.json({})
+  })
+});
+
 app.get('/donations', (req, res) => {
     connection.query('select * from donations where is_new = ?;', [true],(err, result) => {
         if(err) throw err;
@@ -397,7 +407,15 @@ app.post('/donations/edit', (req, res) => {
             res.status(401).json({message: err___});
           }
           else{
-             res.json({new_id: donation_id});
+            connection.query('UPDATE configuration SET stringify_data = ? WHERE type = ?;', ['false', 'switch_1'], (err____, result___) => {
+              if (err____) {
+                console.log(err____);
+                res.status(401).json({message: err____});
+              }
+              else{
+                res.json({new_id: donation_id});
+              }
+            })
           }
           })
         }

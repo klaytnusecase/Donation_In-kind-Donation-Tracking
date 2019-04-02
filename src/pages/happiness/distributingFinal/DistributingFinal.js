@@ -70,6 +70,14 @@ class Distributing extends React.Component {
         window.alert('이미 최종배분이 완료 되었습니다');
         window.location.replace('/app');
       }
+      if (this.props.switches.switch_2 === false){
+        window.alert('정보가 갱신되었습니다. 박스 나눠주기(임시저장)을 완료하시고 오세요.');
+        window.location.replace('/app');
+      }
+      if (this.props.switches.switch_1 === false) {
+        window.alert('정보가 바뀌었습니다. 다시 수량을 정하고 오세요.');
+        window.location.replace('/app');
+      }
     });
     // this.props.dispatch(getNumBoxesByYear(new Date().getFullYear().toString()));
   }

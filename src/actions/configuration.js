@@ -10,6 +10,10 @@ export const FETCH_SWITCH_REQUEST = 'FETCH_SWITCH_REQUEST';
 export const FETCH_SWITCH_SUCCESS = 'FETCH_SWITCH_SUCCESS';
 export const FETCH_SWITCH_FAILURE = 'FETCH_SWITCH_FAILURE';
 
+export const CHANGE_SWITCH_STATUS_REQUEST = 'CHANGE_SWITCH_STATUS_REQUEST';
+export const CHANGE_SWITCH_STATUS_SUCCESS = 'CHANGE_SWITCH_STATUS_SUCCESS';
+export const CHANGE_SWITCH_STATUS_FAILURE = 'CHANGE_SWITCH_STATUS_FAILURE';
+
 
 function requestRegisterRecipientCategory(creds) {
   return {
@@ -76,6 +80,30 @@ export function fetchSwitchError(){
     isFetching: false,
   }
 }
+
+
+function requestChangeSwitchStatus(creds) {
+  return {
+    type: CHANGE_SWITCH_STATUS_REQUEST,
+    isFetching: true,
+    creds,
+  };
+}
+
+export function changeSwitchStatusSuccess(){
+  return {
+    type: CHANGE_SWITCH_STATUS_SUCCESS,
+    isFetching: false,
+  }
+}
+export function changeSwitchStatusError(message){
+  return {
+    type: CHANGE_SWITCH_STATUS_FAILURE,
+    isFetching: false,
+    message
+  }
+}
+
 
 
 export function fetchRecipientCategory() {
@@ -152,6 +180,33 @@ export function fetchSwitch() {
         }
         dispatch(fetchSwitchSuccess(posts));
         return Promise.resolve(posts);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
+
+
+export function changeSwitchStatus(creds) {
+  const config = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    credentials: 'include',
+    body: `type=${creds.type}&status=${creds.status}`,
+  };
+
+  return dispatch => {
+    dispatch(requestChangeSwitchStatus(creds));
+
+    return fetch('/configuration/switchChange', config)
+      .then(response => response.json().then(user => ({ user, response })))
+      .then(({ user, response }) => {
+        if (!response.ok) {
+          dispatch(changeSwitchStatusError(user.message));
+          return Promise.reject(user);
+        }
+        dispatch(changeSwitchStatusSuccess());
+        return Promise.resolve(user);
       })
       .catch(err => console.error('Error: ', err));
   };

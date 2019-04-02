@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
 import withMeta from '../../../core/withMeta';
 import Widget from '../../../components/Widget';
 import { fetchCollectionsDistribution, updateCollectionDistribution} from '../../../actions/happiness';
-import { fetchSwitch} from '../../../actions/configuration';
+import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 
 
 
@@ -90,6 +90,10 @@ class Distributing extends React.Component {
         window.alert('이미 최종배분이 완료 되었습니다');
         window.location.replace('/app');
       }
+      if (this.props.switches.switch_1 === false) {
+        window.alert('정보가 바뀌었습니다. 다시 수량을 정하고 오세요.');
+        window.location.replace('/app');
+      }
     });
   }
 
@@ -136,7 +140,6 @@ class Distributing extends React.Component {
   };
 
   doDistributeBoxes = (e) => {
-    console.log(this.state.quantities)
     this.props
       .dispatch(
         updateCollectionDistribution({
@@ -148,6 +151,10 @@ class Distributing extends React.Component {
         this.props.dispatch(fetchCollectionsDistribution())
     );
     e.preventDefault();
+    this.props.dispatch(changeSwitchStatus({
+      'type': 'switch_2',
+      'status': true
+    }))
   };
 
 

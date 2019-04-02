@@ -25,7 +25,7 @@ import {
 import { connect } from 'react-redux';
 import withMeta from '../../../core/withMeta';
 import { fetchCollectionsAndDonations, setCollectionQuantity, removeCollection } from '../../../actions/happiness';
-import { fetchSwitch} from '../../../actions/configuration';
+import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 
 class Making extends React.Component {
   static propTypes = {
@@ -115,6 +115,14 @@ class Making extends React.Component {
       .then(() =>
         this.props.dispatch(fetchCollectionsAndDonations())
       );
+    this.props.dispatch(changeSwitchStatus({
+      'type': 'switch_2',
+      'status': false
+    }))
+    this.props.dispatch(changeSwitchStatus({
+      'type': 'switch_1',
+      'status': true
+    }))
     e.preventDefault();
   };
 
@@ -128,6 +136,10 @@ class Making extends React.Component {
       .then(() =>
         this.props.dispatch(fetchCollectionsAndDonations())
       );
+    this.props.dispatch(changeSwitchStatus({
+      'type': 'switch_2',
+      'status': false
+    }))
 
   };
 
