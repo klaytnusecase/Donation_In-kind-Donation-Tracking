@@ -71,9 +71,9 @@ function convertDate(date){
     const isoDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().substring(0, 10);
     return isoDate;
   }
-  
+
     return '';
-  
+
 
 }
 
@@ -482,6 +482,7 @@ class VolunteerChecking extends React.Component {
                   onChange={this.handleRecipientChange}
                   dateFormat="yyyy/MM/dd"
                   minDate = {new Date('2019-01-01T00:00:00')}
+                  maxDate = {new Date()}
                 />
               </FormGroup>
 

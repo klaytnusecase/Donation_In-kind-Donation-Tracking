@@ -29,6 +29,7 @@ import dbSchema from '../../../images/prisming_db_schema.png';
 import Widget from '../../../components/Widget';
 import s from './ForAdmin.scss';
 import {fetchBoxStatus} from '../../../actions/posts'
+import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 
 class ForAdmin extends Component {
   /* eslint-disable */
@@ -58,6 +59,13 @@ class ForAdmin extends Component {
     super(props);
   }
 
+  initialize = () => {
+    this.props.dispatch(changeSwitchStatus({
+      'type': 'switch_3',
+      'status': false,
+    }));
+  }
+
   render() {
     console.log(this.props);
     console.log(this.state);
@@ -67,6 +75,15 @@ class ForAdmin extends Component {
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
           <BreadcrumbItem active>Dashboard</BreadcrumbItem>
         </Breadcrumb>
+
+        <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
+          <ButtonGroup>
+          <Button color="danger" onClick={this.initialize}>
+            {'테스트용 초기화'}
+          </Button>
+          </ButtonGroup>
+        </div>
+
         <h1 className="mb-lg">행복상자 현황 {this.props.isFetching ? "(불러오는 중입니다)" : ""}</h1>
         {!this.props.isFetching &&
         <Row>

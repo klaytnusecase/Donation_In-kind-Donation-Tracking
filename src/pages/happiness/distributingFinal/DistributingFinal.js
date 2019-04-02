@@ -25,7 +25,7 @@ import withMeta from '../../../core/withMeta';
 import Widget from '../../../components/Widget';
 import { fetchCollectionsDistribution, updateCollectionDistribution, fetchCollectionsAndDonations} from '../../../actions/happiness';
 import { sendBox, getNumBoxesByYear } from '../../../actions/posts';
-import { fetchSwitch} from '../../../actions/configuration';
+import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
 
 
@@ -180,7 +180,11 @@ toggleModal = () => {
             .then(() => setTimeout(() => this.setState({
               percent: Math.ceil(100*this.state.blockHash.length/this.state.total.reduce((a,b) => a+b, 0))
             }), 100))
-          ))));
+          ))))
+          .then(this.props.dispatch(changeSwitchStatus({
+            'type': 'switch_3',
+            'status': true,
+          })));
 
 
     // window.confirm('상자를 분배하였습니다.');
