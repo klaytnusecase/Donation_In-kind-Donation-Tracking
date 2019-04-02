@@ -29,7 +29,7 @@ import dbSchema from '../../../images/prisming_db_schema.png';
 import Widget from '../../../components/Widget';
 import s from './ForAdmin.scss';
 import {fetchBoxStatus} from '../../../actions/posts'
-import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
+import {fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 
 class ForAdmin extends Component {
   /* eslint-disable */
