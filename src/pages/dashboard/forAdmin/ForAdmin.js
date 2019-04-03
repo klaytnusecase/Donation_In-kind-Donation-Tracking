@@ -97,7 +97,7 @@ class ForAdmin extends Component {
             <div className="d-flex justify-content-center">
             <Circle
               size={200}
-              progress={(this.props.status.filter((x) => x=="0").length/(this.props.status.length - 1)* 100).toFixed(1)}
+              progress={(this.props.status.length!==1) ? (this.props.status.filter((x) => x=="0").length/(this.props.status.length - 1)* 100).toFixed(1) : 0}
               progressColor="Maroon"
               bgColor="Moccasin"
               textStyle={{
@@ -120,7 +120,7 @@ class ForAdmin extends Component {
             <div className="d-flex justify-content-center">
             <Circle
               size={200}
-              progress={(this.props.status.filter((x) => x=="1").length/(this.props.status.length - 1) * 100).toFixed(1)}
+              progress={(this.props.status.length!==1) ? (this.props.status.filter((x) => x=="1").length/(this.props.status.length - 1) * 100).toFixed(1) : 0}
               progressColor="Maroon"
               bgColor="Moccasin"
               textStyle={{
@@ -143,7 +143,7 @@ class ForAdmin extends Component {
             <div className="d-flex justify-content-center">
             <Circle
               size={200}
-              progress={(this.props.status.filter((x) => x=="2").length/(this.props.status.length - 1) * 100).toFixed(1)}
+              progress={(this.props.status.length!==1) ? (this.props.status.filter((x) => x=="2").length/(this.props.status.length - 1) * 100).toFixed(1) : 0}
               progressColor="Maroon"
               bgColor="Moccasin"
               textStyle={{
