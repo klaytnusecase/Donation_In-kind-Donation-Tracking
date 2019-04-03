@@ -358,7 +358,7 @@ const HappyAlliance = require('../../HappyAlliance.json');
 const Caver = require('caver-js');
 const caver = new Caver('http://127.0.0.1:8551');
 
-const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, '0xe5c03574140db9a4bb919ce58284878796db747f');
+const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, '0xff0ebba3595795f52406ea31e80a73ccffe937e0');
 const myAddress = "0x3f3f1b10573e4168958d9176e05b74be17134c80";
 
 export function createDonation(postData) {

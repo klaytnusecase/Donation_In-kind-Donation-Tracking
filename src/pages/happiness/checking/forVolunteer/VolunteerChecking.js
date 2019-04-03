@@ -230,6 +230,7 @@ class VolunteerChecking extends React.Component {
           recipient: `${this.state.recipientA  }, ${  this.state.recipientB}`,
           recipientDate: String(this.state.recipient_date),
         }))
+        .then(() => this.props.dispatch(fetchNPOVolun(this.state.targetNPO)))
         .then(()=> this.setState({
           updateTarget: '',
           recipientA: '',
@@ -481,6 +482,7 @@ class VolunteerChecking extends React.Component {
                   selected={this.state.recipient_date}
                   onChange={this.handleRecipientChange}
                   dateFormat="yyyy/MM/dd"
+                  required
                   minDate = {new Date('2019-01-01T00:00:00')}
                   maxDate = {new Date()}
                 />
