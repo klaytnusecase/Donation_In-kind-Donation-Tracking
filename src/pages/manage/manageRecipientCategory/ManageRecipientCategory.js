@@ -101,7 +101,7 @@ class ManageRecipientCategory extends React.Component {
 
   handleRemoveCategoryType2= idx => () => {
     this.setState({
-      categoryArrayType2: this.state.categoryArrayType1.filter((s, sidx) => idx !== sidx)
+      categoryArrayType2: this.state.categoryArrayType2.filter((s, sidx) => idx !== sidx)
     });
   };
 
