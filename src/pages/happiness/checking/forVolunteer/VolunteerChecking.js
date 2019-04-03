@@ -40,7 +40,7 @@ import withMeta from '../../../../core/withMeta';
 import Widget from '../../../../components/Widget';
 import { fetchPosts, fetchDonations, fetchBlkchain, fetchBoxDetails, updateBox, fetchNPOVolun, confirmBox} from '../../../../actions/posts';
 import {fetchCollectionsAndDonations} from '../../../../actions/happiness';
-import {fetchRecipientCategory} from '../../../../actions/configuration';
+import { fetchRecipientCategory } from '../../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
 
 Date.prototype.isDate = function (){
