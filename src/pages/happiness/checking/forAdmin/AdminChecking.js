@@ -175,7 +175,7 @@ class AdminChecking extends React.Component {
                 >
                 <option value ='' disabled hidden>NPO</option>
                 {this.props.volunteers.map(volun => (
-                    <option value={volun.username} key={volun.id}>{volun.affiliation}</option>
+                    <option value={volun.username} key={volun.username}>{volun.affiliation}</option>
                   ))}
               </Input>
 

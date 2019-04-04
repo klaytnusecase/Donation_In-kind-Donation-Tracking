@@ -38,7 +38,6 @@ const connection     = require('./db_conn');
 const crypto   = require('crypto');
 
 const app = express();
-
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
@@ -294,7 +293,7 @@ app.get('/collections', (req, res) => {
     connection.query("select * from donations A, donation_column B where A.donation_id=B.donation_id and B.column_type in ('물품명', '수량', '유통기한') and A.is_new=?",[true] ,(err, result) => {
         if(err) throw err;
         result = convertFormDonation(groupBy(result,(item) => [item.donation_id]));
-          connection.query("select A.id, A.total_quantity as collection_quantity, A.name, A.expiration_date as expiration_date, B.donation_id, B.quantity, C.detail from collection A, collection_component B, donation_column C where A.id=B.collection_id and B.donation_id=C.donation_id and C.column_type='물품명'", (err_, result_) => {
+          connection.query("select A.id, A.total_quantity as collection_quantity, A.name, A.expiration_date as expiration_date, B.donation_id, B.quantity, C.detail from collection A, collection_component B, donation_column C where A.id=B.collection_id and B.donation_id=C.donation_id and C.column_type='물품명' order by A.id", (err_, result_) => {
           if(err_) throw err_;
           result_ = convertFormCollection(groupBy(result_,(item) => [item.id]));
           const total_result = {donations: result, collectionsForMaking: result_};

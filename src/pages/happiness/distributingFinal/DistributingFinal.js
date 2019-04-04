@@ -27,6 +27,7 @@ import { fetchCollectionsDistribution, updateCollectionDistribution, fetchCollec
 import { sendBox, getNumBoxesByYear } from '../../../actions/posts';
 import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
+const crypto   = require('crypto');
 
 
 function pad_with_zeroes(number, length) {
@@ -168,7 +169,8 @@ toggleModal = () => {
           Array(...{length: q}).map(Number.call, Number).forEach(() =>
             this.props.dispatch(
               sendBox({
-                boxId: `${thisYear  }-${  pad_with_zeroes(numExistingBoxes++, 7)}`, // year + 7 digit box id (0000001~9999999)
+                boxId: crypto.createHash('sha1').update(`${new Date().getTime()}${numExistingBoxes++}`).digest('hex'),
+                //boxId: `${thisYear}-${pad_with_zeroes(numExistingBoxes++, 7)}`, // year + 7 digit box id (0000001~9999999)
                 serializedDonations: JSON.stringify(this.state.collectionsForMaking[idx2].donations),
                 npo: val,
                 year: thisYear,
@@ -183,7 +185,7 @@ toggleModal = () => {
           ))))
           .then(this.props.dispatch(changeSwitchStatus({
             'type': 'switch_3',
-            'status': true,
+            'status': false,
           })));
 
 
@@ -268,7 +270,7 @@ toggleModal = () => {
 
         <Modal isOpen={this.state.isOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>
-            <h5>상자를 분배하시겠습니까? 되돌릴 수 없습니다.</h5>
+            상자를 분배하시겠습니까? 되돌릴 수 없습니다.
           </ModalHeader>
           <ModalBody />
           <h5>&emsp; 블록체인 등록 진행 상황</h5>
