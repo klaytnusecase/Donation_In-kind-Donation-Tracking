@@ -88,27 +88,27 @@ CREATE TABLE `configuration` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(1, 'john', '6607a999607711cd339dce1de6d64425a0985cfd', '행복나눔재단', 'admin', '010-4442-2081');
+(1, 'sk', '6607a999607711cd339dce1de6d64425a0985cfd', '행복나눔재단', 'admin', '010-4442-2081');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(2, 'dbswlgm', '6607a999607711cd339dce1de6d64425a0985cfd', 'Postech', 'member', '010-4442-2081');
+(2, 'gx', '6607a999607711cd339dce1de6d64425a0985cfd', 'GX', 'member', '010-4442-2081');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(3, 'postech', '6607a999607711cd339dce1de6d64425a0985cfd', 'CS2주식회사', 'member', '010-4442-2081');
+(3, 'prisming', '6607a999607711cd339dce1de6d64425a0985cfd', 'prisming', 'member', '010-4442-2081');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(4, 'balla2081', '6607a999607711cd339dce1de6d64425a0985cfd', '미혼모 센터', 'volunteer', '010-4442-2081');
+(4, 'prisming1', '6607a999607711cd339dce1de6d64425a0985cfd', '미혼모 센터', 'volunteer', '010-4442-2081');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(5, 'balla3875', '6607a999607711cd339dce1de6d64425a0985cfd', '아동 복지 센터', 'volunteer', '010-4442-2081');
+(5, 'prisming2', '6607a999607711cd339dce1de6d64425a0985cfd', '아동 복지 센터', 'volunteer', '010-4442-2081');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(6, 'balla4926', '6607a999607711cd339dce1de6d64425a0985cfd', '복지 센터', 'volunteer', '010-4442-2081');
+(6, 'prisming3', '6607a999607711cd339dce1de6d64425a0985cfd', '복지 센터', 'volunteer', '010-4442-2081');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(7, 'balla0000', '6607a999607711cd339dce1de6d64425a0985cfd', '프리즈밍', 'volunteer', '010-4442-2081');
+(7, 'prisming4', '6607a999607711cd339dce1de6d64425a0985cfd', '프리즈밍', 'volunteer', '010-4442-2081');
 
 
 INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(1, 'dbswlgm ', '6607a999607711cd339dce1de6d64425a0985cfd', '', 'Postech' ,'Postech', true, NOW());
+(1, 'gx', '6607a999607711cd339dce1de6d64425a0985cfd', '', 'GX' ,'GX', true, NOW());
 INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(2, 'postech', '6607a999607711cd339dce1de6d64425a0985cfa', '','CS2주식회사' ,'CS2주식회사', true, NOW());
+(2, 'prisming', '6607a999607711cd339dce1de6d64425a0985cfa', '','prisming' ,'prisming', true, NOW());
 INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(3, 'dbswlgm', '6607a999607711cd339dce1de6d64425a0985cfb', '','Postech' ,'Postech', true, NOW());
+(3, 'gx', '6607a999607711cd339dce1de6d64425a0985cfb', '','GX' ,'GX', true, NOW());
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
 ('6607a999607711cd339dce1de6d64425a0985cfd', '물품명', '콜라', false);
