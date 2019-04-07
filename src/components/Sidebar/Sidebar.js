@@ -82,6 +82,10 @@ class Sidebar extends React.Component {
                 name: '박스 확인하기',
                 link: '/app/happiness/checking',
               },
+              {
+                name: '영수증 발급하기',
+                link: '/app/happiness/receipt',
+              },
             ]}
             glyph="components"
           />

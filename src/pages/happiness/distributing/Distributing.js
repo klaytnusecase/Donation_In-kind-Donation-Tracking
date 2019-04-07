@@ -85,16 +85,16 @@ class Distributing extends React.Component {
         })
       })
     })
-    this.props.dispatch(fetchSwitch()).then(()=> {
-      if (this.props.switches.switch_3 === true) {
-        window.alert('이미 최종배분이 완료 되었습니다');
-        window.location.replace('/app');
-      }
-      if (this.props.switches.switch_1 === false) {
-        window.alert('정보가 바뀌었습니다. 다시 수량을 정하고 오세요.');
-        window.location.replace('/app');
-      }
-    });
+    //this.props.dispatch(fetchSwitch()).then(()=> {
+    //  if (this.props.switches.switch_3 === true) {
+    //    window.alert('이미 최종배분이 완료 되었습니다');
+    //    window.location.replace('/app');
+    //  }
+    //  if (this.props.switches.switch_1 === false) {
+    //    window.alert('정보가 바뀌었습니다. 다시 수량을 정하고 오세요.');
+    //    window.location.replace('/app');
+    //  }
+    //});
   }
 
   constructor(props) {

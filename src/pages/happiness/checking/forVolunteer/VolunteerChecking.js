@@ -58,6 +58,7 @@ function convertObjtoArray(obj){
   }
   return value;
 }
+
 function getAllIndexes(arr, val) {
     let indexes = [], i = -1;
     while ((i = arr.indexOf(val, i+1)) != -1){

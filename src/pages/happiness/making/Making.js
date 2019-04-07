@@ -56,12 +56,12 @@ class Making extends React.Component {
         collections : this.props.collectionsForMaking
       })
     );
-    this.props.dispatch(fetchSwitch()).then(()=> {
-      if (this.props.switches.switch_3 === true) {
-        window.alert('이미 최종배분이 완료 되었습니다');
-        window.location.replace('/app');
-      }
-    });
+    //this.props.dispatch(fetchSwitch()).then(()=> {
+    //  if (this.props.switches.switch_3 === true) {
+    //    window.alert('이미 최종배분이 완료 되었습니다');
+    //    window.location.replace('/app');
+    //  }
+    //});
   }
   constructor(props) {
     super(props);

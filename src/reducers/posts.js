@@ -45,6 +45,7 @@ import {
   FETCH_STATUS_REQUEST,
   FETCH_STATUS_SUCCESS,
   FETCH_STATUS_FAILURE,
+  FETCH_ALL_SUCCESS,
 } from '../actions/posts';
 
 import {
@@ -75,7 +76,6 @@ import {
   FETCH_COLLECTION_DISTRIBUTION_REQUEST,
   FETCH_COLLECTION_DISTRIBUTION_SUCCESS,
   FETCH_COLLECTION_DISTRIBUTION_FAILURE ,
-
 
 } from '../actions/happiness'
 
@@ -266,6 +266,11 @@ export default function posts(
         return Object.assign({}, state, {
           isFetching: false,
           status: action.status,
+        });
+      case FETCH_ALL_SUCCESS:
+        return Object.assign({}, state, {
+          isFetching: false,
+          allBoxes: action.allBoxes,
         });
       case FETCH_STATUS_FAILURE:
         return Object.assign({}, state, {

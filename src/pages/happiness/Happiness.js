@@ -7,6 +7,7 @@ import MakingHappiness from './making/Making';
 import DistributingHappiness from './distributing/Distributing';
 import DistributingFinalHappiness from './distributingFinal/DistributingFinal';
 import CheckingHappiness from './checking/Checking';
+import Receipt from './receipt/Receipt';
 
 class Donation extends React.Component {
   render() {
@@ -30,6 +31,7 @@ class Donation extends React.Component {
           <Route path="/app/happiness/distributing" exact component={DistributingHappiness} />
           <Route path="/app/happiness/distributingFinal" exact component={DistributingFinalHappiness} />
           <Route path="/app/happiness/checking" exact component={CheckingHappiness} />
+          <Route path="/app/happiness/receipt" exact component={Receipt} />
         </Switch>
         );
     }

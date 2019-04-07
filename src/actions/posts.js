@@ -42,6 +42,7 @@ export const FETCH_NPOVOLUN_SUCCESS = 'FETCH_NPOVOLUN_SUCCESS';
 export const FETCH_NPOVOLUN_FAILURE = 'FETCH_NPOVOLUN_FAILURE';
 export const FETCH_STATUS_REQUEST = 'FETCH_STATUS_REQUEST';
 export const FETCH_STATUS_SUCCESS = 'FETCH_STATUS_SUCCESS';
+export const FETCH_ALL_SUCCESS = 'FETCH_ALL_SUCCESS';
 export const FETCH_STATUS_FAILURE = 'FETCH_STATUS_FAILURE';
 
 
@@ -339,6 +340,14 @@ function fetchStatusSuccess(status) {
   };
 }
 
+function fetchAllDetailsSuccess(allBoxes) {
+  return {
+    type: FETCH_ALL_SUCCESS,
+    isFetching: false,
+    allBoxes: allBoxes,
+  };
+}
+
 function fetchStatusError(message) {
   return {
     type: FETCH_STATUS_FAILURE,
@@ -358,7 +367,9 @@ const HappyAlliance = require('../../HappyAlliance.json');
 const Caver = require('caver-js');
 const caver = new Caver('http://141.223.44.39:8551');
 
-const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, '0x28b016f7644dd28e2fd7e3743f52af223741fcba');
+const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, '0x23720043bede573711a2846bbbcf38d3e4227340');
+//0x28b016f7644dd28e2fd7e3743f52af223741fcba
+
 const myAddress = "0x3f3f1b10573e4168958d9176e05b74be17134c80";
 
 export function createDonation(postData) {
@@ -516,6 +527,27 @@ export function confirmBox(data) {
       .catch(err => console.error('Error: ', err));
   };
 }
+
+
+export function fetchAllBoxes() {
+  return dispatch => {
+    dispatch(requestFetchStatus());
+    return happyAlliance.methods.getAllBoxInfo().call()
+    .then(response => {
+        if (!response) {
+          // If there was a problem, we want to
+          // dispatch the error condition
+          dispatch(fetchStatusError('Fail'));
+          return Promise.reject(response);
+        }
+        // Dispatch the success action
+        dispatch(fetchAllDetailsSuccess(response));
+        return Promise.resolve(response);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
 
 export function fetchBoxStatus() {
   return dispatch => {
