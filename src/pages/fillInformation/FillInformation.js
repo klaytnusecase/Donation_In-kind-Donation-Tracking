@@ -47,7 +47,7 @@ class RegisterDonation extends PureComponent {
     this.state = {
       password: '',
       password_rep: '',
-      corp_name: '',
+      affiliation: '',
       address: '',
       representative_name: '',
       e_mail: '',
@@ -59,7 +59,7 @@ class RegisterDonation extends PureComponent {
     const name = this.props.name;
     this.props.dispatch(fetchInformation(name)).then(() =>
       this.setState({
-        corp_name: this.props.details.corp_name,
+        affiliation: this.props.details.affiliation,
         address: this.props.details.address,
         representative_name: this.props.details.representative_name,
         e_mail: this.props.details.e_mail,
@@ -74,8 +74,8 @@ class RegisterDonation extends PureComponent {
   changePasswordRep = (event) => {
     this.setState({password_rep: event.target.value});
   };
-  changeCorpName = (event) => {
-    this.setState({corp_name: event.target.value});
+  changeAffiliation = (event) => {
+    this.setState({affiliation: event.target.value});
   };
   changeRepresentativeName = (event) => {
     this.setState({representative_name: event.target.value});
@@ -97,7 +97,7 @@ class RegisterDonation extends PureComponent {
         name: this.props.name,
         password: this.state.password,
         password_rep: this.state.password_rep,
-        corp_name: this.state.corp_name,
+        affiliation: this.state.affiliation,
         address: this.state.address,
         representative_name: this.state.representative_name,
         e_mail: this.state.e_mail,
@@ -158,8 +158,8 @@ class RegisterDonation extends PureComponent {
                   <FormGroup>
                     <Input
                       className="no-border"
-                      value={this.state.corp_name}
-                      onChange={this.changeCorpName}
+                      value={this.state.affiliation}
+                      onChange={this.changeAffiliation}
                       type="text"
                       required
                       name="corp_name"

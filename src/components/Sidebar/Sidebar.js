@@ -44,6 +44,14 @@ class Sidebar extends React.Component {
                 link: '/app/manage/registerUser',
                },
                {
+                name: '멤버사 목록',
+                link: '/app/manage/memberList',
+               },
+               {
+                name: '전달기관 목록',
+                link: '/app/manage/volunteerList',
+               },
+               {
                 name: '수혜자 카테고리 관리',
                 link: '/app/manage/manageRecipientCategory',
                },

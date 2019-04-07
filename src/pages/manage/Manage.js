@@ -3,6 +3,8 @@ import { Switch, Route, withRouter, Redirect } from 'react-router';
 import {connect} from 'react-redux';
 import RegisterUser from './registerUser/RegisterUser';
 import manageRecipientCategory from './manageRecipientCategory/ManageRecipientCategory'
+import viewMemberList from './userListMember/UserListMember'
+import viewVolunteerList from './userListVolunteer/UserListVolunteer'
 
 class Manage extends React.Component {
   render() {
@@ -15,6 +17,8 @@ class Manage extends React.Component {
       <Switch>
         <Route path="/app/manage/registerUser" exact component={RegisterUser}/>
         <Route path="/app/manage/manageRecipientCategory" exact component={manageRecipientCategory}/>
+        <Route path="/app/manage/memberList" exact component={viewMemberList}/>
+        <Route path="/app/manage/volunteerList" exact component={viewVolunteerList}/>
       </Switch>
     );
   }

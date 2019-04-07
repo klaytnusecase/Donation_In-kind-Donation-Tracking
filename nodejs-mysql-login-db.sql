@@ -22,7 +22,6 @@ CREATE TABLE `users` (
   `password` varchar(60) NOT NULL,
   `affiliation` varchar(100) NOT NULL,
   `org_type` varchar(16) NOT NULL,
-  `corp_name` varchar(100) DEFAULT '',
   `address` varchar(100) DEFAULT '',
   `representative_name` varchar(100) DEFAULT '',
   `e_mail` varchar(100) DEFAULT '',

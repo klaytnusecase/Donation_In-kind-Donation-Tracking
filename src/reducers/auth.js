@@ -18,6 +18,14 @@ import {
   CHANGE_INFORMATION_FAILURE,
 
 
+  FETCH_MEMBERS_REQUEST,
+  FETCH_MEMBERS_SUCCESS,
+  FETCH_MEMBERS_FAILURE,
+
+  FETCH_VOLUNTEERS_REQUEST,
+  FETCH_VOLUNTEERS_SUCCESS,
+  FETCH_VOLUNTEERS_FAILURE
+
 } from '../actions/user';
 
 // The auth reducer. The starting state sets authentication
@@ -92,8 +100,6 @@ export default function auth(
     case FETCH_INFORMATION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: null,
-        message: null,
         details: action.posts
       });
 
@@ -112,7 +118,44 @@ export default function auth(
       return Object.assign({}, state, {
         isFetching: false,
         errorMessage: null,
-        message: '비밀번호 변경에 성공하였습니다',
+        message: '정보 변경에 성공하였습니다. 이름은 재접속해야 변경됩니다.',
+      });
+    /* fetch member user list*/
+    case FETCH_MEMBERS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case FETCH_MEMBERS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        message: null,
+      });
+    case FETCH_MEMBERS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: null,
+        message: null,
+        posts: action.posts
+      });
+
+    /* fetch volunteer list*/
+    case FETCH_VOLUNTEERS_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case FETCH_VOLUNTEERS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        message: null,
+      });
+    case FETCH_VOLUNTEERS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: null,
+        message: null,
+        posts: action.posts
       });
 
     default:

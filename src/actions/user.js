@@ -19,6 +19,16 @@ export const CHANGE_INFORMATION_SUCCESS = 'CHANGE_INFORMATION_SUCCESS';
 export const CHANGE_INFORMATION_FAILURE = 'CHANGE_INFORMATION_FAILURE';
 
 
+export const FETCH_MEMBERS_REQUEST = 'FETCH_MEMBERS_REQUEST';
+export const FETCH_MEMBERS_SUCCESS = 'FETCH_MEMBERS_SUCCESS';
+export const FETCH_MEMBERS_FAILURE = 'FETCH_MEMBERS_FAILURE';
+
+
+export const FETCH_VOLUNTEERS_REQUEST = 'FETCH_VOLUNTEERS_REQUEST';
+export const FETCH_VOLUNTEERS_SUCCESS = 'FETCH_VOLUNTEERS_SUCCESS';
+export const FETCH_VOLUNTEERS_FAILURE = 'FETCH_VOLUNTEERS_FAILURE';
+
+
 /* register action */
 function requestRegister(creds) {
   return {
@@ -87,7 +97,7 @@ export function receiveLogout() {
   };
 }
 
-/* Fill Information actions*/
+/* fetch request to change Information actions*/
 function requestFetchInformation(creds) {
   return {
     type: FETCH_INFORMATION_REQUEST,
@@ -111,7 +121,7 @@ export function fetchInformationError(message){
   }
 }
 
-/* CHhnge Information actions*/
+/* Change Information actions*/
 function requestChangeInformation(creds) {
   return {
     type: CHANGE_INFORMATION_REQUEST,
@@ -129,6 +139,54 @@ export function changeInformationSuccess(){
 export function changeInformationError(message){
   return {
     type: CHANGE_INFORMATION_FAILURE,
+    isFetching: false,
+    message
+  }
+}
+
+/* Fetch member list*/
+function requestFetchMembers(creds) {
+  return {
+    type: FETCH_MEMBERS_REQUEST,
+    isFetching: true,
+    creds,
+  };
+}
+
+export function fetchMembersSuccess(posts){
+  return {
+    type: FETCH_MEMBERS_SUCCESS,
+    isFetching: false,
+    posts
+  }
+}
+export function fetchMembersError(message){
+  return {
+    type: FETCH_MEMBERS_FAILURE,
+    isFetching: false,
+    message
+  }
+}
+
+/* Fetch volunteer list*/
+function requestFetchVolunteers(creds) {
+  return {
+    type: FETCH_VOLUNTEERS_REQUEST,
+    isFetching: true,
+    creds,
+  };
+}
+
+export function fetchVolunteersSuccess(posts){
+  return {
+    type: FETCH_VOLUNTEERS_SUCCESS,
+    isFetching: false,
+    posts
+  }
+}
+export function fetchVolunteersError(message){
+  return {
+    type: FETCH_VOLUNTEERS_FAILURE,
     isFetching: false,
     message
   }
@@ -245,7 +303,7 @@ export function changeInformation(creds) {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     credentials: 'include',
-    body: `name=${creds.name}&password=${creds.password}&password_rep=${creds.password_rep}&corp_name=${creds.corp_name}&address=${creds.address}&representative_name=${creds.representative_name}&e_mail=${creds.e_mail}&contacts=${creds.contacts}`,
+    body: `name=${creds.name}&password=${creds.password}&password_rep=${creds.password_rep}&affiliation=${creds.affiliation}&address=${creds.address}&representative_name=${creds.representative_name}&e_mail=${creds.e_mail}&contacts=${creds.contacts}`,
   };
 
   return dispatch => {
@@ -260,6 +318,63 @@ export function changeInformation(creds) {
         }
         dispatch(changeInformationSuccess());
         return Promise.resolve(user);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
+
+export function fetchMembers() {
+  return dispatch => {
+    dispatch(requestFetchMembers());
+
+    return fetch('/user/member_list', {
+      method: 'GET'
+    })
+      .then(response =>
+        response.json().then(responseJson => ({
+          posts: responseJson,
+          responseJson,
+        })),
+      )
+      .then(({posts, responseJson}) => {
+        if (!responseJson) {
+          // If there was a problem, we want to
+          // dispatch the error condition
+          dispatch(fetchMembersError('Fail'));
+          return Promise.reject(posts);
+        }
+        // Dispatch the success action
+        dispatch(fetchMembersSuccess(posts));
+        return Promise.resolve(posts);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
+export function fetchVolunteers() {
+  return dispatch => {
+    dispatch(requestFetchVolunteers());
+
+    return fetch('/user/volunteer_list', {
+      method: 'GET'
+    })
+      .then(response =>
+        response.json().then(responseJson => ({
+          posts: responseJson,
+          responseJson,
+        })),
+      )
+      .then(({posts, responseJson}) => {
+        if (!responseJson) {
+          // If there was a problem, we want to
+          // dispatch the error condition
+          dispatch(fetchVolunteersError('Fail'));
+          return Promise.reject(posts);
+        }
+        // Dispatch the success action
+        dispatch(fetchVolunteersSuccess(posts));
+        return Promise.resolve(posts);
       })
       .catch(err => console.error('Error: ', err));
   };

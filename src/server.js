@@ -164,9 +164,30 @@ app.post('/register', (req, res) => {
   }
 });
 
+app.get('/user/member_list', (req, res) => {
+  connection.query("select username, affiliation, e_mail, contacts from users where org_type = ?", ['member'], (err, rows) => {
+    if (err) {
+      res.status(401).json({message: err});
+    }
+    else {
+      res.send(JSON.stringify(rows));
+    }
+  });
+});
+
+app.get('/user/volunteer_list', (req, res) => {
+  connection.query("select username, affiliation, e_mail, contacts from users where org_type = ?", ['volunteer'], (err, rows) => {
+    if (err) {
+      res.status(401).json({message: err});
+    }
+    else {
+      res.send(JSON.stringify(rows));
+    }
+  });
+});
+
 app.post('/getInformation', (req, res) => {
-  console.log(req.body.name)
-  connection.query("select corp_name, address, representative_name, e_mail, contacts from users where username = ?", [req.body.name], (err, rows) => {
+  connection.query("select affiliation, address, representative_name, e_mail, contacts from users where username = ?", [req.body.name], (err, rows) => {
     if (err) {
       res.status(401).json({message: err});
     }
@@ -180,7 +201,7 @@ app.post('/changeInformation', (req, res) => {
   const name = req.body.name; // eslint-disable-line
   const password = req.body.password;
   const password_rep = req.body.password_rep;
-  const corp_name = req.body.corp_name;
+  const affiliation = req.body.affiliation;
   const address = req.body.address;
   const representative_name = req.body.representative_name;
   const e_mail = req.body.e_mail;
@@ -194,7 +215,7 @@ app.post('/changeInformation', (req, res) => {
     let salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
      salt = `${salt}${password}`;
     const encPassword = crypto.createHash('sha1').update(salt).digest('hex');
-    connection.query("update users set password = ?, corp_name = ?, address = ?, representative_name = ?, e_mail = ?, contacts = ? where username = ?", [encPassword, corp_name, address, representative_name, e_mail, contacts, name], (err, rows) => {
+    connection.query("update users set password = ?, affiliation = ?, address = ?, representative_name = ?, e_mail = ?, contacts = ? where username = ?", [encPassword, affiliation, address, representative_name, e_mail, contacts, name], (err, rows) => {
       if (err) {
         res.status(401).json({message: err});
       }
