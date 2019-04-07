@@ -58,6 +58,13 @@ function expandDonationArray(arr) {
   return([boxIdExpand, npoExpand, donationIdExpand, quantityExpand])
 }
 
+let headers = [
+  { label: "박스ID", key: "boxId" },
+  { label: "수혜사", key: "npo" },
+  { label: "기부ID", key: "donationId" },
+  { label: "수량", key: "quantity" }
+];
+
 function forReactCSV(arr) {
   const size = arr.length;
   let data = [];
@@ -149,7 +156,7 @@ class Receipt extends React.Component {
         )}
 
         <h5>전체 데이터 다운로드</h5>
-        {this.state.expandData && <CSVLink data={this.state.expandData}>Download me</CSVLink>}
+        {this.state.expandData && <CSVLink data={this.state.expandData} headers={headers}>Download me</CSVLink>}
 
         <Widget>
           <div className="widget-table-overflow">
