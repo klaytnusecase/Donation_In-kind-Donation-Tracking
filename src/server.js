@@ -572,6 +572,14 @@ app.get('/collections/fetchDistribution', (req, res) => {
   })
 })
 
+app.get('/receipt/donationInfo', (req, res) => {
+    connection.query("select A.donation_id, C.affiliation, C.username, B.column_type, B.detail from donations A, donation_column B, users C where A.donation_id=B.donation_id and B.column_type in ('물품명', '가격', '수량') and A.is_new=? and A.company_id = C.username", [true],(err, result) => {
+        if(err) throw err;
+        result = convertFormReceipt(groupBy(result,(item) => [item.donation_id]));
+
+        res.send(JSON.stringify(result));
+    });
+});
 
 
 
@@ -758,6 +766,33 @@ function convertFormDonation(array)
   }
   return new_array;
 }
+
+function convertFormReceipt(array)
+{
+  let new_dict = {};
+  for (const i in array) {
+    const dummy_dict = {}
+    for (const j in array[i]) {
+      switch (array[i][j].column_type){
+        case "물품명":
+          dummy_dict['name'] = array[i][j].detail
+          break
+        case "가격":
+          dummy_dict['price'] = array[i][j].detail
+          break
+        case "수량":
+          dummy_dict['quantity'] = array[i][j].detail
+          break
+      }
+    }
+    dummy_dict['affiliation'] = array[i][0].affiliation
+    dummy_dict['company_id'] = array[i][0].username
+    new_dict[array[i][0].donation_id] = dummy_dict
+  }
+  return new_dict;
+}
+
+
 
 function convertFormCollection(array)
 {
