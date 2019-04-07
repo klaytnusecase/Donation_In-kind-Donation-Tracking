@@ -75,8 +75,8 @@ import {
 
   FETCH_COLLECTION_DISTRIBUTION_REQUEST,
   FETCH_COLLECTION_DISTRIBUTION_SUCCESS,
-  FETCH_COLLECTION_DISTRIBUTION_FAILURE ,
-
+  FETCH_COLLECTION_DISTRIBUTION_FAILURE,
+  FETCH_RECEIPT_SUCCESS,
 } from '../actions/happiness'
 
 import {
@@ -497,6 +497,12 @@ export default function posts(
         message: null,
         errorMessage: '분배 수량 정하기에 실패하였습니다. 관리자에게 문의하세요.',
       });
+    case FETCH_RECEIPT_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: null,
+        receipt: action.post,
+    });
 
 
     default:

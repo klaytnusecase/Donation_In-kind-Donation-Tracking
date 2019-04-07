@@ -26,6 +26,7 @@ export const UPDATE_COLLECTION_DISTRIBUTION_INITIAL = 'UPDATE_COLLECTION_DISTRIB
 export const UPDATE_COLLECTION_DISTRIBUTION_REQUEST = 'UPDATE_COLLECTION_DISTRIBUTION_REQUEST';
 export const UPDATE_COLLECTION_DISTRIBUTION_SUCCESS = 'UPDATE_COLLECTION_DISTRIBUTION_SUCCESS';
 export const UPDATE_COLLECTION_DISTRIBUTION_FAILURE = 'UPDATE_COLLECTION_DISTRIBUTION_FAILURE';
+export const FETCH_RECEIPT_SUCCESS = 'FETCH_RECEIPT_SUCCESS';
 
 
 
@@ -192,6 +193,13 @@ function fetchCollectionDistributionError(message) {
   };
 }
 
+function fetchForReceiptSuccess(post) {
+  return {
+    type: FETCH_RECEIPT_SUCCESS,
+    isFetching: false,
+    post,
+  };
+}
 
 
 
@@ -342,6 +350,34 @@ export function fetchCollectionsDistribution() {
   };
 }
 
+export function fetchForReceipt() {
+  return dispatch => {
+    dispatch(requestFetchCollectionDistribution());
+
+    return fetch('/receipt/donationInfo', {
+      method: 'GET'
+    })
+      .then(response =>
+        response.json().then(responseJson => ({
+          posts: responseJson,
+          responseJson,
+        })),
+      )
+      .then(({posts, responseJson}) => {
+        if (!responseJson) {
+          // If there was a problem, we want to
+          // dispatch the error condition
+          dispatch(fetchCollectionDistributionError('Fail'));
+          return Promise.reject(posts);
+        }
+        // Dispatch the success action
+        dispatch(fetchForReceiptSuccess(posts));
+        return Promise.resolve(posts);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
 
 
 export function updateCollectionDistribution(postData) {
@@ -375,4 +411,3 @@ export function updateCollectionDistribution(postData) {
       .catch(err => console.error('Error: ', err));
   };
 }
-
