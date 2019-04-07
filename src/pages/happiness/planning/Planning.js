@@ -88,9 +88,9 @@ class Planning extends React.Component {
         if(donation.유통기한==="null"){
           return null
         }
-        
+
           return new Date(donation.유통기한)
-        
+
       }).filter((obj)=>obj),
     });
     }
@@ -234,7 +234,7 @@ class Planning extends React.Component {
                       onChange = {this.handleinboxQuantity(index)}
                       required
                       type="number"
-                      min = "0"
+                      min = "1"
                       style={{ display:"flex"}}
                       />
                     </span>
