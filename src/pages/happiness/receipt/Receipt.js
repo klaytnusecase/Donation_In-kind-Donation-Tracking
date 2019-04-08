@@ -51,12 +51,12 @@ function getAllIndexes(arr, val) {
 
 
 let headers = [
-  { label: "수혜사", key: "npoName" },
+  { label: "멤버사", key: "member" },
   { label: "기부물품", key: "name" },
   { label: "수량", key: "quantitySum" },
   { label: "가격", key: "price" },
   { label: "총액", key: "totalSum" },
-  { label: "멤버사", key: "member" },
+  { label: "수혜사", key: "npoName" },
 ];
 
 
@@ -134,6 +134,11 @@ class Receipt extends React.Component {
     title: 'Generate receipts',
     description: 'About description',
   };
+
+  handleTargetMember = (event) => {
+    this.setState({targetMember: event.target.value});
+  }
+
   componentWillMount() {
     this.props.dispatch(fetchVolunteers());
     this.props.dispatch(fetchForReceipt())
@@ -164,7 +169,19 @@ class Receipt extends React.Component {
       donations: this.props.posts,
       uniqueType: [],
       allBoxes: [],
+      targetMember: '',
     }
+  }
+
+  searchMember = (e) => {
+    let npoList = this.state.expandData.map(datum=>datum.member);
+    let idx = getAllIndexes(npoList, this.state.targetMember);
+    let selectedData = []
+    for(let i=0;i<idx.length;i++){
+      selectedData.push(this.state.expandData[idx[i]])
+    }
+    this.setState({selectedData: selectedData});
+    e.preventDefault();
   }
 
 
@@ -191,33 +208,56 @@ class Receipt extends React.Component {
           </Alert>
         )}
 
-        <h5>전체 데이터 다운로드</h5>
-        {this.state.expandData && <CSVLink data={this.state.expandData} headers={headers}>Download me</CSVLink>}
+        <Widget>
+          <form onSubmit={this.searchMember}>
+            <Input
+                className="no-border"
+                value={this.state.targetMember}
+                onChange={this.handleTargetMember}
+                type="select"
+                required
+                name="targetNPO"
+              >
+              <option value ='' disabled hidden>멤버사별 검색</option>
+              {this.state.expandData && [...new Set(this.state.expandData.map(datum => datum.member))].map(v=>(
+                <option value={v} key={v}>{v}</option>
+              ))}
+            </Input>
+
+             <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
+              <ButtonGroup>
+              <Button color="success" type="submit">
+                {this.props.isFetching ? 'Searching...' : 'Search'}
+              </Button>
+              </ButtonGroup>
+            </div>
+          </form>
+        </Widget>
 
         <Widget>
           <div className="widget-table-overflow">
             <Table striped>
               <thead>
               <tr>
-                <th>수혜사</th>
+                <th>멤버사</th>
                 <th>기부물품</th>
                 <th>가격</th>
                 <th>수량</th>
                 <th>총액</th>
-                <th>멤버사</th>
+                <th>수혜사</th>
               </tr>
               </thead>
 
               <tbody>
-              {this.state.expandData &&
-                this.state.expandData.map((data, idx) => (
+              {this.state.selectedData &&
+                this.state.selectedData.map((data, idx) => (
                   <tr key={idx}>
-                      <td>{data.npoName}</td>
+                      <td>{data.member}</td>
                       <td>{data.name}</td>
                       <td>{data.price}</td>
                       <td>{data.quantitySum}</td>
                       <td>{data.totalSum}</td>
-                      <td>{data.member}</td>
+                      <td>{data.npoName}</td>
                   </tr>
                   ))}
 
@@ -225,6 +265,9 @@ class Receipt extends React.Component {
             </Table>
           </div>
         </Widget>
+
+        {this.state.selectedData &&
+          <CSVLink data={this.state.selectedData} headers={headers}>선택 데이터 다운로드</CSVLink>}
 
       </div>
 
