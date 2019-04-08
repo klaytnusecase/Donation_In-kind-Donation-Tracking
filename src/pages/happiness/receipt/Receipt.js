@@ -169,8 +169,6 @@ class Receipt extends React.Component {
 
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     return (
       <div>
         <ol className="breadcrumb">

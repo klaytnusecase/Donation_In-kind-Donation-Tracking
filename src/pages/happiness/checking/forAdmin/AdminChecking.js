@@ -48,6 +48,20 @@ function convertObjtoArray(obj){
 }
 
 
+function text_truncate(str, length, ending) {
+    if (length == null) {
+      length = 100;
+    }
+    if (ending == null) {
+      ending = '...';
+    }
+    if (str.length > length) {
+      return str.substring(0, length - ending.length) + ending;
+    } else {
+      return str;
+    }
+  };
+
 class AdminChecking extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -138,10 +152,6 @@ class AdminChecking extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
-    // console.log(Object.keys(this.props.npoBoxes));
-    // console.log(convertObjtoArray(this.props.npoBoxes));
     return (
       <div className={s.root}>
         <Breadcrumb>
@@ -210,7 +220,7 @@ class AdminChecking extends React.Component {
                   <tr key={box[0]}>
                       <td>{box[0]}</td>
                       <td>{box[1]}</td>
-                      <td>{box[2].map(stuff => `${stuff.name} ${stuff.quantity}개,`)}</td>
+                      <td id="details">{box[2].map(stuff => `${stuff.name} ${stuff.quantity}개,`)}</td>
                       <td>{box[3] ? new Date(box[3]).toISOString().substring(0, 10) : "X"}</td>
                       <td>{box[4]}</td>
                       <td>{box[5] ? new Date(box[5]).toISOString().substring(0, 10) : "X"}</td>

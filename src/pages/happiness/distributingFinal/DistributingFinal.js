@@ -195,7 +195,6 @@ toggleModal = () => {
   };
 
   render(){
-    console.log(this.state);
     return (
       <div>
         <ol className="breadcrumb">
