@@ -134,6 +134,7 @@ class RegisterDonation extends PureComponent {
                     </Alert>
                   )}
                 <FormGroup>
+                    <Label for="input-title">비밀번호</Label>
                     <Input
                       className="no-border"
                       value={this.state.password}
@@ -156,6 +157,7 @@ class RegisterDonation extends PureComponent {
                     />
                   </FormGroup>
                   <FormGroup>
+                    <Label for="input-title">기관명</Label>
                     <Input
                       className="no-border"
                       value={this.state.affiliation}
@@ -163,10 +165,11 @@ class RegisterDonation extends PureComponent {
                       type="text"
                       required
                       name="corp_name"
-                      placeholder="법인명"
+                      placeholder="기관명"
                     />
                   </FormGroup>
                   <FormGroup>
+                    <Label for="input-title">법인 대표명</Label>
                     <Input
                       className="no-border"
                       value={this.state.representative_name}
@@ -178,6 +181,7 @@ class RegisterDonation extends PureComponent {
                     />
                   </FormGroup>
                   <FormGroup>
+                    <Label for="input-title">법인 주소지</Label>
                       <Input
                         className="no-border"
                         value={this.state.address}
@@ -189,6 +193,7 @@ class RegisterDonation extends PureComponent {
                       />
                   </FormGroup>
                   <FormGroup>
+                    <Label for="input-title">연락가능 이메일</Label>
                       <Input
                         className="no-border"
                         value={this.state.e_mail}
@@ -200,6 +205,7 @@ class RegisterDonation extends PureComponent {
                       />
                   </FormGroup>
                   <FormGroup>
+                    <Label for="input-title">연락처</Label>
                       <Input
                         className="no-border"
                         value={this.state.contacts}

@@ -126,7 +126,7 @@ class RegisterUser extends React.Component {
                       type="text"
                       required
                       name="username"
-                      placeholder="사용하실 아이디"
+                      placeholder="발급 아이디"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -162,7 +162,7 @@ class RegisterUser extends React.Component {
                     >
                     <option value ='' disabled hidden>단체 종류</option>
                     <option value='member'>멤버사</option>
-                    <option value='volunteer'>봉사단체</option>
+                    <option value='volunteer'>전달기관</option>
                     </Input>
                   </FormGroup>
                   <FormGroup className="form-group">
@@ -173,7 +173,7 @@ class RegisterUser extends React.Component {
                       type="text"
                       required
                       name="affiliation"
-                      placeholder="소속"
+                      placeholder="기관명"
                     />
                   </FormGroup>
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
