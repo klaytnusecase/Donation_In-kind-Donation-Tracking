@@ -94,7 +94,15 @@ import {
 
   CHANGE_SWITCH_STATUS_REQUEST,
   CHANGE_SWITCH_STATUS_SUCCESS,
-  CHANGE_SWITCH_STATUS_FAILURE
+  CHANGE_SWITCH_STATUS_FAILURE,
+
+  FETCH_SEASON_REQUEST,
+  FETCH_SEASON_SUCCESS,
+  FETCH_SEASON_FAILURE,
+
+  CHANGE_SEASON_REQUEST,
+  CHANGE_SEASON_SUCCESS,
+  CHANGE_SEASON_FAILURE,
 } from '../actions/configuration'
 
 
@@ -454,6 +462,43 @@ export default function posts(
         isFetching: false,
       });
 
+    /* fetch season information */
+    case FETCH_SEASON_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+
+    case FETCH_SEASON_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: action.message,
+      });
+
+    case FETCH_SEASON_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        season: action.posts
+      });
+
+    /* change seoson information */
+    case CHANGE_SEASON_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+
+    case CHANGE_SEASON_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: '시즌 넘기기에 실패하였습니다. 관리자에게 문의하세요',
+        message: null
+      });
+
+    case CHANGE_SEASON_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: null,
+        message: '시즌 넘기기에 성공하였습니다'
+      });
 
     /* fetch collection distribution */
     case FETCH_COLLECTION_DISTRIBUTION_REQUEST:

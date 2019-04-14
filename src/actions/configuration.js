@@ -14,6 +14,14 @@ export const CHANGE_SWITCH_STATUS_REQUEST = 'CHANGE_SWITCH_STATUS_REQUEST';
 export const CHANGE_SWITCH_STATUS_SUCCESS = 'CHANGE_SWITCH_STATUS_SUCCESS';
 export const CHANGE_SWITCH_STATUS_FAILURE = 'CHANGE_SWITCH_STATUS_FAILURE';
 
+export const FETCH_SEASON_REQUEST = 'FETCH_SEASON_REQUEST';
+export const FETCH_SEASON_SUCCESS = 'FETCH_SEASON_SUCCESS';
+export const FETCH_SEASON_FAILURE = 'FETCH_SEASON_FAILURE';
+
+export const CHANGE_SEASON_REQUEST = 'CHANGE_SEASON_REQUEST';
+export const CHANGE_SEASON_SUCCESS = 'CHANGE_SEASON_SUCCESS';
+export const CHANGE_SEASON_FAILURE = 'CHANGE_SEASON_FAILURE';
+
 
 function requestRegisterRecipientCategory(creds) {
   return {
@@ -99,6 +107,49 @@ export function changeSwitchStatusSuccess(){
 export function changeSwitchStatusError(message){
   return {
     type: CHANGE_SWITCH_STATUS_FAILURE,
+    isFetching: false,
+    message
+  }
+}
+
+function requestFetchSeason(creds) {
+  return {
+    type: FETCH_SEASON_REQUEST,
+    isFetching: true,
+    creds,
+  };
+}
+export function fetchSeasonSuccess(posts){
+  return {
+    type: FETCH_SEASON_SUCCESS,
+    isFetching: false,
+    posts
+  }
+}
+export function fetchSeasonError(){
+  return {
+    type: FETCH_SEASON_FAILURE,
+    isFetching: false,
+  }
+}
+
+function requestChangeSeason(creds) {
+  return {
+    type: CHANGE_SEASON_REQUEST,
+    isFetching: true,
+    creds,
+  };
+}
+
+export function changeSeasonSuccess(){
+  return {
+    type: CHANGE_SEASON_SUCCESS,
+    isFetching: false,
+  }
+}
+export function changeSeasonError(message){
+  return {
+    type: CHANGE_SEASON_FAILURE,
     isFetching: false,
     message
   }
@@ -206,6 +257,56 @@ export function changeSwitchStatus(creds) {
           return Promise.reject(user);
         }
         dispatch(changeSwitchStatusSuccess());
+        return Promise.resolve(user);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
+export function fetchSeason() {
+  return dispatch => {
+    dispatch(requestFetchSeason());
+
+    return fetch('/configuration/getSeason', {
+      method: 'GET'
+    })
+      .then(response =>
+        response.json().then(responseJson => ({
+          posts: responseJson,
+          responseJson,
+        })),
+      )
+      .then(({posts, responseJson}) => {
+        if (!responseJson) {
+          dispatch(fetchSeasonError());
+          return Promise.reject(posts);
+        }
+        dispatch(fetchSeasonSuccess(posts));
+        return Promise.resolve(posts);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
+export function changeSeason(creds) {
+  const config = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    credentials: 'include',
+    body: `season=${creds.season}`,
+  };
+
+  return dispatch => {
+    dispatch(requestChangeSeason(creds));
+
+    return fetch('/configuration/setSeason', config)
+      .then(response => response.json().then(user => ({ user, response })))
+      .then(({ user, response }) => {
+        if (!response.ok) {
+          dispatch(changeSeasonError(user.message));
+          return Promise.reject(user);
+        }
+        dispatch(changeSeasonSuccess());
         return Promise.resolve(user);
       })
       .catch(err => console.error('Error: ', err));

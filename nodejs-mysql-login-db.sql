@@ -37,6 +37,7 @@ CREATE TABLE `donations` (
   `prev_donation_id` varchar(60) NOT NULL,
   `affiliation` varchar(100) NOT NULL,
   `editor` varchar(100) NOT NULL,
+  `season` int(11) NOT NULL,
   `is_new` boolean NOT NULL,
   `created_at` datetime NOT NULL,
   primary key(`id`)
@@ -55,6 +56,7 @@ CREATE TABLE `collection` (
   `id` int(11) AUTO_INCREMENT NOT NULL,
   `name` varchar(60) NOT NULL,
   `total_quantity`  int(11) NOT NULL,
+  `season`  int(11) NOT NULL,
   `expiration_date` varchar(60) NOT NULL,
   primary key(`id`)
 ) ENGINE=InnoDB CHARSET=UTF8;
@@ -104,16 +106,16 @@ INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `c
 (8, 'EAS_b', '6607a999607711cd339dce1de6d64425a0985cfd', '이지앤모어', 'volunteer', '');
 
 
-INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(1, 'LIO', '6607a999607711cd339dce1de6d64425a0985cfa', '', '라이온코리아' ,'라이온코리아', true, NOW());
-INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(2, 'LIO', '6607a999607711cd339dce1de6d64425a0985cfb', '','라이온코리아' ,'라이온코리아', true, NOW());
-INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(3, 'DGB', '6607a999607711cd339dce1de6d64425a0985cfc', '','동구밭' ,'동구밭', true, NOW());
-INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(4, 'ORG', '6607a999607711cd339dce1de6d64425a0985cfd', '','올가니카' ,'올가니카', true, NOW());
-INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `is_new`, `created_at`) VALUES
-(5, 'EAS', '6607a999607711cd339dce1de6d64425a0985cfe', '','이지앤모어' ,'이지앤모어', true, NOW());
+INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `season`, `is_new`, `created_at`) VALUES
+(1, 'LIO', '6607a999607711cd339dce1de6d64425a0985cfa', '', '라이온코리아' ,'라이온코리아', 1, true, NOW());
+INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `season`, `is_new`, `created_at`) VALUES
+(2, 'LIO', '6607a999607711cd339dce1de6d64425a0985cfb', '','라이온코리아' ,'라이온코리아', 1, true, NOW());
+INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `season`, `is_new`, `created_at`) VALUES
+(3, 'DGB', '6607a999607711cd339dce1de6d64425a0985cfc', '','동구밭' ,'동구밭', 1, true, NOW());
+INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `season`, `is_new`, `created_at`) VALUES
+(4, 'ORG', '6607a999607711cd339dce1de6d64425a0985cfd', '','올가니카' ,'올가니카', 1, true, NOW());
+INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `season`, `is_new`, `created_at`) VALUES
+(5, 'EAS', '6607a999607711cd339dce1de6d64425a0985cfe', '','이지앤모어' ,'이지앤모어', 1, true, NOW());
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
 ('6607a999607711cd339dce1de6d64425a0985cfa', '물품명', '키즈세이프치약', false);
@@ -171,6 +173,8 @@ INSERT INTO `configuration` (`type`, `stringify_data`) VALUES
 ('switch_2', 'false');
 INSERT INTO `configuration` (`type`, `stringify_data`) VALUES
 ('switch_3', 'false');
+INSERT INTO `configuration` (`type`, `stringify_data`) VALUES
+('season', '1');
 
 
 --

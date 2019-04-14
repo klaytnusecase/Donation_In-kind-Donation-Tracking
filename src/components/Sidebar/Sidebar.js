@@ -37,23 +37,19 @@ class Sidebar extends React.Component {
           />
           <LinksGroup
             header="회원 관리"
-            headerLink="/app/manage"
+            headerLink="/app/manage/member"
             childrenLinks={[
               {
                 name: '회원 등록',
-                link: '/app/manage/registerUser',
+                link: '/app/manage/member/registerUser',
                },
                {
                 name: '멤버사 목록',
-                link: '/app/manage/memberList',
+                link: '/app/manage/member/memberList',
                },
                {
                 name: '전달기관 목록',
-                link: '/app/manage/volunteerList',
-               },
-               {
-                name: '수혜자 카테고리 관리',
-                link: '/app/manage/manageRecipientCategory',
+                link: '/app/manage/member/volunteerList',
                },
             ]}
             glyph="notifications"
@@ -88,6 +84,21 @@ class Sidebar extends React.Component {
               },
             ]}
             glyph="components"
+          />
+          <LinksGroup
+            header="환경설정"
+            headerLink="/app/manage/configuration"
+            childrenLinks={[
+              {
+                name: '수혜자 카테고리 관리',
+                link: '/app/manage/configuration/manageRecipientCategory',
+               },
+               {
+                name: '시즌 관리',
+                link: '/app/manage/configuration/manageSeason',
+               },
+            ]}
+            glyph="settings"
           />
         </ul>);
       case 'member':

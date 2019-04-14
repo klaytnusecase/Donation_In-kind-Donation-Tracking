@@ -288,6 +288,39 @@ app.post('/configuration/switchChange', (req, res) => {
   })
 });
 
+app.get('/configuration/getSeason', (req, res) => {
+  connection.query("select stringify_data from configuration where type = ?", ['season'], (err, rows) => {
+    if (err) {
+      res.status(401).json({message: err});
+      console.log(err)
+    }
+    console.log(rows)
+    res.send(JSON.stringify(rows[0]));
+  })
+});
+
+app.post('/configuration/setSeason', (req, res) => {
+  connection.query("update configuration set stringify_data = ? where type = ?", [req.body.season, 'season'], (err, rows) => {
+    if (err) {
+      res.status(401).json({message: err});
+      console.log(err)
+    }
+    connection.query("UPDATE donations set is_new = ? where is_new = ?", [false, true], (err, rows) => {
+      if (err) {
+        res.status(401).json({message: err});
+        console.log(err)
+      }
+        connection.query("TRUNCATE TABLE temp_distribution", [], (err, rows) => {
+        if (err) {
+          res.status(401).json({message: err});
+          console.log(err)
+        }
+        res.json({})
+      })
+    });
+  })
+});
+
 app.get('/donations', (req, res) => {
     connection.query('select * from donations where is_new = ?;', [true],(err, result) => {
         if(err) throw err;
@@ -314,7 +347,7 @@ app.get('/collections', (req, res) => {
     connection.query("select * from donations A, donation_column B where A.donation_id=B.donation_id and B.column_type in ('물품명', '수량', '유통기한') and A.is_new=?",[true] ,(err, result) => {
         if(err) throw err;
         result = convertFormDonation(groupBy(result,(item) => [item.donation_id]));
-          connection.query("select A.id, A.total_quantity as collection_quantity, A.name, A.expiration_date as expiration_date, B.donation_id, B.quantity, C.detail from collection A, collection_component B, donation_column C where A.id=B.collection_id and B.donation_id=C.donation_id and C.column_type='물품명' order by A.id", (err_, result_) => {
+          connection.query("select A.id, A.total_quantity as collection_quantity, A.name, A.expiration_date as expiration_date, B.donation_id, B.quantity, C.detail from collection A, collection_component B, donation_column C where A.id=B.collection_id and B.donation_id=C.donation_id and C.column_type='물품명' and A.season = (select stringify_data from configuration where type = 'season') order by A.id", (err_, result_) => {
           if(err_) throw err_;
           result_ = convertFormCollection(groupBy(result_,(item) => [item.id]));
           const total_result = {donations: result, collectionsForMaking: result_};
@@ -355,7 +388,7 @@ app.post('/donations/new', (req, res) => {
 
   const stringfy_data = JSON.stringify(parsed_data)
   const donation_id = crypto.createHash('sha1').update(stringfy_data).digest('hex');
-    connection.query('INSERT INTO donations (company_id, donation_id, prev_donation_id, affiliation, editor, is_new, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW());', [req.body.company_id, donation_id, '', req.body.affiliation, req.body.affiliation, true], (err, result) => {
+    connection.query('INSERT INTO donations (company_id, donation_id, prev_donation_id, affiliation, editor, season, is_new, created_at) VALUES (?, ?, ?, ?, ?, (select stringify_data from configuration where type = "season"),?, NOW());', [req.body.company_id, donation_id, '', req.body.affiliation, req.body.affiliation, true], (err, result) => {
       if (err) {
         console.log(err)
         res.status(401).json({message: err});
@@ -461,7 +494,7 @@ app.post('/collections/new', (req, res) => {
           res.status(401).json({message: '이미 등록된 이름입니다.'});
         }
         else {
-          connection.query('INSERT INTO collection (name, total_quantity, expiration_date) VALUES (?, ?, ?);', [req.body.name, 0, req.body.expirationDate], (err, result) => {
+          connection.query('INSERT INTO collection (name, total_quantity, season, expiration_date) VALUES (?, ?, (select stringify_data from configuration where type = "season"),?);', [req.body.name, 0, req.body.expirationDate], (err, result) => {
             if (err) {
               res.status(401).json({message: err});
             }
@@ -534,7 +567,7 @@ app.post('/collections/updateDistribution', (req, res) => {
 });
 
 app.get('/collections/fetchDistribution', (req, res) => {
-  connection.query("select id, name, total_quantity as quantity, expiration_date from collection", (err, result) => {
+  connection.query("select id, name, total_quantity as quantity, expiration_date from collection where season = (select stringify_data from configuration where type = 'season')", (err, result) => {
     if (err) {
       console.log(err);
       res.status(401).json({message: err});
