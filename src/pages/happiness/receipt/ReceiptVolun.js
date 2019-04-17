@@ -250,7 +250,7 @@ class ReceiptVolun extends React.Component {
         '\n',
         {text: "상호명: "+this.state.affiliation},
         '\n',
-        {text: "대표자: "+this.state.representative_name+"                        (서명)"},
+        {text: "대표자: "+this.state.representative_name+"\t\t\t\t\t\t\t\t(서명)"},
         '\n',
         {text: "행복도시락 사회적협동조합 귀중", alignment: 'right'},
 
@@ -278,7 +278,7 @@ class ReceiptVolun extends React.Component {
         '\n',
         {text: "상호명: "+this.state.affiliation},
         '\n',
-        {text: "대표자: "+this.state.representative_name+"                        (서명)"},
+        {text: "대표자: "+this.state.representative_name+"\t\t\t\t\t\t\t\t(서명)"},
         '\n',
         {text: "행복도시락 사회적협동조합 귀중", alignment: 'right'},
   		],
