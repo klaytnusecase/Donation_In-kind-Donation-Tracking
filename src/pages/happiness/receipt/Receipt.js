@@ -18,6 +18,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
 } from 'reactstrap';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import withMeta from '../../../core/withMeta';
@@ -27,6 +28,20 @@ import { createCollection, fetchForReceipt } from '../../../actions/happiness';
 import { fetchSwitch} from '../../../actions/configuration';
 import {fetchVolunteers} from '../../../actions/user';
 import { CSVLink, CSVDownload } from "react-csv";
+import pdfMake from 'pdfmake/build/pdfmake';
+//import vfsFonts from 'pdfmake/build/vfs_fonts';
+import vfsFonts from '../../../../public/vfs_fonts';
+
+const {vfs} = vfsFonts.pdfMake;
+pdfMake.vfs = vfs;
+pdfMake.fonts = {
+   Nanum: {
+     normal: 'NanumGothic.ttf',
+     bold: 'NanumGothicBold.ttf',
+     italics: 'NanumGothic.ttf',
+     bolditalics: 'NanumGothic.ttf',
+   },
+ }
 
 function convertObjtoArray(obj){
   const value = [];
@@ -48,6 +63,17 @@ function getAllIndexes(arr, val) {
     return indexes;
 }
 
+const _format = (data) => {
+	return data.map(item => {
+		return ([
+			{text: item.name, alignment: 'center'},
+			{text: item.quantitySum + " 개", alignment: 'center'},
+			{text: item.totalSum + " 원", alignment: 'center'},
+			{text: item.member + " 후원", alignment: 'center'},
+		]);
+	});
+}
+//pdfMake.createPdf(docDefinition).download('optionalName.pdf');
 
 
 let headers = [
@@ -107,9 +133,6 @@ function expandDonationArray(arr, info, volun) {
   return(data);
 }
 
-
-
-
 class Receipt extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -154,7 +177,6 @@ class Receipt extends React.Component {
       }))
     .catch(err => console.error('Error: ', err)));
 
-
     //this.props.dispatch(fetchSwitch()).then(()=> {
     //  if (this.props.switches.switch_3 === true) {
     //    window.alert('이미 최종배분이 완료 되었습니다');
@@ -174,7 +196,7 @@ class Receipt extends React.Component {
   }
 
   searchMember = (e) => {
-    let npoList = this.state.expandData.map(datum=>datum.member);
+    let npoList = this.state.expandData.map(datum=>datum.npoName);
     let idx = getAllIndexes(npoList, this.state.targetMember);
     let selectedData = []
     for(let i=0;i<idx.length;i++){
@@ -182,6 +204,64 @@ class Receipt extends React.Component {
     }
     this.setState({selectedData: selectedData});
     e.preventDefault();
+  }
+
+  generateReceipt = (e) => {
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    const formattedData = _format(this.state.selectedData);
+    const formattedData2 = _format(this.state.selectedData);
+
+    const documentDefinition = {
+  		pageSize: 'A4',
+  		//pageOrientation: 'landscape',
+  		content: [
+  			{text: '수 령 증(센터보관용)', bold: true, alignment: 'center', fontSize:15},
+  			'\n\n\n',
+  			{
+  				table: {
+  					headerRows: 1,
+            widths: [ 150, 50, 100, 150],
+  					dontBreakRows: true,
+  					body: [
+  						[{text: '내용', style: 'tableHeader', alignment: 'center'}, {text: '수량', style: 'tableHeader', alignment: 'center'},
+              {text: '금액', style: 'tableHeader', alignment: 'center'}, {text: '비고', style: 'tableHeader', alignment: 'center'}],
+  						...formattedData,
+  					]
+  				},
+  			},
+        '\n\n',
+        {text: '위 금액을 정히 영수함.'},
+        '\n\n',
+        {text: year+"년 "+month+"월 "+date+"일", alignment: 'center'},
+
+        {text: '수 령 증(조합보관용)', bold: true, pageBreak:'before', alignment: 'center', fontSize:15},
+        '\n\n\n',
+  			{
+  				table: {
+  					headerRows: 1,
+            widths: [ 150, 50, 100, 150],
+  					dontBreakRows: true,
+  					body: [
+  						[{text: '내용', style: 'tableHeader', alignment: 'center'}, {text: '수량', style: 'tableHeader', alignment: 'center'},
+              {text: '금액', style: 'tableHeader', alignment: 'center'}, {text: '비고', style: 'tableHeader', alignment: 'center'}],
+  						...formattedData2,
+  					]
+  				},
+  			},
+        '\n\n',
+        {text: '위 금액을 정히 영수함.'},
+        '\n\n',
+        {text: year+"년 "+month+"월 "+date+"일", alignment: 'center'},
+  		],
+
+      defaultStyle: {
+        font: 'Nanum'
+      }
+    };
+
+	   pdfMake.createPdf(documentDefinition).open();
   }
 
 
@@ -219,7 +299,7 @@ class Receipt extends React.Component {
                 name="targetNPO"
               >
               <option value ='' disabled hidden>멤버사별 검색</option>
-              {this.state.expandData && [...new Set(this.state.expandData.map(datum => datum.member))].map(v=>(
+              {this.state.expandData && [...new Set(this.state.expandData.map(datum => datum.npoName))].map(v=>(
                 <option value={v} key={v}>{v}</option>
               ))}
             </Input>
@@ -269,6 +349,8 @@ class Receipt extends React.Component {
         {this.state.selectedData &&
           <CSVLink data={this.state.selectedData} headers={headers}>선택 데이터 다운로드</CSVLink>}
 
+        {this.state.selectedData &&
+            <Button onClick={this.generateReceipt}>수령증 PDF 다운로드</Button>}
       </div>
 
 
@@ -280,6 +362,7 @@ function mapStateToProps(state) {
   return {
     isFetching: state.posts.isFetching,
     message: state.posts.message,
+    affiliation: state.auth.affiliation,
     errorMessage: state.posts.errorMessage,
     posts: state.auth.posts,
     switches: state.posts.switches,

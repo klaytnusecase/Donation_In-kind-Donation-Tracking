@@ -8,6 +8,7 @@ import DistributingHappiness from './distributing/Distributing';
 import DistributingFinalHappiness from './distributingFinal/DistributingFinal';
 import CheckingHappiness from './checking/Checking';
 import Receipt from './receipt/Receipt';
+import ReceiptVolun from './receipt/ReceiptVolun';
 
 class Donation extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class Donation extends React.Component {
         return (
         <Switch>
           <Route path="/app/happiness/checking" exact component={CheckingHappiness} />
+          <Route path="/app/happiness/receipt" exact component={ReceiptVolun} />
         </Switch>
         );
 
