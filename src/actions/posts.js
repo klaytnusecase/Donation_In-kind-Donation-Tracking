@@ -368,7 +368,7 @@ const Caver = require('caver-js');
 //const caver = new Caver('http://141.223.44.39:8551');
 const caver = new Caver('http://127.0.0.1:8551');
 
-const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, '0x8c4c4e6bb247118aa0a60d43afc9a383308b371b');
+const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, '0xf8660faadcc69d18731de9da319d6033c3d3d7eb');
 //0x28b016f7644dd28e2fd7e3743f52af223741fcba
 
 const myAddress = "0x3f3f1b10573e4168958d9176e05b74be17134c80";
@@ -437,7 +437,7 @@ export function doDonation(postData) {
   return dispatch => {
     // We dispatch requestCreatePost to kickoff the call to the API
     dispatch(requestSendBox(postData));
-    return happyAlliance.methods.donate(postData.donation_id, postData.company_id).
+    return happyAlliance.methods.donate(postData.donation_id, postData.company_id, postData.openInfo).
     send({from: myAddress, gas:2000000, gasPrice:25000000000})
     .then(response => {
         console.log(response);

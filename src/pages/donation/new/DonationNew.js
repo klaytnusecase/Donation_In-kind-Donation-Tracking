@@ -136,6 +136,26 @@ class DonationNew extends React.Component {
   };
 
   doCreateDonation = (e) => {
+    let info = {};
+    if(this.state.nameispublic==true){
+      info['stuff_name'] = this.state.stuff_name;
+    };
+    if(this.state.quantityispublic==true){
+      info['quantity'] = this.state.quantity;
+    };
+    if(this.state.priceispublic==true){
+      info['price'] = this.state.price;
+    };
+    if(this.state.dateispublic==true){
+      info['date'] = this.state.date;
+    };
+    for(let i=0; i<this.state.shareholders.length; i++){
+      let tmp = this.state.shareholders[i];
+      if(tmp.ispublic==true){
+        info[tmp.column] = tmp.value;
+      }
+    }
+
     this.props
       .dispatch(
         createDonation({
@@ -157,6 +177,7 @@ class DonationNew extends React.Component {
           doDonation({
             donation_id: res.donation_id,
             company_id: this.props.name,
+            openInfo: JSON.stringify(info),
           })
         )
         .then(() =>
@@ -178,6 +199,7 @@ class DonationNew extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className={s.root}>
          <Breadcrumb>
