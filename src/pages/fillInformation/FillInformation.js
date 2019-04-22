@@ -132,7 +132,7 @@ class RegisterDonation extends PureComponent {
     //});
   };
 
-  testFunction = (e) => {
+  generateKeystore= (e) => {
     this.props.dispatch(saveKeystore(address));
   };
 
@@ -250,7 +250,7 @@ class RegisterDonation extends PureComponent {
                     </ButtonGroup>
                 </div>
               </Form>
-              <Button onClick={this.testFunction}>Test</Button>
+              <Button onClick={this.generateKeystore}>Test</Button>
 
             </Widget>
           </Col>
