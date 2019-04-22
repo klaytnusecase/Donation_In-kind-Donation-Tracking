@@ -201,7 +201,14 @@ app.post('/privateKey', (req, res) => {
       res.send({message: err});
     }
     else {
-      res.send(req.body.key);
+      connection.query("update users set = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
+      if (err) {
+        res.status(401).json({message: err});
+      }
+      else {
+        res.send(req.body.key);
+      }
+    });
     }
   });
 });

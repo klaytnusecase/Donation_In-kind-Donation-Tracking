@@ -90,7 +90,7 @@ class RegisterUser extends React.Component {
           org_type: '',
         }),
       );
-    this.props.dispatch(saveKeystore());
+    this.props.dispatch(saveKeystore({login: this.state.login}));
     e.preventDefault();
   }
 

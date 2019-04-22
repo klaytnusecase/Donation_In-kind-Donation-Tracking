@@ -266,11 +266,12 @@ export function logoutUser() {
   };
 }
 
-export function saveKeystore(){
+export function saveKeystore(creds){
   const config = {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     credentials: 'include',
+    body: `login=${creds.login}`
   };
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
