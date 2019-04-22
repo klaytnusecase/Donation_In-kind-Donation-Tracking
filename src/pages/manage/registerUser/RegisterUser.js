@@ -29,7 +29,7 @@ import Widget from '../../../components/Widget';
 
 import s from './RegisterUser.scss';
 
-import {registerUser} from '../../../actions/user';
+import {registerUser, saveKeystore} from '../../../actions/user';
 
 class RegisterUser extends React.Component {
   static propTypes = {
@@ -90,9 +90,9 @@ class RegisterUser extends React.Component {
           org_type: '',
         }),
       );
+    this.props.dispatch(saveKeystore());
     e.preventDefault();
   }
-
 
   render() {
     return (
@@ -201,5 +201,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(withStyles(s)(withMeta(RegisterUser)));
-
-

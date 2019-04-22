@@ -132,10 +132,6 @@ class RegisterDonation extends PureComponent {
     //});
   };
 
-  generateKeystore= (e) => {
-    this.props.dispatch(saveKeystore(address));
-  };
-
   render() {
     return (
       <div className={s.root}>
@@ -250,7 +246,6 @@ class RegisterDonation extends PureComponent {
                     </ButtonGroup>
                 </div>
               </Form>
-              <Button onClick={this.generateKeystore}>Test</Button>
 
             </Widget>
           </Col>

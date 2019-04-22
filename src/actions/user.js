@@ -266,21 +266,20 @@ export function logoutUser() {
   };
 }
 
-export function saveKeystore(key){
+export function saveKeystore(){
   const config = {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     credentials: 'include',
-    body: `key=${key}`,
   };
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
-    dispatch(requestFetchInformation(key));
+    dispatch(requestFetchInformation('key'));
     return fetch('/privateKey', config)
       .then(() => {
         console.log(config);
-        dispatch(fetchInformationSuccess(key));
-        return Promise.resolve(key);
+        dispatch(fetchInformationSuccess('key'));
+        return Promise.resolve('key');
       })
       .catch(err => console.error('Error: ', err));
   };
