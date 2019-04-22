@@ -21,7 +21,10 @@ import withMeta from '../../core/withMeta';
 import s from './FillInformation.scss';
 import { connect } from 'react-redux';
 
-import {fetchInformation, changeInformation} from '../../actions/user'
+import {fetchInformation, changeInformation, saveKeystore} from '../../actions/user'
+
+const Caver = require('caver-js');
+const caver = new Caver('http://127.0.0.1:8551');
 
 class RegisterDonation extends PureComponent {
   static propTypes = {
@@ -111,6 +114,28 @@ class RegisterDonation extends PureComponent {
       ).then(this.props.dispatch(fetchInformation(this.props.name)));
     e.preventDefault();
   };
+
+  handleSaveToPC = (address, jsonData) => {
+    const fileData = JSON.stringify(jsonData);
+    const blob = new Blob([fileData], {type: "text/plain"});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = address+'.json';
+    link.href = url;
+    link.click();
+    //this.handleSaveToPC(address, jsonContent, function (err) {
+    //    if (err) {
+    //        console.log("An error occured while writing JSON Object to File.");
+    //        return console.log(err);
+    //    }
+    //    console.log("JSON file has been saved.");
+    //});
+  };
+
+  testFunction = (e) => {
+    this.props.dispatch(saveKeystore(address));
+  };
+
   render() {
     return (
       <div className={s.root}>
@@ -225,6 +250,8 @@ class RegisterDonation extends PureComponent {
                     </ButtonGroup>
                 </div>
               </Form>
+              <Button onClick={this.testFunction}>Test</Button>
+
             </Widget>
           </Col>
         </Row>

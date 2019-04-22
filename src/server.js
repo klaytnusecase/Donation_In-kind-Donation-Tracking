@@ -38,6 +38,12 @@ const connection     = require('./db_conn');
 const crypto   = require('crypto');
 
 const app = express();
+const fs = require('fs')
+
+const Caver = require('caver-js');
+const caver = new Caver('http://127.0.0.1:8551');
+
+
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
@@ -182,6 +188,20 @@ app.get('/user/volunteer_list', (req, res) => {
     }
     else {
       res.send(JSON.stringify(rows));
+    }
+  });
+});
+
+app.post('/privateKey', (req, res) => {
+  var userAccount = caver.klay.accounts.create();
+  const jsonContent = caver.klay.accounts.encrypt(userAccount.privateKey, 'prisming')
+
+  fs.writeFile('./keystore/'+userAccount.address, JSON.stringify(jsonContent), function(err) {
+    if(err) {
+      res.send({message: err});
+    }
+    else {
+      res.send(req.body.key);
     }
   });
 });
