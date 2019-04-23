@@ -194,14 +194,14 @@ app.get('/user/volunteer_list', (req, res) => {
 
 app.post('/privateKey', (req, res) => {
   var userAccount = caver.klay.accounts.create();
-  const jsonContent = caver.klay.accounts.encrypt(userAccount.privateKey, 'prisming')
+  const jsonContent = caver.klay.accounts.encrypt(userAccount.privateKey, 'prisming');
 
   fs.writeFile('./keystore/'+userAccount.address, JSON.stringify(jsonContent), function(err) {
     if(err) {
       res.send({message: err});
     }
     else {
-      connection.query("update users set encryped_key = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
+      connection.query("update users set encrypted_key = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
       if (err) {
         res.status(401).json({message: err});
       }

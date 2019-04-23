@@ -278,7 +278,6 @@ export function saveKeystore(creds){
     dispatch(requestFetchInformation('key'));
     return fetch('/privateKey', config)
       .then(() => {
-        console.log(config);
         dispatch(fetchInformationSuccess('key'));
         return Promise.resolve('key');
       })

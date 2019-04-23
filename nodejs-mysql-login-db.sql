@@ -26,7 +26,7 @@ CREATE TABLE `users` (
   `representative_name` varchar(100) DEFAULT '',
   `e_mail` varchar(100) DEFAULT '',
   `contacts` varchar(100) DEFAULT '',
-  `encryped_key` varchar(100) DEFAULT '',
+  `encrypted_key` varchar(100) DEFAULT '',
   primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
