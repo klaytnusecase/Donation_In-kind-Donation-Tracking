@@ -201,7 +201,7 @@ app.post('/privateKey', (req, res) => {
       res.send({message: err});
     }
     else {
-      connection.query("update users set = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
+      connection.query("update users set encryped_key = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
       if (err) {
         res.status(401).json({message: err});
       }
