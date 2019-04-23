@@ -81,6 +81,8 @@ class RegisterUser extends React.Component {
         affiliation: this.state.affiliation,
         org_type: this.state.org_type,
       }),
+    ).then (() =>
+      this.props.dispatch(saveKeystore({login: this.state.login}))
     ).then(() =>
         this.setState({
           login: '',
@@ -89,8 +91,8 @@ class RegisterUser extends React.Component {
           affiliation: '',
           org_type: '',
         }),
-      );
-    this.props.dispatch(saveKeystore({login: this.state.login}));
+      )
+
     e.preventDefault();
   }
 
