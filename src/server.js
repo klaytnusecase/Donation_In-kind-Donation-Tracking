@@ -36,12 +36,14 @@ import theme from './styles/theme.scss';
 
 const connection     = require('./db_conn');
 const crypto   = require('crypto');
+const multer = require("multer");
 
 const app = express();
 const fs = require('fs')
 
 const Caver = require('caver-js');
 const caver = new Caver('http://127.0.0.1:8551');
+
 
 
 //
@@ -641,7 +643,25 @@ app.get('/receipt/donationInfo', (req, res) => {
     });
 });
 
+// configuring Multer to use files directory for storing files
+// this is important because later we'll need to access file path
+const storage = multer.diskStorage({
+  destination: 'public/receipt',
+  filename(req, file, cb) {
+    cb(null, `${new Date()}-${file.originalname}`);
+  },
+});
 
+const upload = multer({ storage });
+
+// express route where we receive files from the client
+// passing multer middleware
+app.post('/upload', upload.single('file'), (req, res) => {
+ const file = req.file; // file passed from client
+ const meta = req.body; // all other values passed from the client, like name, etc..
+  console.log(file)
+ // send the data to our REST API
+});
 
 
 //
