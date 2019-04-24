@@ -2741,10 +2741,10 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-caver-js@^0.0.2-r:
-  version "0.0.2-r"
-  resolved "https://registry.yarnpkg.com/caver-js/-/caver-js-0.0.2-r.tgz#deab6be423c97ff74ba5c91dfec038d2bd82b46c"
-  integrity sha512-KycgwzclL4SNyxudfHZTdoyuPMsK4ShdGCYEusY1bGJV7B4NyN9SeE57w5eQbig3WePTNBb89CFDBixvC0YYcQ==
+caver-js@^0.0.2-y:
+  version "0.0.2-y"
+  resolved "https://registry.yarnpkg.com/caver-js/-/caver-js-0.0.2-y.tgz#b7eed68d36f37265cac2515762cd8c39e027258f"
+  integrity sha512-jHHqQDdVjURNclOgKRj738gvZXbXmNxC078Su1Tln7kwiMkhzE58awD+K70dtzpmC+xv4SXF8fDsbk9FDwQBPg==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@babel/runtime" "^7.3.1"

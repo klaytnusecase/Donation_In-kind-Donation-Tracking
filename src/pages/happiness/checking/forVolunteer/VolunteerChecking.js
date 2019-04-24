@@ -42,6 +42,11 @@ import { fetchPosts, fetchDonations, fetchBlkchain, fetchBoxDetails, updateBox, 
 import {fetchCollectionsAndDonations} from '../../../../actions/happiness';
 import { fetchRecipientCategory } from '../../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
+import axios from 'axios';
+import {caver, centerAddress, contractAddress, centerPrivateKey} from '../../../../caver';
+const HappyAlliance = require('../../../../../HappyAlliance.json');
+const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
+
 
 Date.prototype.isDate = function (){
     return !!((this !== "Invalid Date" && !isNaN(this)));
@@ -75,10 +80,7 @@ function convertDate(date){
   }
 
     return '';
-
-
 }
-
 
 
 class VolunteerChecking extends React.Component {
@@ -159,6 +161,7 @@ class VolunteerChecking extends React.Component {
       uniqueDate: [],
       percent: 0,
       isClicked: false,
+      userKeystore: JSON.parse(require('../../../../../keystore/'+this.props.klaytnAddress+'.txt')),
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRecipientChange = this.handleRecipientChange.bind(this);
@@ -258,11 +261,47 @@ class VolunteerChecking extends React.Component {
         uniqueDate: new Set(this.state.targetBoxes.map(box=>box[5])),
       }))
     .catch(err => console.error('Error: ', err));
+    this.setState({
+      userPrivateKey : caver.klay.accounts.decrypt(this.state.userKeystore, 'prisming'),
+    });
     this.props.dispatch(fetchCollectionsAndDonations());
     this.props.dispatch(fetchRecipientCategory());
   }
 
+  sendTest = () => {
+    const senderAddress = this.props.klaytnAddress;
+    const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
+    caver.klay.accounts.wallet.add(this.state.userPrivateKey);
+    caver.klay.accounts.wallet.add(centerPrivateKey);
+    console.log(caver.klay.accounts.wallet);
+
+    let builder = happyAlliance.methods.donate("", "", "");
+    let encodedBuilder = builder.encodeABI();
+    let transactionObject = {
+        type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
+        from: senderAddress,
+        to: contractAddress,
+        data: encodedBuilder,
+        gas: 2000000,
+    };
+
+    caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(signedTx.rawTransaction);
+          caver.klay.sendTransaction({
+            feePayer: centerAddress,
+            senderRawTransaction: signedTx.rawTransaction,
+          })
+          .on('receipt', (receipt) => console.log(receipt))
+          .on('error', (error) => console.log(error));
+        }
+      });
+    }
+
   render() {
+    console.log(this.state);
     console.log(this.props);
     return (
       <div className={s.root}>
@@ -281,6 +320,8 @@ class VolunteerChecking extends React.Component {
             {this.props.errorMessage}
           </Alert>
         )}
+
+        <Button onClick={this.sendTest}>Send for Test</Button>
 
         <Widget>
           <div className="widget-table-overflow">

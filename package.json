@@ -19,7 +19,7 @@
     "body-parser": "^1.18.2",
     "bootstrap": "4.2.1",
     "bundle-loader": "^0.5.5",
-    "caver-js": "^0.0.2-r",
+    "caver-js": "^0.0.2-y",
     "classnames": "^2.2.5",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.5.1",

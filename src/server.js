@@ -202,7 +202,7 @@ app.post('/privateKey', (req, res) => {
   var userAccount = caver.klay.accounts.create();
   const jsonContent = caver.klay.accounts.encrypt(userAccount.privateKey, 'prisming');
 
-  fs.writeFile('./keystore/'+userAccount.address, JSON.stringify(jsonContent), function(err) {
+  fs.writeFile('./keystore/'+userAccount.address+'.txt', JSON.stringify(jsonContent), function(err) {
     if(err) {
       res.send({message: err});
     }
