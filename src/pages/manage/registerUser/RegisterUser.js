@@ -92,7 +92,6 @@ class RegisterUser extends React.Component {
           org_type: '',
         }),
       )
-
     e.preventDefault();
   }
 

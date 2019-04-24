@@ -25,7 +25,6 @@ class Login extends React.Component {
     dispatch: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     isFetching: PropTypes.bool,
-    org_type: PropTypes.string,
     location: PropTypes.any, // eslint-disable-line
     errorMessage: PropTypes.string,
   };
@@ -34,7 +33,6 @@ class Login extends React.Component {
     isAuthenticated: false,
     isFetching: false,
     location: {},
-    org_type: null,
     errorMessage: null,
   };
 
@@ -74,7 +72,7 @@ class Login extends React.Component {
       // cant access login page while logged in
       return <Redirect to={from} />;
     }
-
+    console.log(this.props)
     return (
         <div className={s.root}>
           <Row>
@@ -135,7 +133,6 @@ function mapStateToProps(state) {
   return {
     isFetching: state.auth.isFetching,
     isAuthenticated: state.auth.isAuthenticated,
-    org_type: state.auth.org_type,
     errorMessage: state.auth.errorMessage,
   };
 }

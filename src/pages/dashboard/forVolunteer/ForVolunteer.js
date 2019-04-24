@@ -28,7 +28,7 @@ import Widget from '../../../components/Widget';
 import {fetchDonations } from '../../../actions/posts';
 import s from './ForVolunteer.scss';
 
-class ForAdmin extends Component {
+class ForVolunteer extends Component {
   /* eslint-disable */
   static propTypes = {
     posts: PropTypes.any,
@@ -128,4 +128,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withStyles(s)(ForAdmin));
+export default connect(mapStateToProps)(withStyles(s)(ForVolunteer));

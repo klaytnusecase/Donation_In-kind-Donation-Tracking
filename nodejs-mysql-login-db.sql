@@ -26,7 +26,7 @@ CREATE TABLE `users` (
   `representative_name` varchar(100) DEFAULT '',
   `e_mail` varchar(100) DEFAULT '',
   `contacts` varchar(100) DEFAULT '',
-  `encrypted_key` varchar(100) DEFAULT '',
+  `klaytnAddress` varchar(100) DEFAULT '',
   primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
@@ -88,8 +88,8 @@ CREATE TABLE `configuration` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(1, 'sk', '6607a999607711cd339dce1de6d64425a0985cfd', '행복나눔재단', 'admin', '010-4442-2081');
+INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`, `klaytnAddress`) VALUES
+(1, 'sk', '6607a999607711cd339dce1de6d64425a0985cfd', '행복나눔재단', 'admin', '010-4442-2081', '0x3f3f1b10573e4168958d9176e05b74be17134c80');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
 (2, 'LIO', '6607a999607711cd339dce1de6d64425a0985cfd', '라이온코리아', 'member', '');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES

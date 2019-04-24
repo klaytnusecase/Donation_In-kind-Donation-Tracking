@@ -114,6 +114,7 @@ app.post('/login', (req, res) => {
           const type = rows[0].org_type;
           const name = rows[0].username;
           const affiliation = rows[0].affiliation;
+          const klaytnAddress = rows[0].klaytnAddress;
           res.cookie('id_token', token, {
             maxAge: 1000 * expiresIn,
             httpOnly: false,
@@ -130,8 +131,11 @@ app.post('/login', (req, res) => {
             maxAge: 1000 * expiresIn,
             httpOnly: false,
           });
-          res.json({id_token: token, org_type: type, name, affiliation});
-          // HK: should be changed to organization type, not full_name
+          res.cookie('klaytnAddress', klaytnAddress, {
+            maxAge: 1000 * expiresIn,
+            httpOnly: false,
+          });
+          res.json({id_token: token, org_type: type, name, affiliation, klaytnAddress: klaytnAddress});
         }
       }
   });
@@ -203,7 +207,7 @@ app.post('/privateKey', (req, res) => {
       res.send({message: err});
     }
     else {
-      connection.query("update users set encrypted_key = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
+      connection.query("update users set klaytnAddress = ? where username = ?", [userAccount.address, req.body.login], (err, rows) => {
       if (err) {
         res.status(401).json({message: err});
       }
@@ -708,7 +712,8 @@ app.get('*', async (req, res, next) => {
           id_token: req.cookies.id_token,
           org_type: req.cookies.org_type,
           name: req.cookies.name,
-          affiliation: req.cookies.affiliation
+          affiliation: req.cookies.affiliation,
+          klaytnAddress: req.cookies.klaytnAddress,
         }),
       );
     } else {

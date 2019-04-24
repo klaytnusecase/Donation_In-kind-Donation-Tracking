@@ -37,23 +37,7 @@ const ContextType = {
 };
 
 
-/* eslint-disable */
-/*const PrivateRoute = ({ component, isAuthenticated, org_type, ...rest }) =>
-  <Route
-    {...rest}
-    render={props =>
-      //(isAuthenticated && (org_type=="John Does"))
-      isAuthenticated
-        ? React.createElement(component, props)
-        : <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />}
-  />;*/
-
-const PrivateRoute = ({ component, isAuthenticated, org_type, ...rest }) =>
+const PrivateRoute = ({ component, isAuthenticated, org_type, klaytnAddress, ...rest }) =>
   <Route
     {...rest}
     render={props =>
@@ -72,12 +56,14 @@ class App extends React.PureComponent {
     context: PropTypes.shape(ContextType),
     isAuthenticated: PropTypes.bool,
     org_type: PropTypes.any,
+    klaytnAddress: PropTypes.string,
   };
 
   static defaultProps = {
     context: null,
     isAuthenticated: false,
     org_type: null,
+    klaytnAddress: null,
   };
 
   static contextTypes = {
@@ -99,6 +85,7 @@ class App extends React.PureComponent {
         <PrivateRoute
           isAuthenticated={this.props.isAuthenticated}
           org_type = {this.props.org_type}
+          klaytnAddress = {this.props.klaytnAddress}
           path="/app"
           component={LayoutComponent}
         />
@@ -113,6 +100,7 @@ function mapStateToProps(store) {
   return {
     isAuthenticated: store.auth.isAuthenticated,
     org_type: store.auth.org_type,
+    klaytnAddress: store.auth.klaytnAddress,
   };
 }
 

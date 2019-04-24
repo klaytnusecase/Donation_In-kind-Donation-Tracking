@@ -123,13 +123,6 @@ class RegisterDonation extends PureComponent {
     link.download = address+'.json';
     link.href = url;
     link.click();
-    //this.handleSaveToPC(address, jsonContent, function (err) {
-    //    if (err) {
-    //        console.log("An error occured while writing JSON Object to File.");
-    //        return console.log(err);
-    //    }
-    //    console.log("JSON file has been saved.");
-    //});
   };
 
   render() {

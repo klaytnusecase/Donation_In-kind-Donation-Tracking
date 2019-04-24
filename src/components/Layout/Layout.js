@@ -34,12 +34,6 @@ import Sidebar from '../Sidebar';
 // Dashboard component is loaded directly as an example of server side rendering
 import Dashboard from '../../pages/dashboard/Dashboard';
 
-import Web3 from 'web3';
-var HappyAlliance = require('../../../HappyAlliance.json');
-var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'))
-var happyAlliance = new web3.eth.Contract(HappyAlliance.abi, '0x6146a551fa876f63Be823BFEE969D4aB53Ed7B3B');
-
-
 const FillInformationBundle = Bundle.generateBundle(loadFillInformation);
 const HappinessBundle = Bundle.generateBundle(loadHappiness);
 const ChartsBundle = Bundle.generateBundle(loadCharts);
@@ -52,19 +46,12 @@ const ManageBundle = Bundle.generateBundle(loadManage);
 class Layout extends React.Component {
   constructor(props) {
     super(props);
-    this.web3 = web3;
-    this.happyAlliance = happyAlliance;
-
     this.state = {
       sidebarOpen: false,
     };
   }
 
   render() {
-    //this.web3.eth.getAccounts(console.log);
-    //this.props.web3.eth.getCode('0x6143fc3e80F57B430F1324E8846E7e78AbA877A7').then(console.log);
-    //this.happyAlliance.methods.viewFinalBoxInformation('test').call().then(console.log);
-
     return (
       <div className={s.root}>
         <Sidebar />

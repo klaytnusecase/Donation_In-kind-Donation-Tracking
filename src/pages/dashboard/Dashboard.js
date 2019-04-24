@@ -8,8 +8,9 @@ import VolunteerDashboard from './forVolunteer/ForVolunteer';
 
 
 class Dashboard extends React.Component {
-  render() {
 
+  render() {
+    console.log(this.props);
     switch(this.props.orgType){
       case 'member':
         return (
@@ -32,12 +33,14 @@ class Dashboard extends React.Component {
         </Switch>
         );
     }
+
   }
 }
 
 function mapStateToProps(state) {
   return {
     orgType: state.auth.org_type,
+    klaytnAddress: state.auth.klaytnAddress,
   };
 }
 

@@ -48,13 +48,13 @@ export default function auth(
         user: action.creds,
       });
     case LOGIN_SUCCESS:
-      console.log(action);
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
         org_type: action.org_type,
         name: action.name,
         affiliation: action.affiliation,
+        klaytnAddress: action.klaytnAddress,
         errorMessage: '',
       });
     case LOGIN_FAILURE:

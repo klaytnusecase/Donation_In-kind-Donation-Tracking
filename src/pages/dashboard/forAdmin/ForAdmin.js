@@ -68,7 +68,6 @@ class ForAdmin extends Component {
 
   render() {
     console.log(this.props);
-    console.log(this.state);
     return (
       <div className={s.root}>
         <Breadcrumb>
@@ -168,6 +167,7 @@ function mapStateToProps(state) {
   return {
     isFetching: state.posts.isFetching,
     status: state.posts.status,
+    klaytnAddress: state.auth.klaytnAddress,
   };
 }
 

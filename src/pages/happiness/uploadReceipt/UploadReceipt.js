@@ -94,21 +94,10 @@ class UploadReceipt extends React.Component {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">기부 영수증 발급</li>
+          <li className="active breadcrumb-item">수령증 업로드하기</li>
         </ol>
 
-        <h1 className="page-title">수령증 발급하기</h1>
-        {this.props.message && (
-          <Alert size="sm" color="info">
-            {this.props.message}
-          </Alert>
-        )}
-        {this.props.errorMessage && (
-          <Alert size="sm" color="danger">
-            {this.props.errorMessage}
-          </Alert>
-        )}
-
+        <h1 className="page-title">수령증 업로드하기</h1>
         <Widget>
           <FormGroup>
             <Input
@@ -134,6 +123,7 @@ function mapStateToProps(state) {
     isFetching: state.posts.isFetching,
     message: state.posts.message,
     errorMessage: state.posts.errorMessage,
+    klaytnAddress: state.auth.klaytnAddress,
   };
 }
 

@@ -68,7 +68,8 @@ export function receiveLogin(user) {
     id_token: user.id_token,
     org_type: user.org_type, // HK: add organization type, it will be used in app.js
     name: user.name,
-    affiliation: user.affiliation
+    affiliation: user.affiliation,
+    klaytnAddress: user.klaytnAddress,
   };
 }
 function loginError(message) {

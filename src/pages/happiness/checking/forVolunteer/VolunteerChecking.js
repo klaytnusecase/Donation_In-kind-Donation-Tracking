@@ -92,6 +92,7 @@ class VolunteerChecking extends React.Component {
     categories: PropTypes.array,
     categoriesType1: PropTypes.array,
     categoriesType2: PropTypes.array,
+    klaytnAddress: PropTypes.string,
   };
 
   static defaultProps = {
@@ -104,6 +105,7 @@ class VolunteerChecking extends React.Component {
     categoriesType1: [{ category: ""}],
     categoriesType2: [{ category: ""}],
     isOpen: false,
+    klaytnAddress: null,
   };
 
   static meta = {
@@ -261,6 +263,7 @@ class VolunteerChecking extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className={s.root}>
         <Breadcrumb>
@@ -515,6 +518,7 @@ function mapStateToProps(state) {
     name: state.auth.name,
     categoriesType1: state.posts.categoriesType1,
     categoriesType2: state.posts.categoriesType2,
+    klaytnAddress: state.auth.klaytnAddress,
   };
 }
 
