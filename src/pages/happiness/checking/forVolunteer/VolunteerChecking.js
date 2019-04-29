@@ -208,6 +208,7 @@ class VolunteerChecking extends React.Component {
   doConfirmBox = (e) => {
     const allTypes = this.state.targetBoxes.map(box=>box[1]);
     const idxArray = getAllIndexes(allTypes, this.state.confirmTarget);
+
     idxArray.map((val, idx) => this.props.dispatch(confirmBox({
       boxId: String(this.state.targetBoxes[val][0]),
       receivedTime: String(this.state.date),
@@ -273,7 +274,6 @@ class VolunteerChecking extends React.Component {
     const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
     caver.klay.accounts.wallet.add(this.state.userPrivateKey);
     caver.klay.accounts.wallet.add(centerPrivateKey);
-    console.log(caver.klay.accounts.wallet);
 
     let builder = happyAlliance.methods.donate("", "", "");
     let encodedBuilder = builder.encodeABI();
@@ -289,11 +289,12 @@ class VolunteerChecking extends React.Component {
         if (error) {
           console.log(error);
         } else {
-          console.log(signedTx.rawTransaction);
+          //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
           caver.klay.sendTransaction({
             feePayer: centerAddress,
             senderRawTransaction: signedTx.rawTransaction,
           })
+          .on('transactionHash', (transactionHash) => console.log(transactionHash))
           .on('receipt', (receipt) => console.log(receipt))
           .on('error', (error) => console.log(error));
         }
