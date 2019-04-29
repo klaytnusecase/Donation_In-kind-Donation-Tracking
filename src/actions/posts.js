@@ -498,26 +498,6 @@ export function updateBox(postData) {
 }
 
 
-export function confirmBox(data) {
-  return dispatch => {
-    dispatch(requestUpdateBox(data));
-    return happyAlliance.methods.npoConfirm(data.boxId, data.receivedTime).send({from: myAddress, gas:2000000, gasPrice:25000000000})
-    .then(response => {
-        if (!response) {
-          // If there was a problem, we want to
-          // dispatch the error condition
-          dispatch(updateBoxFailure('Fail'));
-          return Promise.reject(response);
-        }
-        // Dispatch the success action
-        dispatch(updateBoxSuccess(response));
-        return Promise.resolve(response);
-      })
-      .catch(err => console.error('Error: ', err));
-  };
-}
-
-
 export function fetchAllBoxes() {
   return dispatch => {
     dispatch(requestFetchStatus());
