@@ -31,14 +31,10 @@ import Widget from '../../../components/Widget';
 class UploadReceipt extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    message: PropTypes.string,
-    errorMessage: PropTypes.string,
     isFetching: PropTypes.bool,
   };
   static defaultProps = {
     isFetching: false,
-    message: null,
-    errorMessage: null,
   };
   static meta = {
     title: 'Upload receipts',
@@ -48,7 +44,8 @@ class UploadReceipt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFile: ''
+      selectedFile: '',
+      message: null,
     };
   }
   handleFiles = () => {
@@ -59,6 +56,9 @@ class UploadReceipt extends React.Component {
   onClickHandler = (e) => {
     e.preventDefault() // Stop form submit
     this.fileUpload().then((response)=>{
+      this.setState({
+      message: '파일을 업로드하였습니다',
+    })
     })
   }
   fileUpload = () =>{
@@ -84,6 +84,11 @@ class UploadReceipt extends React.Component {
         </ol>
 
         <h1 className="page-title">수령증 업로드하기</h1>
+         {this.state.message && (
+                    <Alert size="sm" color="info">
+                      {this.state.message}
+                    </Alert>
+                  )}
         <Widget>
           <FormGroup>
             <Input
@@ -104,8 +109,6 @@ class UploadReceipt extends React.Component {
 function mapStateToProps(state) {
   return {
     isFetching: state.posts.isFetching,
-    message: state.posts.message,
-    errorMessage: state.posts.errorMessage,
   };
 }
 
