@@ -26,6 +26,8 @@ import { connect } from 'react-redux';
 import withMeta from '../../../core/withMeta';
 import Widget from '../../../components/Widget';
 
+
+
 class UploadReceipt extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -57,7 +59,6 @@ class UploadReceipt extends React.Component {
   onClickHandler = (e) => {
     e.preventDefault() // Stop form submit
     this.fileUpload().then((response)=>{
-      console.log(response.data);
     })
   }
   fileUpload = () =>{
@@ -70,25 +71,10 @@ class UploadReceipt extends React.Component {
         }
     }
     return  post(url, data,config)
-
   }
 
-
-   fileUpload(file){
-    const url = 'http://example.com/file-upload';
-    const formData = new FormData();
-    formData.append('file',file)
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }
-    return  post(url, formData,config)
-  }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div>
         <ol className="breadcrumb">
@@ -114,16 +100,12 @@ class UploadReceipt extends React.Component {
   }
 }
 
-//{this.state.selectedData &&
-//  <CSVLink data={this.state.selectedData} headers={headers}>선택 데이터 다운로드</CSVLink>}
-
 
 function mapStateToProps(state) {
   return {
     isFetching: state.posts.isFetching,
     message: state.posts.message,
     errorMessage: state.posts.errorMessage,
-    klaytnAddress: state.auth.klaytnAddress,
   };
 }
 

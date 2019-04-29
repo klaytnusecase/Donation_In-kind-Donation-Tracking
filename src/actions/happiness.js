@@ -29,6 +29,11 @@ export const UPDATE_COLLECTION_DISTRIBUTION_FAILURE = 'UPDATE_COLLECTION_DISTRIB
 export const FETCH_RECEIPT_SUCCESS = 'FETCH_RECEIPT_SUCCESS';
 
 
+export const FETCH_CHECK_RECEIPT_UPLOADED_INITIAL = 'FETCH_CHECK_RECEIPT_UPLOADED_INITIAL';
+export const FETCH_CHECK_RECEIPT_UPLOADED_SUCCESS = 'FETCH_CHECK_RECEIPT_UPLOADED_SUCCESS';
+export const FETCH_CHECK_RECEIPT_UPLOADED_FAILURE = 'FETCH_CHECK_RECEIPT_UPLOADED_FAILURE';
+
+
 
 
 function createCollectionInitial() {
@@ -201,6 +206,29 @@ function fetchForReceiptSuccess(post) {
   };
 }
 
+
+function requestFetchCheckReceiptUploaded() {
+  return {
+    type: FETCH_CHECK_RECEIPT_UPLOADED_INITIAL,
+    isFetching: true,
+  };
+}
+
+function fetchCheckReceiptUploadedSuccess(posts) {
+  return {
+    type: FETCH_CHECK_RECEIPT_UPLOADED_SUCCESS,
+    isFetching: false,
+    posts,
+  };
+}
+
+function fetchCheckReceiptUploadedError(message) {
+  return {
+    type: FETCH_CHECK_RECEIPT_UPLOADED_FAILURE,
+    isFetching: false,
+    message,
+  };
+}
 
 
 export function createCollection(postData) {
@@ -407,6 +435,38 @@ export function updateCollectionDistribution(postData) {
           dispatch(updateCollectionDistributionInitial());
         }, 5000);
         return Promise.resolve(post);
+      })
+      .catch(err => console.error('Error: ', err));
+  };
+}
+
+
+
+export function uploadReciept(file, name) {
+    return dispatch => {
+    dispatch(requestFetchCheckReceiptUploaded());
+
+    return fetch('/receipt/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `name=${name}`,
+        })
+      .then(response =>
+        response.json().then(responseJson => ({
+          posts: responseJson,
+          responseJson,
+        })),
+      )
+      .then(({posts, responseJson}) => {
+        if (!responseJson) {
+          // If there was a problem, we want to
+          // dispatch the error condition
+          dispatch(fetchCheckReceiptUploadedError('Fail'));
+          return Promise.reject(posts);
+        }
+        // Dispatch the success action
+        dispatch(requestFetchCheckReceiptUploaded(posts));
+        return Promise.resolve(posts);
       })
       .catch(err => console.error('Error: ', err));
   };

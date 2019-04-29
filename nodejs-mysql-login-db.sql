@@ -76,6 +76,15 @@ CREATE TABLE `temp_distribution` (
   primary key(`volunteer_id`, `collection_id`)
 ) ENGINE=InnoDB CHARSET=UTF8;
 
+CREATE TABLE `receipt_record` (
+  `id` int(11) AUTO_INCREMENT NOT NULL,
+  `volunteer_id` varchar(16) NOT NULL,
+  `season`  int(11) NOT NULL,
+  `filename`  varchar(50) NOT NULL,
+  primary key(`id`)
+) ENGINE=InnoDB CHARSET=UTF8;
+
+
 CREATE TABLE `configuration` (
   `id` int(11) AUTO_INCREMENT NOT NULL,
   `type` varchar(60) NOT NULL,

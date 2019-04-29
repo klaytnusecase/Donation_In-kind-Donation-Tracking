@@ -107,35 +107,47 @@ app.post('/login', (req, res) => {
           res.status(401).json({ message: 'Invalid username or password.' });
          }
          else {
-          const expiresIn = 60 * 60 * 24; // 1 days
-          let user = false;
-          user = { user, login };
-          const token = jwt.sign(user, config.auth.jwt.secret, {expiresIn});
-          const type = rows[0].org_type;
-          const name = rows[0].username;
-          const affiliation = rows[0].affiliation;
-          const klaytnAddress = rows[0].klaytnAddress;
-          res.cookie('id_token', token, {
-            maxAge: 1000 * expiresIn,
-            httpOnly: false,
-          });
-          res.cookie('org_type', type, {
-            maxAge: 1000 * expiresIn,
-            httpOnly: false,
-          });
-          res.cookie('name', name, {
-            maxAge: 1000 * expiresIn,
-            httpOnly: false,
-          });
-          res.cookie('affiliation', affiliation, {
-            maxAge: 1000 * expiresIn,
-            httpOnly: false,
-          });
-          res.cookie('klaytnAddress', klaytnAddress, {
-            maxAge: 1000 * expiresIn,
-            httpOnly: false,
-          });
-          res.json({id_token: token, org_type: type, name, affiliation, klaytnAddress: klaytnAddress});
+          connection.query("select stringify_data from configuration where type = 'season'", [], (err_, rows_) => {
+            if (err_){
+              res.status(401).json({ message: 'Configuration Error' });
+            }
+            else{
+              console.log(rows_)
+              const expiresIn = 60 * 60 * 24; // 1 days
+              let user = false;
+              user = { user, login };
+              const token = jwt.sign(user, config.auth.jwt.secret, {expiresIn});
+              const type = rows[0].org_type;
+              const name = rows[0].username;
+              const affiliation = rows[0].affiliation;
+              const klaytnAddress = rows[0].klaytnAddress;
+              res.cookie('id_token', token, {
+                maxAge: 1000 * expiresIn,
+                httpOnly: false,
+              });
+              res.cookie('org_type', type, {
+                maxAge: 1000 * expiresIn,
+                httpOnly: false,
+              });
+              res.cookie('name', name, {
+                maxAge: 1000 * expiresIn,
+                httpOnly: false,
+              });
+              res.cookie('affiliation', affiliation, {
+                maxAge: 1000 * expiresIn,
+                httpOnly: false,
+              });
+              res.cookie('klaytnAddress', klaytnAddress, {
+                maxAge: 1000 * expiresIn,
+                httpOnly: false,
+              });
+              res.cookie('season', rows_[0].stringify_data, {
+                maxAge: 1000 * expiresIn,
+                httpOnly: false,
+              });
+              res.json({id_token: token, org_type: type, name, affiliation, klaytnAddress: klaytnAddress});
+            }
+          })
         }
       }
   });
@@ -638,6 +650,7 @@ app.get('/collections/fetchDistribution', (req, res) => {
   })
 })
 
+
 app.get('/receipt/donationInfo', (req, res) => {
     connection.query("select A.donation_id, C.affiliation, C.username, B.column_type, B.detail from donations A, donation_column B, users C where A.donation_id=B.donation_id and B.column_type in ('물품명', '가격', '수량') and A.is_new=? and A.company_id = C.username", [true],(err, result) => {
         if(err) throw err;
@@ -647,12 +660,14 @@ app.get('/receipt/donationInfo', (req, res) => {
     });
 });
 
+
 // configuring Multer to use files directory for storing files
 // this is important because later we'll need to access file path
 const storage = multer.diskStorage({
   destination: 'public/receipt',
   filename(req, file, cb) {
-    cb(null, `${new Date()}-${file.originalname}`);
+    cb(null, `${new Date()}-${req.cookies.name}-${req.cookies.season}.pdf`);
+    console.log(req.cookies)
   },
 });
 
@@ -661,10 +676,12 @@ const upload = multer({ storage });
 // express route where we receive files from the client
 // passing multer middleware
 app.post('/upload', upload.single('file'), (req, res) => {
- const file = req.file; // file passed from client
- const meta = req.body; // all other values passed from the client, like name, etc..
-  console.log(file)
- // send the data to our REST API
+  const filename = `${new Date()}-${req.cookies.name}-${req.cookies.season}.pdf`
+  connection.query('INSERT INTO receipt_record (volunteer_id, season, filename) VALUES (?, ?, ?)', [req.cookies.name, req.cookies.season, filename],(err, result) => {
+    if(err) throw err
+    console.log(result)
+    res.send(JSON.stringify(result));
+  });
 });
 
 
