@@ -216,7 +216,7 @@ class VolunteerChecking extends React.Component {
 
     for(let i = 0; i<idxArray.length; i++){
       let val = idxArray[i];
-      let builder = happyAlliance.methods.npoConfirm(String(this.state.targetBoxes[val][0]), String(this.state.date));
+      let builder = happyAlliance.methods.receiveBox(String(this.state.targetBoxes[val][0]), String(this.state.date));
       let encodedBuilder = builder.encodeABI();
       let transactionObject = {
           type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
