@@ -13,6 +13,6 @@ We record donation information into a local database or the Klaytn as there are 
     - The selected information are recorded into the Klaytn (method: *donate*)
     - Information what members are reluctant to open are stored into a local database (MySQL)
 2. [Local] For each type of donation boxes, the foundation decides its components based on the collected goods.
-    - e.g., type A box consists of 3 toothpastes and 1 toothbrush
-    - Box configuration is saved into a local database
+    - e.g., type A box consists of 3 toothpastes and 1 toothbrush while type B box only has 1 soap. 
+    - Box configuration is saved into a local database. The foundation could change the configuration easily. 
     
