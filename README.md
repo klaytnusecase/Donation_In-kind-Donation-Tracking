@@ -4,9 +4,15 @@ This pilot project is for tracking "donation box" that has various goods, such a
 
 **Our codes are at a preliminary stage with a focus on the following procedure and smart contract methods.**
 
-### Flows & Functions
+## Flows & Methods
 
-1. A member donates goods and gives in-depth information (quantity, price, expiration date, ...) to the foundation.
-    1. Members specify which information will be opened to the public
-    2. The selected information are recorded into the Klaytn (method: *donate*)
-2. 
+We record donation information into a local database or the Klaytn as there are privacy issues in blockchain-based donation.
+
+1. [Klaytn & Local] Members donate goods and give in-depth information (quantity, price, expiration date, ...) to the foundation.
+    - Members specify which information will be opened to the public
+    - The selected information are recorded into the Klaytn (method: *donate*)
+    - Information what members are reluctant to open are stored into a local database (MySQL)
+2. [Local] For each type of donation boxes, the foundation decides its components based on the collected goods.
+    - e.g., type A box consists of 3 toothpastes and 1 toothbrush
+    - Box configuration is saved into a local database
+    
