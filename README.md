@@ -1,9 +1,3 @@
-## Description
-
-This pilot project is for tracking donation boxes that have various in-kind donations, such as toothpaste, soap, and snack. 
-
-
-
 ## Quick Start
 
 #### 1. Get the latest version
