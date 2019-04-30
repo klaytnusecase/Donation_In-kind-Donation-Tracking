@@ -30,3 +30,9 @@ We record donation information into a local database or the Klaytn as there are 
     - Each box has an identification number and is sent to a recipient. (method: *sendBox*)
     - A box contains rich information including the identification number, box type, recipient, expiration date, and etc.
     
+6. [Klaytn] Recipients update box information when they receive boxes and deliver them to individuals.
+    - Recipients record the date when they receive boxes by using their private key (method: *npoConfirm*, *addRecipientInfo*).
+    - Private key is generated when the foundation creates ID of a recipient.
+    - Keystore files are in the system, so that recipients do not need to load them independently when signing a transaction.
+    - Recipients delegate smart contract execution to the foundation. The foundation pays gas. 
+    
