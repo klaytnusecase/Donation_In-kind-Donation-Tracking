@@ -22,7 +22,7 @@ We record donation information into a local database or the Klaytn as there are 
     - The number of boxes is determined depending on the quantity of goods that members donate.
     - These numbers are stored in a local database. 
     
-4. [Local] The foundation artificially distributes boxes to recipients.
+4. [Local] The foundation temporally distributes boxes to recipients.
     - This step needs for simulating a donation event before recording the box information into the Klaytn.
     - Temporal distributions are saved in a local database to be easily modified.
     
