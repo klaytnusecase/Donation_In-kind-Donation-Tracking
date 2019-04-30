@@ -1,4 +1,6 @@
+## Description
 
+This pilot project is for tracking "donation boxes" that have various goods, such as toothpaste, soap, and snack. 
 
 ## Quick Start
 
