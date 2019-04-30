@@ -7,4 +7,4 @@ This pilot project is for tracking "donation box" that has various goods, such a
 ### Flows & Functions
 
 1. A member donates goods and gives their information (quantity, price, expiration date, ...) to the foundation.
-  - Members decide whether they open these information to the public
+    1. Members decide whether they open these information to the public
