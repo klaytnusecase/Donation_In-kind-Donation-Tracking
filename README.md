@@ -10,7 +10,7 @@ We record donation information into a local database or the Klaytn as there are 
 
 1. [Klaytn / Local] Members donate goods and give in-depth information (quantity, price, expiration date, ...) to the foundation.
     - Members specify which information will be opened to the public.
-    - The selected information are recorded into the Klaytn. (method: *donate*)
+    - The selected information are recorded into the Klaytn. (method: __*donate*__)
     - Information what members are reluctant to open are stored into a local database. (MySQL)
     
 2. [Local] For each type of donation boxes, the foundation decides its configuration based on the collected goods.
@@ -27,7 +27,7 @@ We record donation information into a local database or the Klaytn as there are 
     - Temporal distributions are saved in a local database to be easily modified.
     
 5. [Klaytn] The foundation uploads box distribution details to the Klaytn. 
-    - Each box has an identification number and is sent to a recipient. (method: *sendBox*)
+    - Each box has an identification number and is sent to a recipient. (method: __*distributeBox*__)
     - A box contains rich information including the identification number, box type, recipient, expiration date, and etc.
     
 6. [Klaytn] Recipients update box information when they receive boxes and deliver them to individuals.
