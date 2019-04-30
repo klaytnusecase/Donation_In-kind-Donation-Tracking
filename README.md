@@ -4,7 +4,7 @@ This pilot project is for tracking "donation box" that has various goods, such a
 
 **Our codes are at a preliminary stage with a focus on the following procedure and smart contract methods.**
 
-## Flows & Methods
+## Flows
 
 We record donation information into a local database or the Klaytn as there are privacy issues in blockchain-based donation.
 
@@ -22,5 +22,11 @@ We record donation information into a local database or the Klaytn as there are 
     - The number of boxes is determined depending on the quantity of goods that a member donates.
     - The numbers are stored in a local database. 
     
-4. [Local]
+4. [Local] The foundation artificially distributes boxes to recipients.
+    - This step needs for simulating a donation event before recording the box information into the Klaytn.
+    - Temporal distributions are saved in a local database to be easily modified.
+    
+5. [Klaytn] The foundation uploads box distribution details to the Klaytn. 
+    - Each box has an identification number, and is sent to a recipient. (method: *sendBox*)
+    - A box contains many information including the identification number, box type, recipient, expiration date, and etc.
     
