@@ -6,7 +6,7 @@ This pilot project is for tracking "donation box" that has various goods, such a
 
 ## Flows
 
-We record donation information into a local database or the Klaytn as there are privacy issues in blockchain-based donation.
+We record donation information into a local database and/or the Klaytn as there are privacy issues in blockchain-based donation.
 
 1. [Klaytn / Local] Members donate goods and give in-depth information (quantity, price, expiration date, ...) to the foundation.
     - Members specify which information will be opened to the public.
