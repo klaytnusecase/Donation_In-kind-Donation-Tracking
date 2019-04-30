@@ -37,4 +37,4 @@ We record donation information into a local database or the Klaytn as there are 
     - Keystore files are in the system, so that recipients do not need to load them independently when signing a transaction.
     - Recipients delegate smart contract execution to the foundation. The foundation pays gas. 
     
-![GitHub Logo](/public/tile.png)
+![GitHub Logo](/public/Fig_for_flow_ENG.png)
