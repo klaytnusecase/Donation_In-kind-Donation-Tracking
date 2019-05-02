@@ -35,6 +35,7 @@ contract HappyAlliance is Ownable {
   mapping (string => string[]) historyOfBox; // record whole destination history
 
   string[] public boxIdList; // list of box ids
+	string[] public boxTypes; // list of box types
 
   uint[] public boxStatus;
 
@@ -74,6 +75,7 @@ contract HappyAlliance is Ownable {
     boxIdToIdx[_boxId] = boxes.length - 1;
     historyOfBox[_boxId].push(_npo);
     boxIdList.push(_boxId);
+		boxTypes.push(_boxType);
     yearlyCounts[_year]++;
   }
 
@@ -95,6 +97,11 @@ contract HappyAlliance is Ownable {
   // return all box ids;
   function getBoxIds () public view returns(string[]){
     return boxIdList;
+  }
+
+	// return box types;
+	function getBoxTypes () public view returns(string[]){
+    return boxTypes;
   }
 
   // return the received history of a box
