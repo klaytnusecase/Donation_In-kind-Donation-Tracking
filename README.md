@@ -51,7 +51,7 @@ We record donation information into a local database and/or the Klaytn as there 
 
 
 
-## Quic.k Start
+## Quick Start
 
 #### 1. Get the latest version
 
