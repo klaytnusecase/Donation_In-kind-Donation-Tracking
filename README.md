@@ -40,8 +40,18 @@ We record donation information into a local database and/or the Klaytn as there 
 ![GitHub Logo](/public/Fig_for_flow_ENG.png)
 
 
+## Prerequisites
 
-## Quick Start
+
+1. [NPM](https://www.npmjs.com/) and Node installed (node version 8.10.0)
+
+2. [Klaytn quick start](https://docs.klaytn.com/getting_started/quick_start)
+
+3. Install mysql for local storage.
+
+
+
+## Quic.k Start
 
 #### 1. Get the latest version
 
@@ -51,14 +61,19 @@ You can start by cloning the latest version.
 $ git clone https://github.com/[[git-hub address]] MyApp
 $ cd MyApp
 ```
-Before you start, please read this instruction https://docs.klaytn.com/getting_started/quick_start to work with klaytn.
 
 #### 2. Run `yarn install`
 
 This command install run-time project depedencies and developter tools that listed in [package.json](../package.json) file.
 If you add nother libraries and add to [package.json](../package.json), you must re-install with `yarn install`.
 
-#### 3. Run `yarn start`
+
+#### 3. Run `mysql -u [user_name] -p < nodejs-mysql-login-db.sql`
+
+This command install database_scheme for local stroage.
+
+
+#### 4. Run `yarn start`
 
 This command will build the app from the source files (`/src`) into the output
 `/build` folder. As soon as the initial build completes, it will start the Node.js server (`node build/server.js`).
