@@ -38,3 +38,32 @@ We record donation information into a local database and/or the Klaytn as there 
     - Recipients delegate smart contract execution to the foundation. The foundation pays gas. 
     
 ![GitHub Logo](/public/Fig_for_flow_ENG.png)
+
+
+
+## Quick Start
+
+#### 1. Get the latest version
+
+You can start by cloning the latest version.
+
+```shell
+$ git clone https://github.com/[[git-hub address]] MyApp
+$ cd MyApp
+```
+Before you start, please read this instruction https://docs.klaytn.com/getting_started/quick_start to work with klaytn.
+
+#### 2. Run `yarn install`
+
+This command install run-time project depedencies and developter tools that listed in [package.json](../package.json) file.
+If you add nother libraries and add to [package.json](../package.json), you must re-install with `yarn install`.
+
+#### 3. Run `yarn start`
+
+This command will build the app from the source files (`/src`) into the output
+`/build` folder. As soon as the initial build completes, it will start the Node.js server (`node build/server.js`).
+
+> [http://localhost:3000/](http://localhost:3000/) — Node.js server (`build/server.js`)
+
+
+
