@@ -45,7 +45,7 @@ We record donation information into a local database and/or the Klaytn as there 
 
 1. [NPM](https://www.npmjs.com/) and Node installed (node version 8.10.0)
 
-2. [Klaytn quick start](https://docs.klaytn.com/getting_started/quick_start)
+2. Follow the [Klaytn quick start](https://docs.klaytn.com/getting_started/quick_start) for work with klaytn
 
 3. Install mysql for local storage.
 
