@@ -50,7 +50,20 @@ struct Donation {
   string openInfo; // information that a member agrees to open
 }
 ```
-Each box has its id, type, details, expiration data, and information on recipients. 
+Each box has its id, type, details, expiration date, and information on recipients. 
+```
+struct Box {
+  string boxId; // box Id
+  string boxType; // box type such as KIDS
+  string generatedYear; // year that a box is generated
+  string serializedDonationsDetails; // originally string[] donationIds;
+  string expirationDate; // expiration date obtained from the minimum value out of donations
+  string npoInfo; // npo information
+  string npoReceivedTime; // check whether the npo receives
+  string recipientInfo; // information about last recipients
+  string recipientReceivedTime; // check whether the recipient receives
+}
+```
 
 
 ## Prerequisites
