@@ -38,6 +38,8 @@ We record donation information into a local database and/or the Klaytn because t
     - Keystore files are in the system, so that NPOs do not need to load them independently when signing a transaction.
     - NPOs delegate smart contract execution to the foundation. The foundation pays gas. 
     
+    
+    
 ![GitHub Logo](/public/Fig_for_flow_ENG.png)
 
 ## Smart contract
@@ -128,7 +130,7 @@ function addInfo (string _boxId, string _recipientInfo, string _time) public {
 
 1. [NPM](https://www.npmjs.com/) and Node installed (node version 8.10.0)
 
-2. Follow the [Klaytn quick start](https://docs.klaytn.com/getting_started/quick_start) for work with klaytn
+2. Follow the [Klaytn quick start](https://docs.klaytn.com/getting_started/quick_start) to work with klaytn
 
 3. Install mysql for local storage.
 
