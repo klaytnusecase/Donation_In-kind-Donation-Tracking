@@ -44,7 +44,7 @@ import { fetchRecipientCategory } from '../../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
 import axios from 'axios';
 import {caver, centerAddress, contractAddress, centerPrivateKey} from '../../../../caver';
-const HappyAlliance = require('../../../../../HappyAlliance.json');
+const HappyAlliance = require('../../../../../smart_contract/build/contracts/HappyAlliance.json');
 const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
 
 
@@ -267,7 +267,7 @@ class VolunteerChecking extends React.Component {
     this.setState({percent: 0});
 
     for(let i = 0; i<updateBoxId.length; i++){
-      let builder = happyAlliance.methods.addRecipientInfo(
+      let builder = happyAlliance.methods.addInfo(
         updateBoxId[i], `${this.state.recipientA  }, ${  this.state.recipientB}`, String(this.state.recipient_date));
       let encodedBuilder = builder.encodeABI();
       let transactionObject = {

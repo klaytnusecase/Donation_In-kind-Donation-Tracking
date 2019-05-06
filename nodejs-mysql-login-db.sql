@@ -107,12 +107,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `c
 (4, 'ORG', '6607a999607711cd339dce1de6d64425a0985cfd', '올가니카', 'member', '');
 INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
 (5, 'EAS', '6607a999607711cd339dce1de6d64425a0985cfd', '이지앤모어', 'member', '');
-INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(6, 'HAC', '6607a999607711cd339dce1de6d64425a0985cfd', '행복도시락 센터', 'volunteer', '');
-INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(7, 'DBC', '6607a999607711cd339dce1de6d64425a0985cfd', '동부케어', 'volunteer', '');
-INSERT INTO `users` (`id`, `username`, `password`, `affiliation`, `org_type`, `contacts`) VALUES
-(8, 'EAS_b', '6607a999607711cd339dce1de6d64425a0985cfd', '이지앤모어', 'volunteer', '');
 
 
 INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`affiliation`,`editor`, `season`, `is_new`, `created_at`) VALUES

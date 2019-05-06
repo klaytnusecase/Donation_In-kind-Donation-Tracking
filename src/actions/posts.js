@@ -357,7 +357,7 @@ function fetchStatusError(message) {
 }
 
 import {caver, centerAddress, contractAddress} from '../caver'
-const HappyAlliance = require('../../HappyAlliance.json');
+const HappyAlliance = require('../../smart_contract/build/contracts/HappyAlliance.json');
 const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
 const myAddress = centerAddress;
 
