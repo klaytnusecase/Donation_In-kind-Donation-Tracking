@@ -40,6 +40,10 @@ We record donation information into a local database and/or the Klaytn as there 
     
 ![GitHub Logo](/public/Fig_for_flow_ENG.png)
 
+## Smart contract
+
+We have two structs, Donation and Box. Each donation consists of its id, the id of the member who donates, and the information that the member agrees to open. Each box has its id, type, details, expiration data, and information on recipients. 
+
 
 ## Prerequisites
 
