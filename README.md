@@ -45,11 +45,10 @@ We record donation information into a local database and/or the Klaytn as there 
 We have two structs, Donation and Box. Each donation consists of its id, the id of the member who donates, and the information that the member agrees to open. 
 ```
 struct Donation {
-  	// Do not record details in the blockchain
-  	string donationId; // donation Id
-  	string memberId; // member Id
-		string openInfo; // information that a member agrees to open
-  }
+  string donationId; // donation Id
+  string memberId; // member Id
+  string openInfo; // information that a member agrees to open
+}
 ```
 Each box has its id, type, details, expiration data, and information on recipients. 
 
