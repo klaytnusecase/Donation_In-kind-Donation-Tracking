@@ -42,6 +42,7 @@ We record donation information into a local database and/or the Klaytn because t
 
 ## Smart contract
 
+### Structs
 We have two structs, Donation and Box. Each donation consists of its id, the id of the member who donates, and the information that the member agrees to open. 
 ```
 struct Donation {
@@ -64,6 +65,10 @@ struct Box {
   string recipientReceivedTime; // the time when recipients finally get the box
 }
 ```
+
+### Methods
+
+- __*donate*__
 
 
 ## Prerequisites
