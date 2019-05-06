@@ -94,13 +94,33 @@ function distributeBox (string _boxId, string _boxType, string _year, string _se
   tmpBox.recipientInfo = '';
   tmpBox.recipientReceivedTime = '';
 
-  boxes.push(tmpBox); Box[] public boxes
+  boxes.push(tmpBox); // Box[] public boxes
   boxStatus.push(0); // '0': distributed
   
+  boxIdToIdx[_boxId] = boxes.length - 1; // mapping boxId to its index in the array "boxes" for easy access
   ...
 }
 ```
 
+- __*receiveBox*__
+```
+function receiveBox (string _boxId, string _time) public {
+  boxes[boxIdToIdx[_boxId]].npoReceivedTime = _time; //boxIdToIdx
+  if(boxStatus[boxIdToIdx[_boxId]]<=1){
+    boxStatus[boxIdToIdx[_boxId]] = 1; //'1': received
+  }
+}
+```
+
+- __*addInfo*__
+```
+function addInfo (string _boxId, string _recipientInfo, string _time) public {
+  boxes[boxIdToIdx[_boxId]].recipientInfo = _recipientInfo;
+  boxes[boxIdToIdx[_boxId]].recipientReceivedTime = _time;
+  boxStatus[boxIdToIdx[_boxId]] = 2; //'2': given to a recipient
+  ...
+}
+```
 
 
 ## Prerequisites
