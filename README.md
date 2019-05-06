@@ -168,5 +168,5 @@ This command will build the app from the source files (`/src`) into the output
 
 ## To-do List
 
-#### 1. API is exposed. Make API key and API athucated architercture to blocks the access without permission
+#### 1. API is exposed. Make API key and API authentication architercture to blocks the access without permission
 #### 2. Most parts of project is moblie-friendly, but some parte doesn't. Make project more moblie friendly.
