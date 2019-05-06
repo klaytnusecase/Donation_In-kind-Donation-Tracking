@@ -69,6 +69,38 @@ struct Box {
 ### Methods
 
 - __*donate*__
+```
+function donate (string _donationId, string _memberId, string _openInfo) public {
+  Donation memory tmpDonation;
+  tmpDonation.donationId = _donationId;
+  tmpDonation.memberId = _memberId;
+  tmpDonation.openInfo = _openInfo;
+  donations.push(tmpDonation); // Donation[] public donations
+  memberToDonations[_memberId].push(_donationId);
+}
+```
+
+- __*distributeBox*__
+```
+function distributeBox (string _boxId, string _boxType, string _year, string _serializedDonationsDetails, string _expirationDate, string _npo) public {
+  Box memory tmpBox;
+  tmpBox.boxId = _boxId;
+  tmpBox.boxType = _boxType;
+  tmpBox.generatedYear = _year;
+  tmpBox.serializedDonationsDetails = _serializedDonationsDetails;
+  tmpBox.expirationDate = _expirationDate;
+  tmpBox.npoInfo = _npo;
+  tmpBox.npoReceivedTime = '';
+  tmpBox.recipientInfo = '';
+  tmpBox.recipientReceivedTime = '';
+
+  boxes.push(tmpBox); Box[] public boxes
+  boxStatus.push(0); // '0': distributed
+  
+  ...
+}
+```
+
 
 
 ## Prerequisites
