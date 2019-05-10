@@ -46,7 +46,7 @@ module.exports = {
     klaytn: {
             host: '127.0.0.1',
             port: 8551,
-            from: '0x3f3f1b10573e4168958d9176e05b74be17134c80', // enter your publickey
+            from: '0xa56a3611381c7749a9bd9e4e6edfd2d7c8a8fc52', // enter your publickey
             network_id: '1001', // Baobab network id
             gas: 20000000, // transaction gas limit
             gasPrice: 25000000000, // gasPrice of Baobab is 25 Gpeb
