@@ -124,9 +124,9 @@ function addInfo (string _boxId, string _recipientInfo, string _time) public {
 }
 ```
 
-## Klaytn Fee Delegation Service with AWS Lambda
+## Klaytn Fee Delegation Service 
 
-Members, NPOs have their own account in Klaytn network, but managing keys and paying fee for smart contrct is difficult for people who are not familar with block-chain. With this structure, all the fee can be paid on fee player which is foundation generally.
+Members, NPOs have their own account in Klaytn network, but managing keys and paying a fee for smart contract is difficult for people who are not familiar with block-chain. With klaytn free delegation service, all the fee can be paid on fee player(foundation), and Members/Npos can easily use the system without recognizing the key correctly.
 
 
 ![Delegate process](/public/Picture1.png)
