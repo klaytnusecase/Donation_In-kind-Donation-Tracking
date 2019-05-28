@@ -32,7 +32,7 @@ class IndDonationList extends React.Component {
   };
 
   static meta = {
-    title: 'Posts list',
+    title: 'Donation Details',
     description: 'About description',
   };
 
@@ -49,7 +49,7 @@ class IndDonationList extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>상세내역</BreadcrumbItem>
+          <BreadcrumbItem active>Donation Details</BreadcrumbItem>
         </Breadcrumb>
         <h1>Donation ID: {this.props.match.params.id}</h1>
         <Widget
@@ -59,16 +59,16 @@ class IndDonationList extends React.Component {
               <div className="pull-right mt-n-xs">
               {this.props.isNew&&(
                 <Link to={`/app/donation/edit/${this.props.match.params.id}`} className="btn btn-sm btn-inverse">
-                  수정하기
+                  Edit
                 </Link>
                 )}
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to="/app/donation" className="btn btn-sm btn-inverse">
-                  돌아가기
+                  Go back
                 </Link>
               </div>
               <h5 className="mt-0">
-                <span className="fw-semi-bold">목록</span>
+                <span className="fw-semi-bold">Details</span>
               </h5>
             </div>
           }
@@ -77,8 +77,8 @@ class IndDonationList extends React.Component {
             <Table striped>
               <thead>
               <tr>
-                <th>속성</th>
-                <th>상세</th>
+                <th>Attribute</th>
+                <th>Info</th>
               </tr>
               </thead>
               <tbody>
@@ -92,21 +92,21 @@ class IndDonationList extends React.Component {
               {this.props.details &&
               this.props.details.length && (
                 <tr>
-                  <td>멤버사 정보</td>
+                  <td>Name of Member</td>
                   <td>{this.props.details[0].affiliation}</td>
                 </tr>
               )}
               {this.props.details &&
               this.props.details.length && (
                 <tr>
-                  <td>작성자(수정자)</td>
+                  <td>Recent Modifier</td>
                   <td>{this.props.details[0].editor}</td>
                 </tr>
               )}
               {this.props.details &&
               this.props.details.length && (
                 <tr>
-                  <td>등록 일시</td>
+                  <td>Modified Date</td>
                   <td>{this.props.details[0].created_at}</td>
                 </tr>
               )}
@@ -126,14 +126,14 @@ class IndDonationList extends React.Component {
 
             {this.props.hasPrev && (
               <div className="pull-right mt-n-xs">
-                <a href = {`/app/donation/${  this.props.details[0].prev_donation_id}`}>이전 기록 보기</a>
+                <a href = {`/app/donation/${  this.props.details[0].prev_donation_id}`}>View Previous Information</a>
               </div>
               )}
           </div>
         </Widget>
       </div>
     );
-  }
+  }Pre
 }
 
 

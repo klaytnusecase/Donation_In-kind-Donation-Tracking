@@ -26,71 +26,71 @@ class Sidebar extends React.Component {
       case 'admin':
         return (<ul className={s.nav}>
           <LinksGroup
-            header="대시보드"
+            header="Dashboard"
             headerLink="/app"
             glyph="dashboard"
           />
           <LinksGroup
-            header="기부 조회 & 등록하기"
+            header="Donation"
             headerLink="/app/donation"
             glyph="typography"
           />
           <LinksGroup
-            header="회원 관리"
-            headerLink="/app/manage/member"
-            childrenLinks={[
-              {
-                name: '회원 등록',
-                link: '/app/manage/member/registerUser',
-               },
-               {
-                name: '멤버사 목록',
-                link: '/app/manage/member/memberList',
-               },
-               {
-                name: '전달기관 목록',
-                link: '/app/manage/member/volunteerList',
-               },
-            ]}
-            glyph="notifications"
-          />
-          <LinksGroup
-            header="Happiness Box"
+            header="Donation Box"
             headerLink="/app/typography"
             childrenLinks={[
               {
-                name: '박스 기획하기',
+                name: 'Box Plan',
                 link: '/app/happiness/planning',
               },
               {
-                name: '박스 수량 정하기',
+                name: 'Quantity Setting',
                 link: '/app/happiness/making',
               },
               {
-                name: '박스 나눠주기 (임시저장)',
+                name: 'Temporal Distribution',
                 link: '/app/happiness/distributing',
               },
               {
-                name: '박스 나눠주기 (최종)',
+                name: 'Final Distribution',
                 link: '/app/happiness/distributingFinal',
               },
               {
-                name: '박스 확인하기',
+                name: 'Box Check',
                 link: '/app/happiness/checking',
               },
             ]}
             glyph="components"
           />
           <LinksGroup
-            header="환경설정"
+            header="Management Users"
+            headerLink="/app/manage/member"
+            childrenLinks={[
+              {
+                name: 'Register Users',
+                link: '/app/manage/member/registerUser',
+               },
+               {
+                name: 'Members List',
+                link: '/app/manage/member/memberList',
+               },
+               {
+                name: 'NPOs List',
+                link: '/app/manage/member/volunteerList',
+               },
+            ]}
+            glyph="notifications"
+          />
+          <LinksGroup
+            header="Configuration"
             headerLink="/app/manage/configuration"
             childrenLinks={[
               {
-                name: '수혜자 카테고리 관리',
+                name: 'Recipient Category',
                 link: '/app/manage/configuration/manageRecipientCategory',
                },
                {
-                name: '시즌 관리',
+                name: 'Manage Season',
                 link: '/app/manage/configuration/manageSeason',
                },
             ]}
@@ -100,12 +100,12 @@ class Sidebar extends React.Component {
       case 'member':
         return (<ul className={s.nav}>
           <LinksGroup
-            header="대시보드"
+            header="Dashboard"
             headerLink="/app"
             glyph="dashboard"
           />
           <LinksGroup
-            header="기부 조회 & 등록하기"
+            header="Donation"
             headerLink="/app/donation"
             glyph="typography"
           />
@@ -114,24 +114,24 @@ class Sidebar extends React.Component {
         return (
           <ul className={s.nav}>
             <LinksGroup
-            header="대시보드"
+            header="Dashboard"
             headerLink="/app"
             glyph="dashboard"
           />
           <LinksGroup
-            header="Happiness Box"
+            header="Donation Box"
             headerLink="/app/typography"
             childrenLinks={[
               {
-                name: '박스 확인하기',
+                name: 'Check box',
                 link: '/app/happiness/checking',
               },
               {
-                name: '수령증 발급하기',
+                name: 'Issue Receipt',
                 link: '/app/happiness/receipt',
               },
               {
-                name: '수령증 업로드하기',
+                name: 'Upload Receipt',
                 link: '/app/happiness/receipt/upload',
               },
             ]}

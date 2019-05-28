@@ -6,12 +6,11 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-create database prisming_app;
+create database donation_klaytn;
 -- --------------------------------------------------------
-use prisming_app;
+use donation_klaytn;
 
 --
--- Database: `db_users`
 --
 
 -- --------------------------------------------------------
@@ -121,49 +120,49 @@ INSERT INTO `donations` (`id`, `company_id`, `donation_id`, `prev_donation_id`,`
 (5, 'EAS', '6607a999607711cd339dce1de6d64425a0985cfe', '','이지앤모어' ,'이지앤모어', 1, true, NOW());
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfa', '물품명', '키즈세이프치약', false);
+('6607a999607711cd339dce1de6d64425a0985cfa', 'Name', '키즈세이프치약', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfa', '수량', '4', true);
+('6607a999607711cd339dce1de6d64425a0985cfa', 'Quantity', '4', true);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfa', '가격', '400', false);
+('6607a999607711cd339dce1de6d64425a0985cfa', 'Price', '400', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfa', '유통기한', 'null', false);
+('6607a999607711cd339dce1de6d64425a0985cfa', 'ExpirationDate', 'null', false);
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfb', '물품명', '키즈세이프칫솔', false);
+('6607a999607711cd339dce1de6d64425a0985cfb', 'Name', '키즈세이프칫솔', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfb', '수량', '4', true);
+('6607a999607711cd339dce1de6d64425a0985cfb', 'Quantity', '4', true);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfb', '가격', '400', false);
+('6607a999607711cd339dce1de6d64425a0985cfb', 'Price', '400', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfb', '유통기한', 'null', false);
+('6607a999607711cd339dce1de6d64425a0985cfb', 'ExpirationDate', 'null', false);
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfc', '물품명', '가꿈비누', false);
+('6607a999607711cd339dce1de6d64425a0985cfc', 'Name', '가꿈비누', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfc', '수량', '5', true);
+('6607a999607711cd339dce1de6d64425a0985cfc', 'Quantity', '5', true);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfc', '가격', '6000', false);
+('6607a999607711cd339dce1de6d64425a0985cfc', 'Price', '6000', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfc', '유통기한', 'null', false);
+('6607a999607711cd339dce1de6d64425a0985cfc', 'ExpirationDate', 'null', false);
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfd', '물품명', '어네스트바', false);
+('6607a999607711cd339dce1de6d64425a0985cfd', 'Name', '어네스트바', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfd', '수량', '11', true);
+('6607a999607711cd339dce1de6d64425a0985cfd', 'Quantity', '11', true);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfd', '가격', '1500', false);
+('6607a999607711cd339dce1de6d64425a0985cfd', 'Price', '1500', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfd', '유통기한', 'null', false);
+('6607a999607711cd339dce1de6d64425a0985cfd', 'ExpirationDate', 'null', false);
 
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfe', '물품명', '위생용품', false);
+('6607a999607711cd339dce1de6d64425a0985cfe', 'Name', '위생용품', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfe', '수량', '1', true);
+('6607a999607711cd339dce1de6d64425a0985cfe', 'Quantity', '1', true);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfe', '가격', '0', false);
+('6607a999607711cd339dce1de6d64425a0985cfe', 'Price', '0', false);
 INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_public`) VALUES
-('6607a999607711cd339dce1de6d64425a0985cfe', '유통기한', 'null', false);
+('6607a999607711cd339dce1de6d64425a0985cfe', 'ExpirationDate', 'null', false);
 
 
 INSERT INTO `configuration` (`type`, `stringify_data`) VALUES

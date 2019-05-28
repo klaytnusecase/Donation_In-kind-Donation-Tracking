@@ -18,17 +18,17 @@ import { fetchDonations } from '../../../actions/posts';
 class DonationList extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    posts: PropTypes.array, // eslint-disable-line
+    donations: PropTypes.array, // eslint-disable-line
     isFetching: PropTypes.bool,
   };
 
   static defaultProps = {
     isFetching: false,
-    posts: [],
+    donations: [],
   };
 
   static meta = {
-    title: 'Posts list',
+    title: 'Donations list',
     description: 'About description',
   };
 
@@ -41,20 +41,20 @@ class DonationList extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>기부내역</BreadcrumbItem>
+          <BreadcrumbItem active>Donation List</BreadcrumbItem>
         </Breadcrumb>
-        <h1>기부내역</h1>
+        <h1>Donation List</h1>
         <Widget
           className="pb-0"
           title={
             <div>
               <div className="pull-right mt-n-xs">
                 <Link to="/app/donation/new" className="btn btn-sm btn-inverse">
-                  기부 등록
+                  Register Donation
                 </Link>
               </div>
               <h5 className="mt-0">
-                <span className="fw-semi-bold">목록</span>
+                <span className="fw-semi-bold">List</span>
               </h5>
             </div>
           }
@@ -65,24 +65,24 @@ class DonationList extends React.Component {
               <tr>
                 <th>List ID</th>
                 <th>Donation ID</th>
-                <th>멤버사</th>
-                <th>수정버튼</th>
+                <th>Member Name</th>
+                <th>Edit</th>
               </tr>
               </thead>
               <tbody>
-              {this.props.posts &&
-              this.props.posts.map(post => (
+              {this.props.donations &&
+              this.props.donations.map(post => (
                 <tr key={post.id}>
                   <td>{post.id}</td>
                   <td><Link to={`/app/donation/${post.donation_id}`}>{post.donation_id}</Link></td>
                   <td>{post.affiliation}</td>
-                  <td><Link to={`/app/donation/edit/${post.donation_id}`}><Button outline color="info" size="sm"> 수정 </Button></Link></td>
+                  <td><Link to={`/app/donation/edit/${post.donation_id}`}><Button outline color="info" size="sm"> Edit </Button></Link></td>
                 </tr>
               ))}
-              {this.props.posts &&
-              !this.props.posts.length && (
+              {this.props.donations &&
+              !this.props.donations.length && (
                 <tr>
-                  <td colSpan="100">No posts yet</td>
+                  <td colSpan="100">No donations yet</td>
                 </tr>
               )}
               {this.props.isFetching && (
@@ -106,7 +106,7 @@ class DonationList extends React.Component {
 function mapStateToProps(state) {
   return {
     isFetching: state.posts.isFetching,
-    posts: state.posts.posts,
+    donations: state.posts.posts,
   };
 }
 
