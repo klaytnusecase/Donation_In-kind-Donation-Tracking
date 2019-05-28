@@ -40,7 +40,7 @@ class Planning extends React.Component {
     switches: {},
   };
   static meta = {
-    title: 'Create new happiness box',
+    title: 'Create new donation box',
     description: 'About description',
   };
   componentWillMount() {
@@ -85,11 +85,11 @@ class Planning extends React.Component {
       donations: donations.filter(task => task.donation_id !== draggedDonation.donation_id),
       draggedDonation: {},
       expirationDate: [...InBoxDonations, draggedDonation].map(donation => {
-        if(donation.유통기한==="null"){
+        if(donation.ExpirationDate==="null"){
           return null
         }
 
-          return new Date(donation.유통기한)
+          return new Date(donation.ExpirationDate)
 
       }).filter((obj)=>obj),
     });
@@ -146,11 +146,11 @@ class Planning extends React.Component {
       <div>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">박스 기획하기</li>
+          <li className="breadcrumb-item">Dontaion Box</li>
+          <li className="active breadcrumb-item">Box Plan</li>
         </ol>
 
-        <h1 className="page-title">박스 기획하기</h1>
+        <h1 className="page-title">Box Plan</h1>
         <form onSubmit={this.doCreateCollection}>
           {this.props.message && (
                     <Alert size="sm" color="info">
@@ -166,7 +166,7 @@ class Planning extends React.Component {
           <Card>
             <Input
               value = {this.state.name}
-              placeholder = '이름을 입력해주세요'
+              placeholder = 'Put the name of the box to plan'
               onChange = {this.handleName}
               required
               type="text"
@@ -176,7 +176,7 @@ class Planning extends React.Component {
         <CardDeck>
           <Card>
             <Widget
-              title={<h4> 현재 기부물품
+              title={<h4> Donation Inventory
               </h4>} close collapse
             >
               <hr/>
@@ -192,10 +192,10 @@ class Planning extends React.Component {
                       onDrag={(event) => this.onDrag(event, donation)}
                       >
                       <span>
-                      {donation.물품명} &emsp; (유통기한: {donation.유통기한!=="null" ? donation.유통기한 : "데이터 없음"})
+                      {donation.Name} &emsp; (Expiration Date: {donation.ExpirationDate!=="null" ? donation.ExpirationDate : "No data"})
                       </span>
                       <span style={{float:"right"}}>
-                        총 수량: {donation.수량}
+                        Quantity: {donation.Quantity}
                       </span>
                       <hr/>
                     </div>
@@ -206,7 +206,7 @@ class Planning extends React.Component {
           </Card>
           <Card>
             <Widget
-              title={<h4> 박스 구성</h4>} close collapse
+              title={<h4> Configuration of Box to plan</h4>} close collapse
             >
               <hr/>
               <div
@@ -214,7 +214,7 @@ class Planning extends React.Component {
                 onDragOver={(event => this.onDragOver(event))}
                  style={{minHeight: "200px"}}>
                  <h5><span>{(this.state.expirationDate.length>0) ?
-                   new Date(Math.min.apply(null, this.state.expirationDate)).toISOString().substring(0, 10)  : "미지정"}</span></h5>
+                   new Date(Math.min.apply(null, this.state.expirationDate)).toISOString().substring(0, 10)  : "No data"}</span></h5>
 
                 {this.state.InBoxDonations.map((donation, index) =>
                   <div
@@ -223,10 +223,10 @@ class Planning extends React.Component {
                     onDrag={(event) => this.onDrag(event, donation)}
                   >
                     <span>
-                      {donation.물품명} &emsp; (유통기한: {donation.유통기한!=="null" ? donation.유통기한 : "데이터 없음"})
+                      {donation.Name} &emsp; (Expiration Date: {donation.ExpirationDate!=="null" ? donation.ExpirationDate : "No data"})
                       </span>
                       <span style={{float:"right"}}>
-                        총 수량: {donation.수량}
+                        Quantity: {donation.Quantity}
                       </span>
                     <span>
                     <Input
@@ -250,7 +250,7 @@ class Planning extends React.Component {
             <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
               <ButtonGroup>
               <Button color="success" type="submit">
-                {this.props.isFetching ? '생성중...' : '컬랙션 생성'}
+                {this.props.isFetching ? 'Processing...' : 'Save'}
               </Button>
               </ButtonGroup>
             </div>
