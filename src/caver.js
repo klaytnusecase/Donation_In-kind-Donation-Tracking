@@ -8,8 +8,8 @@
 import Caver from 'caver-js'
 
 export const caver = new Caver('http://127.0.0.1:8551');
-export const centerAddress = "0x3f3f1b10573e4168958d9176e05b74be17134c80";
-export const centerPrivateKey = "0xbac724b0eb0b49ec3cac5c8ac22da15e8bbc4f539dbe91ec12d476c8ff1ea1e4";
-export const contractAddress = "0xf8660faadcc69d18731de9da319d6033c3d3d7eb";
+export const centerAddress = "0xa56a3611381c7749a9bd9e4e6edfd2d7c8a8fc52";
+export const centerPrivateKey = "0xd447648abc237a38eda59a112b8d1700a93664ac94c8dc23ed6ca02c91bd8055";
+export const contractAddress = "0x457c7efcbe9399a7dc59a165c87c6bda2a432c93";
 
 export default caver

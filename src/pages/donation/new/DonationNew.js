@@ -21,8 +21,12 @@ import Widget from '../../../components/Widget';
 
 import DatePicker from "react-datepicker";
 
-import { createDonation, doDonation } from '../../../actions/posts';
+import { createDonation } from '../../../actions/posts';
 import s from './DonationNew.scss';
+import {caver, centerAddress, contractAddress, centerPrivateKey} from '../../../caver';
+const HappyAlliance = require('../../../../smart_contract/build/contracts/HappyAlliance.json');
+const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
+
 
 class DonationNew extends React.Component {
   static propTypes = {
@@ -55,8 +59,15 @@ class DonationNew extends React.Component {
       dateispublic: false,
       shareholders: [],
       donation_id: '',
+      userKeystore: JSON.parse(require('../../../../keystore/'+this.props.klaytnAddress+'.txt')),
     };
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({
+      userPrivateKey : caver.klay.accounts.decrypt(this.state.userKeystore, 'prisming'),
+    });
   }
   handleChange(date) {
     this.setState({
@@ -135,7 +146,42 @@ class DonationNew extends React.Component {
     });
   };
 
+  donate = (donation_id, company_id, info) => {
+    const senderAddress = this.props.klaytnAddress;
+    const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
+    caver.klay.accounts.wallet.add(this.state.userPrivateKey);
+    caver.klay.accounts.wallet.add(centerPrivateKey);
+
+    let builder = happyAlliance.methods.donate(donation_id, company_id, info);
+    let encodedBuilder = builder.encodeABI();
+    let transactionObject = {
+        type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
+        from: senderAddress,
+        to: contractAddress,
+        data: encodedBuilder,
+        gas: 2000000,
+    };
+
+    caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
+        if (error) {
+          console.log(error);
+        } else {
+          //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
+          caver.klay.sendTransaction({
+            feePayer: centerAddress,
+            senderRawTransaction: signedTx.rawTransaction,
+          })
+          .on('receipt', (receipt) => console.log(receipt))
+          .on('error', (error) => console.log(error));
+        }
+      });
+
+    console.log('working');
+  }
+
   doCreateDonation = (e) => {
+
+
     let info = {};
     if(this.state.nameispublic==true){
       info['stuff_name'] = this.state.stuff_name;
@@ -172,14 +218,13 @@ class DonationNew extends React.Component {
           shareholders: this.state.shareholders,
         })
       )
-      .then(res => this.props
-        .dispatch(
-          doDonation({
-            donation_id: res.donation_id,
-            company_id: this.props.name,
-            openInfo: JSON.stringify(info),
-          })
-        )
+      .then(res => this.donate(res.donation_id, this.props.name, JSON.stringify(info)))
+          //this.doDonation()
+          //doDonation({
+          //  donation_id: res.donation_id,
+          //  company_id: this.props.name,
+          //  openInfo: JSON.stringify(info),
+          //}))
         .then(() =>
           this.setState({
             company_id: '',
@@ -192,14 +237,13 @@ class DonationNew extends React.Component {
             shareholders: [],
             date: null,
           }),
-        )
-      );
-
+        );
     e.preventDefault();
   }
 
   render() {
     console.log(this.state);
+    console.log(this.props);
     return (
       <div className={s.root}>
          <Breadcrumb>
@@ -377,7 +421,8 @@ function mapStateToProps(state) {
     isFetching: state.posts.isFetching,
     message: state.posts.message,
     name: state.auth.name,
-    affiliation: state.auth.affiliation
+    affiliation: state.auth.affiliation,
+    klaytnAddress: state.auth.klaytnAddress,
   };
 }
 

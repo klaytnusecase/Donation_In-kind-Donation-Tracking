@@ -44,7 +44,7 @@ import { fetchRecipientCategory } from '../../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
 import axios from 'axios';
 import {caver, centerAddress, contractAddress, centerPrivateKey} from '../../../../caver';
-const HappyAlliance = require('../../../../../HappyAlliance.json');
+const HappyAlliance = require('../../../../../smart_contract/build/contracts/HappyAlliance.json');
 const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
 
 
@@ -209,43 +209,102 @@ class VolunteerChecking extends React.Component {
     const allTypes = this.state.targetBoxes.map(box=>box[1]);
     const idxArray = getAllIndexes(allTypes, this.state.confirmTarget);
 
-    idxArray.map((val, idx) => this.props.dispatch(confirmBox({
-      boxId: String(this.state.targetBoxes[val][0]),
-      receivedTime: String(this.state.date),
-    }))
-    .then(this.setState({
-      percent: Math.ceil(100*(idx+1)/idxArray.length),
-    }))
-  .then(() => this.props.dispatch(fetchNPOVolun(this.state.targetNPO))));
-  this.setState({
-      date: null,
-      confirmTarget: '',
-      isClicked: true,
-    });
-    e.preventDefault();
-  }
+    const senderAddress = this.props.klaytnAddress;
+    const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
+    caver.klay.accounts.wallet.add(this.state.userPrivateKey);
+    caver.klay.accounts.wallet.add(centerPrivateKey);
+
+    for(let i = 0; i<idxArray.length; i++){
+      let val = idxArray[i];
+      let builder = happyAlliance.methods.receiveBox(String(this.state.targetBoxes[val][0]), String(this.state.date));
+      let encodedBuilder = builder.encodeABI();
+      let transactionObject = {
+          type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
+          from: senderAddress,
+          to: contractAddress,
+          data: encodedBuilder,
+          gas: 2000000,
+      };
+
+      caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
+          if (error) {
+            console.log(error);
+          } else {
+            //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
+            caver.klay.sendTransaction({
+              feePayer: centerAddress,
+              senderRawTransaction: signedTx.rawTransaction,
+            })
+            .on('receipt', (receipt) => console.log(receipt))
+            .on('error', (error) => console.log(error));
+          }
+        });
+
+        this.setState({
+          percent: Math.ceil(100*(i+1)/idxArray.length),
+        });
+      }
+      this.props.dispatch(fetchNPOVolun(this.state.targetNPO));
+      this.setState({
+        date: null,
+        confirmTarget: '',
+        isClicked: true,
+      });
+      e.preventDefault();
+    }
 
   updateBox = (e) => {
     const updateTargetIdx = getAllIndexes(this.props.npoBoxesForVolun[1], this.state.updateTarget);
     const emptyTargetIdx = getAllIndexes(this.props.npoBoxesForVolun[5], "");
-    const unionIdx = updateTargetIdx.filter(value => emptyTargetIdx.includes(value))
-
+    const unionIdx = updateTargetIdx.filter(value => emptyTargetIdx.includes(value));
     const updateBoxId = unionIdx.map(idx => this.props.npoBoxesForVolun[0][idx]);
-    Array(...{length: this.state.number}).map(Number.call, Number).forEach(i =>
-      this.props.dispatch(
-        updateBox({
-          updateTarget: updateBoxId[i],
-          recipient: `${this.state.recipientA  }, ${  this.state.recipientB}`,
-          recipientDate: String(this.state.recipient_date),
-        }))
-        .then(() => this.props.dispatch(fetchNPOVolun(this.state.targetNPO)))
-        .then(()=> this.setState({
+
+    const senderAddress = this.props.klaytnAddress;
+    const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
+    caver.klay.accounts.wallet.add(this.state.userPrivateKey);
+    caver.klay.accounts.wallet.add(centerPrivateKey);
+
+    this.setState({percent: 0});
+
+    for(let i = 0; i<updateBoxId.length; i++){
+      let builder = happyAlliance.methods.addInfo(
+        updateBoxId[i], `${this.state.recipientA  }, ${  this.state.recipientB}`, String(this.state.recipient_date));
+      let encodedBuilder = builder.encodeABI();
+      let transactionObject = {
+          type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
+          from: senderAddress,
+          to: contractAddress,
+          data: encodedBuilder,
+          gas: 2000000,
+      };
+
+      caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
+          if (error) {
+            console.log(error);
+          } else {
+            //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
+            caver.klay.sendTransaction({
+              feePayer: centerAddress,
+              senderRawTransaction: signedTx.rawTransaction,
+            })
+            .on('receipt', (receipt) => console.log(receipt))
+            .on('error', (error) => console.log(error));
+          }
+        });
+
+        this.setState({
+          percent: Math.ceil(100*(i+1)/updateBoxId.length),
+        })
+
+        this.props.dispatch(fetchNPOVolun(this.state.targetNPO));
+        this.setState({
           updateTarget: '',
           recipientA: '',
           recipientB: '',
           recipient_date: null,
           number: '',
-        })));
+        });
+      }
     e.preventDefault();
   }
 
@@ -268,38 +327,6 @@ class VolunteerChecking extends React.Component {
     this.props.dispatch(fetchCollectionsAndDonations());
     this.props.dispatch(fetchRecipientCategory());
   }
-
-  sendTest = () => {
-    const senderAddress = this.props.klaytnAddress;
-    const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
-    caver.klay.accounts.wallet.add(this.state.userPrivateKey);
-    caver.klay.accounts.wallet.add(centerPrivateKey);
-
-    let builder = happyAlliance.methods.donate("", "", "");
-    let encodedBuilder = builder.encodeABI();
-    let transactionObject = {
-        type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
-        from: senderAddress,
-        to: contractAddress,
-        data: encodedBuilder,
-        gas: 2000000,
-    };
-
-    caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
-        if (error) {
-          console.log(error);
-        } else {
-          //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
-          caver.klay.sendTransaction({
-            feePayer: centerAddress,
-            senderRawTransaction: signedTx.rawTransaction,
-          })
-          .on('transactionHash', (transactionHash) => console.log(transactionHash))
-          .on('receipt', (receipt) => console.log(receipt))
-          .on('error', (error) => console.log(error));
-        }
-      });
-    }
 
   render() {
     console.log(this.state);

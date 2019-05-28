@@ -357,7 +357,7 @@ function fetchStatusError(message) {
 }
 
 import {caver, centerAddress, contractAddress} from '../caver'
-const HappyAlliance = require('../../HappyAlliance.json');
+const HappyAlliance = require('../../smart_contract/build/contracts/HappyAlliance.json');
 const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
 const myAddress = centerAddress;
 
@@ -447,11 +447,11 @@ export function doDonation(postData) {
 }
 
 
-export function sendBox(postData) {
+export function distributeBox(postData) {
   return dispatch => {
     // We dispatch requestCreatePost to kickoff the call to the API
     dispatch(requestSendBox(postData));
-    return happyAlliance.methods.sendBox(postData.boxId, postData.boxType, postData.year, postData.serializedDonations, postData.expirationDate, postData.npo).
+    return happyAlliance.methods.distributeBox(postData.boxId, postData.boxType, postData.year, postData.serializedDonations, postData.expirationDate, postData.npo).
     send({from: myAddress, gas:2000000, gasPrice:25000000000})
     .then(response => {
         console.log(response);
@@ -476,7 +476,7 @@ export function updateBox(postData) {
   return dispatch => {
     // We dispatch requestCreatePost to kickoff the call to the API
     dispatch(requestUpdateBox(postData));
-    return happyAlliance.methods.addRecipientInfo(postData.updateTarget, postData.recipient, postData.recipientDate).
+    return happyAlliance.methods.addInfo(postData.updateTarget, postData.recipient, postData.recipientDate).
     send({from: myAddress, gas:2000000, gasPrice:25000000000})
     .then(response => {
         console.log(response);
@@ -492,26 +492,6 @@ export function updateBox(postData) {
           dispatch(sendBoxInitial());
         }, 5000);
         return Promise.resolve(postData);
-      })
-      .catch(err => console.error('Error: ', err));
-  };
-}
-
-
-export function confirmBox(data) {
-  return dispatch => {
-    dispatch(requestUpdateBox(data));
-    return happyAlliance.methods.npoConfirm(data.boxId, data.receivedTime).send({from: myAddress, gas:2000000, gasPrice:25000000000})
-    .then(response => {
-        if (!response) {
-          // If there was a problem, we want to
-          // dispatch the error condition
-          dispatch(updateBoxFailure('Fail'));
-          return Promise.reject(response);
-        }
-        // Dispatch the success action
-        dispatch(updateBoxSuccess(response));
-        return Promise.resolve(response);
       })
       .catch(err => console.error('Error: ', err));
   };

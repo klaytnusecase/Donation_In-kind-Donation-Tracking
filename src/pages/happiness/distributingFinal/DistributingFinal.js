@@ -24,7 +24,7 @@ import { connect } from 'react-redux';
 import withMeta from '../../../core/withMeta';
 import Widget from '../../../components/Widget';
 import { fetchCollectionsDistribution, updateCollectionDistribution, fetchCollectionsAndDonations} from '../../../actions/happiness';
-import { sendBox, getNumBoxesByYear } from '../../../actions/posts';
+import { distributeBox, getNumBoxesByYear } from '../../../actions/posts';
 import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
 const crypto   = require('crypto');
@@ -168,7 +168,7 @@ toggleModal = () => {
         this.state.quantities[idx].map((q, idx2) =>
           Array(...{length: q}).map(Number.call, Number).forEach(() =>
             this.props.dispatch(
-              sendBox({
+              distributeBox({
                 boxId: crypto.createHash('sha1').update(`${new Date().getTime()}${numExistingBoxes++}`).digest('hex'),
                 //boxId: `${thisYear}-${pad_with_zeroes(numExistingBoxes++, 7)}`, // year + 7 digit box id (0000001~9999999)
                 serializedDonations: JSON.stringify(this.state.collectionsForMaking[idx2].donations),
