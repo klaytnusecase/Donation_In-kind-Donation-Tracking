@@ -83,7 +83,7 @@ class ForAdmin extends Component {
           </ButtonGroup>
         </div>
 
-        <h1 className="mb-lg">Current Status of Boxes {this.props.isFetching ? "(불러오는 중입니다)" : ""}</h1>
+        <h1 className="mb-lg">Current Status of Boxes {this.props.isFetching ? "(Loading...)" : ""}</h1>
         {!this.props.isFetching &&
         <Row>
           <Col sm={4}>

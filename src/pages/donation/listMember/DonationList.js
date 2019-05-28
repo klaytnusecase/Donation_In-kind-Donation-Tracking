@@ -18,7 +18,7 @@ import { fetchDonationsMember } from '../../../actions/posts';
 class DonationList extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    posts: PropTypes.array, // eslint-disable-line
+    donations: PropTypes.array, // eslint-disable-line
     isFetching: PropTypes.bool,
 
   };
@@ -29,7 +29,7 @@ class DonationList extends React.Component {
   };
 
   static meta = {
-    title: 'Posts list',
+    title: 'Donation list',
     description: 'About description',
   };
 
@@ -42,7 +42,7 @@ class DonationList extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>기부내역</BreadcrumbItem>
+          <BreadcrumbItem active>Donation List</BreadcrumbItem>
         </Breadcrumb>
         <h1>기부내역</h1>
         <Widget
@@ -71,8 +71,8 @@ class DonationList extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {this.props.posts &&
-              this.props.posts.map(post => (
+              {this.props.donations &&
+              this.props.donations.map(post => (
                 <tr key={post.id}>
                   <td>{post.id}</td>
                   <td><Link to={`/app/donation/${post.donation_id}`}>{post.donation_id}</Link></td>
@@ -80,10 +80,10 @@ class DonationList extends React.Component {
                   <td><Link to={`/app/donation/edit/${post.donation_id}`}><Button outline color="info" size="sm"> 수정 </Button></Link></td>
                 </tr>
               ))}
-              {this.props.posts &&
-              !this.props.posts.length && (
+              {this.props.donations &&
+              !this.props.donations.length && (
                 <tr>
-                  <td colSpan="100">No posts yet</td>
+                  <td colSpan="100">No Donations yet</td>
                 </tr>
               )}
               {this.props.isFetching && (
