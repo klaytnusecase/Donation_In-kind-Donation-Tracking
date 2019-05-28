@@ -83,12 +83,12 @@ class ForAdmin extends Component {
           </ButtonGroup>
         </div>
 
-        <h1 className="mb-lg">행복상자 현황 {this.props.isFetching ? "(불러오는 중입니다)" : ""}</h1>
+        <h1 className="mb-lg">Current Status of Boxes {this.props.isFetching ? "(불러오는 중입니다)" : ""}</h1>
         {!this.props.isFetching &&
         <Row>
           <Col sm={4}>
             <div className="d-flex justify-content-center">
-                <h3 className="mb-lg">수령 전</h3>
+                <h3 className="mb-lg">Before Receipt</h3>
             </div>
             <div className="d-flex justify-content-center">
                 <h3 className="mb-lg">{this.props.status.filter((x) => x=="0").length} 개</h3>
@@ -111,7 +111,7 @@ class ForAdmin extends Component {
           </Col>
           <Col sm={4}>
             <div className="d-flex justify-content-center">
-                <h3 className="mb-lg">수령 완료</h3>
+                <h3 className="mb-lg">Receipt Complete</h3>
             </div>
             <div className="d-flex justify-content-center">
                 <h3 className="mb-lg">{this.props.status.filter((x) => x=="1").length} 개</h3>
@@ -134,7 +134,7 @@ class ForAdmin extends Component {
           </Col>
           <Col sm={4}>
             <div className="d-flex justify-content-center">
-                <h3 className="mb-lg">최종 수혜 완료</h3>
+                <h3 className="mb-lg">Deliver Complete</h3>
             </div>
             <div className="d-flex justify-content-center">
                 <h3 className="mb-lg">{this.props.status.filter((x) => x=="2").length} 개</h3>

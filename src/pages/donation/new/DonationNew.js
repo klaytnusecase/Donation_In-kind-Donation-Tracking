@@ -40,7 +40,7 @@ class DonationNew extends React.Component {
   };
 
   static meta = {
-    title: 'Create new donation',
+    title: 'Register donation',
     description: 'About description',
   };
 
