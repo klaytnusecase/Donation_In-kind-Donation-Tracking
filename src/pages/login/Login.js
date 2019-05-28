@@ -81,7 +81,7 @@ class Login extends React.Component {
               <Widget className={s.widget}>
                 <h4 className="mt-0">Login Happiness box App</h4>
                 <p className="fs-sm text-muted">
-                  계정이 없다면 관리자에게 문의해주세요
+                  If you do not have account, please contact to admin.
                 </p>
                 <Form className="mt" onSubmit={this.doLogin}>
                   {this.props.errorMessage && (
@@ -115,7 +115,7 @@ class Login extends React.Component {
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
                     <ButtonGroup>
                       <Button color="success" size="sm" type="submit">
-                        {this.props.isFetching ? '로그인 중...' : '로그인'}
+                        {this.props.isFetching ? 'Login...' : 'Login'}
                       </Button>
                     </ButtonGroup>
                   </div>

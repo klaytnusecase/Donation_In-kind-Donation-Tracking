@@ -242,13 +242,11 @@ class DonationNew extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     return (
       <div className={s.root}>
          <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>기부 등록</BreadcrumbItem>
+          <BreadcrumbItem active>Register Donation</BreadcrumbItem>
         </Breadcrumb>
         <h1>기부 등록</h1>
         <Row>
@@ -256,7 +254,7 @@ class DonationNew extends React.Component {
             <Widget
               title={
                 <span>
-                  <span className="fw-semi-bold">기부하고자 하는 물품의 정보를 입력해주세요.</span>
+                  <span className="fw-semi-bold">Fill the information of donations.</span>
                 </span>
               }
             >
@@ -268,11 +266,11 @@ class DonationNew extends React.Component {
                   </Alert>
                 )}
                 <FormGroup>
-                  <Label for="input-title">기부물품 이름</Label>
+                  <Label for="input-title">Name</Label>
                   <Input
                     id="input-title"
                     type="text"
-                    placeholder="기부물품 이름"
+                    placeholder="Name"
                     value={this.state.stuff_name}
                     required
                     onChange={this.changeStuffName}
@@ -286,15 +284,15 @@ class DonationNew extends React.Component {
                           onClick = {this.changeNameIsPublic}
                           type="checkbox"
                         />
-                    <span>해당 속성을 공개하겠습니다.</span>
+                    <span>Open this attribute to public.</span>
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="input-title">수량 (개 단위로 입력해주세요)</Label>
+                  <Label for="input-title">Quantity</Label>
                   <Input
                     id="input-title"
                     type="number"
-                    placeholder="수량"
+                    placeholder="Quantity"
                     value={this.state.quantity}
                     required
                     min = "0"
@@ -308,15 +306,15 @@ class DonationNew extends React.Component {
                           onClick = {this.changeQuantityIsPublic}
                           type="checkbox"
                         />
-                    <span>해당 속성을 공개하겠습니다.</span>
+                    <span>Open this attribute to public.</span>
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="input-title">가격 (개당 원가를 입력해주세요)</Label>
+                  <Label for="input-title">Price per product</Label>
                   <Input
                     id="input-title"
                     type="number"
-                    placeholder="가격"
+                    placeholder="Price per product"
                     value={this.state.price}
                     required
                     min = "0"
@@ -330,10 +328,10 @@ class DonationNew extends React.Component {
                           onClick = {this.changePriceIsPublic}
                           type="checkbox"
                         />
-                    <span>해당 속성을 공개하겠습니다.</span>
+                    <span>Open this attribute to public.</span>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="input-title">유통 기한 (없을 경우 비워주세요) </Label><br/>
+                  <Label for="input-title">Expiration Date </Label><br/>
                   <DatePicker
                     selected={this.state.date}
                     onChange={this.handleChange}
@@ -348,7 +346,7 @@ class DonationNew extends React.Component {
                           onClick = {this.changeDateIsPublic}
                           type="checkbox"
                         />
-                    <span>해당 속성을 공개하겠습니다.</span>
+                    <span>Open this attribute to public.</span>
                 </FormGroup>
                 <hr/>
                 {this.state.shareholders.map((shareholder, idx) => (
@@ -358,7 +356,7 @@ class DonationNew extends React.Component {
                       value= {shareholder.column}
                       onChange = {this.handleShareholderColumnChange(idx)}
                       type="text"
-                      placeholder = "추가할 물품의 속성"
+                      placeholder = "Name of Attribute"
                       style={{ width:"50%" }}
                       />
                   </FormGroup>
@@ -368,7 +366,7 @@ class DonationNew extends React.Component {
                       onChange = {this.handleShareholderValueChange(idx)}
                       type="text"
                       required
-                      placeholder = "해당 속성의 정보를 입력해주세요"
+                      placeholder = "Details"
                       />
                   </FormGroup>
                     <FormGroup key = {`check${  idx}`}>
@@ -378,14 +376,14 @@ class DonationNew extends React.Component {
                           onClick = {this.handleShareholderIspublicChange(idx)}
                           type="checkbox"
                         />
-                    <span>해당 속성을 공개하겠습니다.</span>
+                    <span>Open this attribute to public.</span>
                     </FormGroup>
                     <Button
                     color="danger"
                     onClick={this.handleRemoveShareholder(idx)}
                     size="sm"
                     >
-                      지우기
+                      Remove
                     </Button>
                   <hr/>
                   </React.Fragment>
@@ -396,7 +394,7 @@ class DonationNew extends React.Component {
                 onClick={this.handleAddShareholder}
                 size="sm"
               >
-              속성 추가
+              Add Attribute
               </Button>
 
                 <div className="d-flex justify-content-end">
