@@ -44,18 +44,18 @@ class DonationList extends React.Component {
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
           <BreadcrumbItem active>Donation List</BreadcrumbItem>
         </Breadcrumb>
-        <h1>기부내역</h1>
+        <h1>List</h1>
         <Widget
           className="pb-0"
           title={
             <div>
               <div className="pull-right mt-n-xs">
                 <Link to="/app/donation/new" className="btn btn-sm btn-inverse">
-                  기부 등록
+                  Register Donation
                 </Link>
               </div>
               <h5 className="mt-0">
-                <span className="fw-semi-bold">목록</span>
+                <span className="fw-semi-bold">List</span>
               </h5>
             </div>
           }
@@ -66,8 +66,8 @@ class DonationList extends React.Component {
               <tr>
                 <th>List ID</th>
                 <th>Donation ID</th>
-                <th>멤버사</th>
-                <th>수정버튼</th>
+                <th>Member Name</th>
+                <th>Edit</th>
               </tr>
               </thead>
               <tbody>
@@ -77,7 +77,7 @@ class DonationList extends React.Component {
                   <td>{post.id}</td>
                   <td><Link to={`/app/donation/${post.donation_id}`}>{post.donation_id}</Link></td>
                   <td>{post.affiliation}</td>
-                  <td><Link to={`/app/donation/edit/${post.donation_id}`}><Button outline color="info" size="sm"> 수정 </Button></Link></td>
+                  <td><Link to={`/app/donation/edit/${post.donation_id}`}><Button outline color="info" size="sm"> Edit </Button></Link></td>
                 </tr>
               ))}
               {this.props.donations &&

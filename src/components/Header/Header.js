@@ -77,7 +77,7 @@ class Header extends React.Component {
             </DropdownToggle>
             <DropdownMenu style={{width: '100%'}}>
               <DropdownItem>
-                <NavLink to="/app/fillInformation">계정 관리하기</NavLink>
+                <NavLink to="/app/fillInformation">Edit Information</NavLink>
               </DropdownItem>
               <DropdownItem onClick={this.doLogout}>
                 Logout

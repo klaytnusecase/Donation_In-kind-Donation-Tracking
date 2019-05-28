@@ -23,8 +23,6 @@ import { connect } from 'react-redux';
 
 import {fetchInformation, changeInformation, saveKeystore} from '../../actions/user'
 
-const Caver = require('caver-js');
-const caver = new Caver('http://127.0.0.1:8551');
 
 class RegisterDonation extends PureComponent {
   static propTypes = {
@@ -40,7 +38,7 @@ class RegisterDonation extends PureComponent {
   };
 
   static meta = {
-    title: 'Change password',
+    title: 'Edit Information',
     description: 'About description',
   };
 
@@ -129,10 +127,10 @@ class RegisterDonation extends PureComponent {
     return (
       <div className={s.root}>
         <Breadcrumb>
-          <BreadcrumbItem>현재 위치</BreadcrumbItem>
-          <BreadcrumbItem active>비밀번호 변경하기</BreadcrumbItem>
+          <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
+          <BreadcrumbItem active>Edit Information</BreadcrumbItem>
         </Breadcrumb>
-        <h1 className="mb-lg">비밀번호 변경하기</h1>
+        <h1 className="mb-lg"></h1>
         <Row>
           <Col sm={8}>
             <Widget>
@@ -148,7 +146,7 @@ class RegisterDonation extends PureComponent {
                     </Alert>
                   )}
                 <FormGroup>
-                    <Label for="input-title">비밀번호</Label>
+                    <Label for="input-title">Password</Label>
                     <Input
                       className="no-border"
                       value={this.state.password}
@@ -156,7 +154,7 @@ class RegisterDonation extends PureComponent {
                       type="password"
                       required
                       name="password"
-                      placeholder="비밀번호"
+                      placeholder="password"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -167,11 +165,11 @@ class RegisterDonation extends PureComponent {
                       type="password"
                       required
                       name="password_rep"
-                      placeholder="비밀번호 재입력"
+                      placeholder="retype password"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">기관명</Label>
+                    <Label for="input-title">Affiliation</Label>
                     <Input
                       className="no-border"
                       value={this.state.affiliation}
@@ -179,11 +177,11 @@ class RegisterDonation extends PureComponent {
                       type="text"
                       required
                       name="corp_name"
-                      placeholder="기관명"
+                      placeholder="Affiliation"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">법인 대표명</Label>
+                    <Label for="input-title">Representative_name</Label>
                     <Input
                       className="no-border"
                       value={this.state.representative_name}
@@ -191,11 +189,11 @@ class RegisterDonation extends PureComponent {
                       type="text"
                       required
                       name="representative_name"
-                      placeholder="법인 대표명"
+                      placeholder="representative_name"
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">법인 주소지</Label>
+                    <Label for="input-title">Address</Label>
                       <Input
                         className="no-border"
                         value={this.state.address}
@@ -203,11 +201,11 @@ class RegisterDonation extends PureComponent {
                         type="text"
                         required
                         name="address"
-                        placeholder="주소지"
+                        placeholder="address"
                       />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">연락가능 이메일</Label>
+                    <Label for="input-title">E-mail</Label>
                       <Input
                         className="no-border"
                         value={this.state.e_mail}
@@ -215,11 +213,11 @@ class RegisterDonation extends PureComponent {
                         type="email"
                         required
                         name="e-mail"
-                        placeholder="연락가능 이메일"
+                        placeholder="e-mail"
                       />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">연락처</Label>
+                    <Label for="input-title">Contacts</Label>
                       <Input
                         className="no-border"
                         value={this.state.contacts}
@@ -227,7 +225,7 @@ class RegisterDonation extends PureComponent {
                         type="tel"
                         required
                         name="contacts"
-                        placeholder="연락처"
+                        placeholder="contacts"
                       />
                   </FormGroup>
 
