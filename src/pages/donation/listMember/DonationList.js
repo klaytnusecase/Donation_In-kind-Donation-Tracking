@@ -20,7 +20,6 @@ class DonationList extends React.Component {
     dispatch: PropTypes.func.isRequired,
     donations: PropTypes.array, // eslint-disable-line
     isFetching: PropTypes.bool,
-
   };
 
   static defaultProps = {

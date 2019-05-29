@@ -48,9 +48,9 @@ const HappyAlliance = require('../../../../../smart_contract/build/contracts/Hap
 const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
 
 
-Date.prototype.isDate = function (){
-    return !!((this !== "Invalid Date" && !isNaN(this)));
-}
+//Date.prototype.isDate = function (){
+//    return !!((this !== "Invalid Date" && !isNaN(this)));
+//}
 
 function convertObjtoArray(obj){
   const value = [];
@@ -78,7 +78,6 @@ function convertDate(date){
     const isoDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().substring(0, 10);
     return isoDate;
   }
-
     return '';
 }
 
@@ -214,50 +213,51 @@ class VolunteerChecking extends React.Component {
     caver.klay.accounts.wallet.add(this.state.userPrivateKey);
     caver.klay.accounts.wallet.add(centerPrivateKey);
 
-    for(let i = 0; i<idxArray.length; i++){
-      let val = idxArray[i];
-      let builder = happyAlliance.methods.receiveBox(String(this.state.targetBoxes[val][0]), String(this.state.date));
-      let encodedBuilder = builder.encodeABI();
-      let transactionObject = {
-          type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
-          from: senderAddress,
-          to: contractAddress,
-          data: encodedBuilder,
-          gas: 2000000,
-      };
+    caver.klay.getTransactionCount(senderAddress).then(firstNonce => {
+      for(let i=0; i<idxArray.length; i++){
+        let val = idxArray[i];
+        let builder = happyAlliance.methods.receiveBox(String(this.state.targetBoxes[val][0]), String(this.state.date));
+        let encodedBuilder = builder.encodeABI();
+        let transactionObject = {
+            type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
+            from: senderAddress,
+            to: contractAddress,
+            data: encodedBuilder,
+            nonce: firstNonce+i,
+            gas: 2000000,
+        };
+        caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
+            if (error) {
+              console.log(error);
+            } else {
+              //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
+              caver.klay.sendTransaction({
+                feePayer: centerAddress,
+                senderRawTransaction: signedTx.rawTransaction,
+              })
+              .on('receipt', (receipt) => console.log(receipt))
+              .on('error', (error) => console.log(error));
+          }});
+          this.setState({
+            percent: 100*(i+1)/idxArray.length,
+          })
+        }
+    });
 
-      caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
-          if (error) {
-            console.log(error);
-          } else {
-            //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
-            caver.klay.sendTransaction({
-              feePayer: centerAddress,
-              senderRawTransaction: signedTx.rawTransaction,
-            })
-            .on('receipt', (receipt) => console.log(receipt))
-            .on('error', (error) => console.log(error));
-          }
-        });
 
-        this.setState({
-          percent: Math.ceil(100*(i+1)/idxArray.length),
-        });
-      }
-      this.props.dispatch(fetchNPOVolun(this.state.targetNPO));
-      this.setState({
-        date: null,
-        confirmTarget: '',
-        isClicked: true,
-      });
-      e.preventDefault();
-    }
+    this.props.dispatch(fetchNPOVolun(this.state.targetNPO));
+    this.setState({
+      confirmTarget: '',
+      isClicked: true,
+    });
+    e.preventDefault();
+  }
 
   updateBox = (e) => {
     const updateTargetIdx = getAllIndexes(this.props.npoBoxesForVolun[1], this.state.updateTarget);
     const emptyTargetIdx = getAllIndexes(this.props.npoBoxesForVolun[5], "");
-    const unionIdx = updateTargetIdx.filter(value => emptyTargetIdx.includes(value));
-    const updateBoxId = unionIdx.map(idx => this.props.npoBoxesForVolun[0][idx]);
+    const intersectionIdx = updateTargetIdx.filter(value => emptyTargetIdx.includes(value));
+    const updateBoxId = intersectionIdx.map(idx => this.props.npoBoxesForVolun[0][idx]);
 
     const senderAddress = this.props.klaytnAddress;
     const { accessType, keystore, password, privateKey } = this.state.userPrivateKey;
@@ -266,45 +266,38 @@ class VolunteerChecking extends React.Component {
 
     this.setState({percent: 0});
 
-    for(let i = 0; i<updateBoxId.length; i++){
-      let builder = happyAlliance.methods.addInfo(
-        updateBoxId[i], `${this.state.recipientA  }, ${  this.state.recipientB}`, String(this.state.recipient_date));
-      let encodedBuilder = builder.encodeABI();
-      let transactionObject = {
-          type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
-          from: senderAddress,
-          to: contractAddress,
-          data: encodedBuilder,
-          gas: 2000000,
-      };
-
-      caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
-          if (error) {
-            console.log(error);
-          } else {
-            //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
-            caver.klay.sendTransaction({
-              feePayer: centerAddress,
-              senderRawTransaction: signedTx.rawTransaction,
-            })
-            .on('receipt', (receipt) => console.log(receipt))
-            .on('error', (error) => console.log(error));
-          }
+    caver.klay.getTransactionCount(senderAddress).then(firstNonce => {
+      for(let i=0; i<this.state.number;i++){
+        let builder = happyAlliance.methods.addInfo(
+          updateBoxId[i], `${this.state.recipientA  }, ${  this.state.recipientB}`, String(this.state.recipient_date));
+        let encodedBuilder = builder.encodeABI();
+        let transactionObject = {
+            type: 'FEE_DELEGATED_SMART_CONTRACT_EXECUTION',
+            from: senderAddress,
+            to: contractAddress,
+            data: encodedBuilder,
+            nonce: firstNonce+i,
+            gas: 20000000,
+        };
+        caver.klay.accounts.signTransaction(transactionObject, privateKey, function (error, signedTx) {
+            if (error) {
+              console.log(error);
+            } else {
+              //KNOWN ISSUE: A sender must have at least 1 KLAY. (20190430)
+              caver.klay.sendTransaction({
+                feePayer: centerAddress,
+                senderRawTransaction: signedTx.rawTransaction,
+              })
+              .on('error', (error) => console.log(error))
+              .on('receipt', (receipt) => console.log(receipt));
+            }
         });
-
         this.setState({
-          percent: Math.ceil(100*(i+1)/updateBoxId.length),
+          percent: 100*(i+1)/this.state.number,
         })
+      }});
 
-        this.props.dispatch(fetchNPOVolun(this.state.targetNPO));
-        this.setState({
-          updateTarget: '',
-          recipientA: '',
-          recipientB: '',
-          recipient_date: null,
-          number: '',
-        });
-      }
+    this.props.dispatch(fetchNPOVolun(this.state.targetNPO));
     e.preventDefault();
   }
 
@@ -329,6 +322,8 @@ class VolunteerChecking extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state);
     return (
       <div className={s.root}>
         <Breadcrumb>
@@ -360,7 +355,7 @@ class VolunteerChecking extends React.Component {
               <th>Date of Receipt by NPO</th>
               <th>Recipient Info</th>
 
-              <th>Delivered</th>
+              <th># of Delivered Boxes</th>
               <th>Date of Receipt by Recipient</th>
             </tr>
             </thead>
@@ -423,7 +418,7 @@ class VolunteerChecking extends React.Component {
                    selected={this.state.date}
                    onChange={this.handleChange}
                    required
-                   dateFormat="yyyy/MM/dd"
+                   //dateFormat="yyyy/MM/dd"
                    minDate = {new Date('2019-01-01T00:00:00')}
                    maxDate = {new Date()}
                  />
@@ -556,7 +551,6 @@ class VolunteerChecking extends React.Component {
                   maxDate = {new Date()}
                 />
               </FormGroup>
-
 
               <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
                 <ButtonGroup>

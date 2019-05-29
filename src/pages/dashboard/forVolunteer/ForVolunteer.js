@@ -64,7 +64,7 @@ class ForVolunteer extends Component {
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
           <BreadcrumbItem active>Dashboard</BreadcrumbItem>
         </Breadcrumb>
-        <h1 className="mb-lg">Dashboard for volunteer</h1>
+        <h1 className="mb-lg">Dashboard for NPO</h1>
         <h1 className="mb-lg">Will be designed later</h1>
       </div>
     );

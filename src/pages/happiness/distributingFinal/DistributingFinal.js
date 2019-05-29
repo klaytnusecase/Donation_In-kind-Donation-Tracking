@@ -178,10 +178,10 @@ toggleModal = () => {
                 boxType: this.state.collections[idx2].name,
               })
             )
-            .then(res => setTimeout(()=>this.state.blockHash.push(res.blockHash), 100))
+            .then(res => setTimeout(()=>this.state.blockHash.push(res.blockHash), 500))
             .then(() => setTimeout(() => this.setState({
               percent: Math.ceil(100*this.state.blockHash.length/this.state.total.reduce((a,b) => a+b, 0))
-            }), 100))
+            }), 500))
           ))))
           .then(this.props.dispatch(changeSwitchStatus({
             'type': 'switch_3',

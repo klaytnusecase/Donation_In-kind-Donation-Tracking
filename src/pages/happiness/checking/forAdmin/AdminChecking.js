@@ -46,6 +46,14 @@ function convertObjtoArray(obj){
   }
   return value;
 }
+function convertDate(date){
+  const d = new Date(date)
+  if(d instanceof Date && !isNaN(d.valueOf())){
+    const isoDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().substring(0, 10);
+    return isoDate;
+  }
+    return '';
+}
 
 
 function text_truncate(str, length, ending) {
@@ -221,9 +229,9 @@ class AdminChecking extends React.Component {
                       <td>{box[0]}</td>
                       <td>{box[1]}</td>
                       <td id="details">{box[2].map(stuff => `${stuff.name} ${stuff.quantity} unit(s),`)}</td>
-                      <td>{box[3] ? new Date(box[3]).toISOString().substring(0, 10) : "X"}</td>
+                      <td>{box[3] ? convertDate(box[3]) : "X"}</td>
                       <td>{box[4]}</td>
-                      <td>{box[5] ? new Date(box[5]).toISOString().substring(0, 10) : "X"}</td>
+                      <td>{box[5] ? convertDate(box[5]) : "X"}</td>
                   </tr>
                   ))}
               {this.props.existingBoxes &&
