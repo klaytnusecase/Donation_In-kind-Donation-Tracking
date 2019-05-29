@@ -71,8 +71,8 @@ class DonationList extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {this.props.donations &&
-              this.props.donations.map(post => (
+              {this.props.posts &&
+              this.props.posts.map(post => (
                 <tr key={post.id}>
                   <td>{post.id}</td>
                   <td><Link to={`/app/donation/${post.donation_id}`}>{post.donation_id}</Link></td>
@@ -80,8 +80,8 @@ class DonationList extends React.Component {
                   <td><Link to={`/app/donation/edit/${post.donation_id}`}><Button outline color="info" size="sm"> Edit </Button></Link></td>
                 </tr>
               ))}
-              {this.props.donations &&
-              !this.props.donations.length && (
+              {this.props.posts &&
+              !this.props.posts.length && (
                 <tr>
                   <td colSpan="100">No Donations yet</td>
                 </tr>

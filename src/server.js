@@ -33,6 +33,7 @@ import { receiveLogin, receiveLogout } from './actions/user';
 import config from './config';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import theme from './styles/theme.scss';
+import {password, caver} from './caver';
 
 const connection     = require('./db_conn');
 const crypto   = require('crypto');
@@ -41,8 +42,8 @@ const multer = require("multer");
 const app = express();
 const fs = require('fs')
 
-const Caver = require('caver-js');
-const caver = new Caver('http://127.0.0.1:8551');
+//const Caver = require('caver-js');
+//const caver = new Caver('http://127.0.0.1:8551');
 
 
 
@@ -212,7 +213,7 @@ app.get('/user/volunteer_list', (req, res) => {
 
 app.post('/privateKey', (req, res) => {
   var userAccount = caver.klay.accounts.create();
-  const jsonContent = caver.klay.accounts.encrypt(userAccount.privateKey, 'prisming');
+  const jsonContent = caver.klay.accounts.encrypt(userAccount.privateKey, password);
 
   fs.writeFile('./keystore/'+userAccount.address+'.txt', JSON.stringify(jsonContent), function(err) {
     if(err) {

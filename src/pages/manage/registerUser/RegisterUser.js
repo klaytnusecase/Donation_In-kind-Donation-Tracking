@@ -127,7 +127,7 @@ class RegisterUser extends React.Component {
                       type="text"
                       required
                       name="username"
-                      placeholder="Id to issue"
+                      placeholder="User ID"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -174,7 +174,7 @@ class RegisterUser extends React.Component {
                       type="text"
                       required
                       name="affiliation"
-                      placeholder="Affiliation"
+                      placeholder="Institution name"
                     />
                   </FormGroup>
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>

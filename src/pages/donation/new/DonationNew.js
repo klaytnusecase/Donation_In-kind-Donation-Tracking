@@ -66,7 +66,7 @@ class DonationNew extends React.Component {
 
   componentWillMount() {
     this.setState({
-      userPrivateKey : caver.klay.accounts.decrypt(this.state.userKeystore, 'prisming'),
+      userPrivateKey : caver.klay.accounts.decrypt(this.state.userKeystore, 'prisming1!'),
     });
   }
   handleChange(date) {
@@ -175,8 +175,6 @@ class DonationNew extends React.Component {
           .on('error', (error) => console.log(error));
         }
       });
-
-    console.log('working');
   }
 
   doCreateDonation = (e) => {
@@ -246,9 +244,9 @@ class DonationNew extends React.Component {
       <div className={s.root}>
          <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>Register Donation</BreadcrumbItem>
+          <BreadcrumbItem active>Donate</BreadcrumbItem>
         </Breadcrumb>
-        <h1>기부 등록</h1>
+        <h1>Donate</h1>
         <Row>
           <Col sm={10}>
             <Widget
@@ -266,11 +264,11 @@ class DonationNew extends React.Component {
                   </Alert>
                 )}
                 <FormGroup>
-                  <Label for="input-title">Name</Label>
+                  <Label for="input-title">Product name</Label>
                   <Input
                     id="input-title"
                     type="text"
-                    placeholder="Name"
+                    placeholder="Product name"
                     value={this.state.stuff_name}
                     required
                     onChange={this.changeStuffName}
@@ -331,7 +329,7 @@ class DonationNew extends React.Component {
                     <span>Open this attribute to public.</span>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="input-title">Expiration Date </Label><br/>
+                  <Label for="input-title">Expiration date</Label><br/>
                   <DatePicker
                     selected={this.state.date}
                     onChange={this.handleChange}

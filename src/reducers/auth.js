@@ -147,7 +147,7 @@ export default function auth(
     case FETCH_VOLUNTEERS_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        errorMessage: 'Fail. Ask to admin.',
         message: null,
       });
     case FETCH_VOLUNTEERS_SUCCESS:
