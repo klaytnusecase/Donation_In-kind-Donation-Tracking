@@ -55,7 +55,7 @@ class Distributing extends React.Component {
     boxcnt: 0,
   };
   static meta = {
-    title: 'Distribute new happiness box',
+    title: 'Distribute new Donation Box',
     description: 'About description',
   };
   componentWillMount() {
@@ -231,7 +231,7 @@ class Distributing extends React.Component {
       <div>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">Happiness Box</li>
+          <li className="breadcrumb-item">Donation Box</li>
           <li className="active breadcrumb-item">박스 나눠주기</li>
         </ol>
 

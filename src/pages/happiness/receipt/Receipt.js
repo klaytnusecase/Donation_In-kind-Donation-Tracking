@@ -272,7 +272,7 @@ class Receipt extends React.Component {
       <div>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">Happiness Box</li>
+          <li className="breadcrumb-item">Donation Box</li>
           <li className="active breadcrumb-item">Issue Receipt</li>
         </ol>
 

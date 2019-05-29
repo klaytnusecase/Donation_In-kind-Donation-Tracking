@@ -46,7 +46,7 @@ class Making extends React.Component {
     collectionsForMaking: [],
   };
   static meta = {
-    title: 'Create new happiness box',
+    title: 'Create new Donation Box',
     description: 'About description',
   };
   componentWillMount() {
@@ -148,7 +148,7 @@ class Making extends React.Component {
       <div>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">Happiness Box</li>
+          <li className="breadcrumb-item">Donation Box</li>
           <li className="active breadcrumb-item">Quantity Setting</li>
         </ol>
         <h1 className="page-title">Quantity Setting</h1>

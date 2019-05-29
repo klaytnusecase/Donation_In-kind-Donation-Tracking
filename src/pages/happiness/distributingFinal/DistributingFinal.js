@@ -60,7 +60,7 @@ class Distributing extends React.Component {
     switches: {},
   };
   static meta = {
-    title: 'Distribute new happiness box',
+    title: 'Distribute new Donation Box',
     description: 'About description',
   };
   componentWillMount() {
@@ -199,7 +199,7 @@ toggleModal = () => {
       <div>
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">Happiness Box</li>
+          <li className="breadcrumb-item">Donation Box</li>
           <li className="active breadcrumb-item">Final Box Distribution</li>
         </ol>
 
