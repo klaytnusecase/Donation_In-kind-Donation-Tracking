@@ -43,7 +43,7 @@ import {fetchCollectionsAndDonations} from '../../../../actions/happiness';
 import { fetchRecipientCategory } from '../../../../actions/configuration';
 import CircularProgressbar from 'react-circular-progressbar';
 import axios from 'axios';
-import {caver, centerAddress, contractAddress, centerPrivateKey} from '../../../../caver';
+import {caver, centerAddress, contractAddress, centerPrivateKey, password} from '../../../../caver';
 const HappyAlliance = require('../../../../../smart_contract/build/contracts/HappyAlliance.json');
 const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
 
@@ -322,22 +322,20 @@ class VolunteerChecking extends React.Component {
       }))
     .catch(err => console.error('Error: ', err));
     this.setState({
-      userPrivateKey : caver.klay.accounts.decrypt(this.state.userKeystore, 'prisming'),
+      userPrivateKey : caver.klay.accounts.decrypt(this.state.userKeystore, password),
     });
     this.props.dispatch(fetchCollectionsAndDonations());
     this.props.dispatch(fetchRecipientCategory());
   }
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     return (
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>박스탐색</BreadcrumbItem>
+          <BreadcrumbItem active>Update Box Status</BreadcrumbItem>
         </Breadcrumb>
-        <h1>박스탐색 (from Blockchain) & 수혜내역 등록</h1>
+        <h1>Update Box Status</h1>
         {this.props.message && (
           <Alert size="sm" color="info">
             {this.props.message}
@@ -349,23 +347,21 @@ class VolunteerChecking extends React.Component {
           </Alert>
         )}
 
-        <Button onClick={this.sendTest}>Send for Test</Button>
-
         <Widget>
           <div className="widget-table-overflow">
             <Table striped>
             <thead>
             <tr>
-              <th>상자종류</th>
-              <th>총 개수</th>
-              <th>남은 상자 수</th>
+              <th>Type</th>
+              <th>Total Quantity</th>
+              <th>Remaining Boxes</th>
 
-              <th>상자구성</th>
-              <th>수혜사 수령 일자</th>
-              <th>수혜대상 정보</th>
+              <th>Items</th>
+              <th>Date of Receipt by NPO</th>
+              <th>Recipient Info</th>
 
-              <th>전달한 개수</th>
-              <th>수혜대상 수령 일자</th>
+              <th>Delivered</th>
+              <th>Date of Receipt by Recipient</th>
             </tr>
             </thead>
             <tbody>
@@ -377,7 +373,7 @@ class VolunteerChecking extends React.Component {
                     <td>{type}</td>
                     <td>{getAllIndexes(this.props.npoBoxesForVolun[1], type).length}</td>
                     <td>{getAllIndexes(getAllIndexes(this.props.npoBoxesForVolun[1], type).map(idx => this.props.npoBoxesForVolun[5][idx]), "").length}</td>
-                    <td>{JSON.parse(this.props.npoBoxesForVolun[2][this.props.npoBoxesForVolun[1].indexOf(type)]).map(stuff => `${stuff.name} ${stuff.quantity}개,`)}</td>
+                    <td>{JSON.parse(this.props.npoBoxesForVolun[2][this.props.npoBoxesForVolun[1].indexOf(type)]).map(stuff => `${stuff.name} ${stuff.quantity} unit(s),`)}</td>
                     <td>{(this.props.npoBoxesForVolun[3][getAllIndexes(this.props.npoBoxesForVolun[1], type)[0]]!=="") ? convertDate(this.props.npoBoxesForVolun[3][getAllIndexes(this.props.npoBoxesForVolun[1], type)[0]]) : ''}</td>
                     <td>{cat}</td>
                     <td>{(getAllIndexes(getAllIndexes(this.props.npoBoxesForVolun[1], type).map(idx => this.props.npoBoxesForVolun[4][idx]), cat).length!==0) && (cat!=="") ?
@@ -396,7 +392,7 @@ class VolunteerChecking extends React.Component {
         </Widget>
 
         <Widget>
-             <h2>수령 여부 업데이트</h2>
+             <h2>Record a date when NPO receives boxes</h2>
                {this.props.errorMessage && (
                  <Alert size="sm" color="danger">
                    {this.props.errorMessage}
@@ -411,9 +407,9 @@ class VolunteerChecking extends React.Component {
                    type="select"
                    required
                    name="confirm"
-                   placeholder="수령할 상자 종류"
+                   placeholder="Box type"
                  >
-                 <option value ='' disabled hidden>수령할 상자 종류</option>
+                 <option value ='' disabled hidden>Box type</option>
                  {this.state.uniqueType &&
                    [...this.state.uniqueType].map(type => (
                      <option value={type} key={type}>{type}</option>
@@ -422,7 +418,7 @@ class VolunteerChecking extends React.Component {
                </FormGroup>
 
                <FormGroup>
-                 <Label for="input-title">수령 시점</Label><br/>
+                 <Label for="input-title">Date</Label><br/>
                  <DatePicker
                    selected={this.state.date}
                    onChange={this.handleChange}
@@ -441,13 +437,14 @@ class VolunteerChecking extends React.Component {
                  </Button>
                  </ButtonGroup>
                 </div>
+                <h5>Please refresh this page to check the updated information.</h5>
 
                 <Modal isOpen={this.state.isOpen} toggle={this.toggleModal}>
                   <ModalHeader toggle={this.toggleModal}>
-                    수령 시점을 등록하시겠습니까?
+                    Do you record the date of receipt?
                   </ModalHeader>
                   <ModalBody />
-                  <h5>&emsp; 블록체인 등록 진행 상황</h5>
+                  <h5>&emsp; Progress</h5>
                   <div style={{ width: '80%' }}>
                     <CircularProgressbar
                       percentage={this.state.percent}
@@ -471,13 +468,13 @@ class VolunteerChecking extends React.Component {
                   </div>
                   <Button color={(!this.state.isClicked) ? "danger" : ((this.state.percent!==100)? "info" : "success")} variant="primary"
                   onClick={(!this.state.isClicked) ? this.doConfirmBox : this.toggleModal}>
-                    {(!this.state.isClicked) ? ('등록하기 (클릭 후 원이 완전히 찰때까지 기다려주세요)') : ((this.state.percent!==100) ? '등록 중... (원이 완전히 찰때까지 기다려주세요)' : '등록완료')}
+                    {(!this.state.isClicked) ? ('Update (Please wait until the progress reaches 100%)') : ((this.state.percent!==100) ? 'Saving... (Please wait)' : 'Completed')}
                   </Button>
                 </Modal>
            </Widget>
 
        <Widget>
-            <h2>수혜자 정보 업데이트</h2>
+            <h2>Update Recipient Information</h2>
             <Form onSubmit={this.updateBox}>
               {this.props.errorMessage && (
                 <Alert size="sm" color="danger">
@@ -493,9 +490,9 @@ class VolunteerChecking extends React.Component {
                   type="select"
                   required
                   name="confirm"
-                  placeholder="수혜자 정보를 입력할 상자 종류"
+                  placeholder="Box type"
                 >
-                <option value ='' disabled hidden>수령할 정보를 입력할 상자 종류</option>
+                <option value ='' disabled hidden>Box type</option>
                 {this.state.uniqueType &&
                   [...this.state.uniqueType].map(type => (
                     <option value={type} key={type}>{type}</option>
@@ -510,7 +507,7 @@ class VolunteerChecking extends React.Component {
               min = "0"
               max = {this.state.updateTarget ? getAllIndexes(getAllIndexes(this.props.npoBoxesForVolun[1], this.state.updateTarget).map(idx => this.props.npoBoxesForVolun[5][idx]), "").length : 0}
               style={{ display:"flex"}}
-              placeholder="개수"
+              placeholder="Quantity"
               />
               <hr/>
 
@@ -522,9 +519,9 @@ class VolunteerChecking extends React.Component {
                   type="select"
                   required
                   name="categories"
-                  placeholder="수혜자 카테고리 A"
+                  placeholder="Category A"
                 >
-                <option value ='' disabled hidden>수혜자 카테고리 A</option>
+                <option value ='' disabled hidden>Category A</option>
                 {this.props.categoriesType1.map(cat => (
                     <option value={cat.category} key={cat.category}>{cat.category}</option>
                   ))}
@@ -539,9 +536,9 @@ class VolunteerChecking extends React.Component {
                   type="select"
                   required
                   name="categories"
-                  placeholder="수혜자 카테고리 B"
+                  placeholder="Category B"
                 >
-                <option value ='' disabled hidden>수혜자 카테고리 B</option>
+                <option value ='' disabled hidden>Category B</option>
                 {this.props.categoriesType2.map(cat => (
                     <option value={cat.category} key={cat.category}>{cat.category}</option>
                   ))}
@@ -549,7 +546,7 @@ class VolunteerChecking extends React.Component {
               </FormGroup>
 
               <FormGroup>
-                <Label for="input-title">수혜 시점</Label><br/>
+                <Label for="input-title">Date of Receipt by Recipients</Label><br/>
                 <DatePicker
                   selected={this.state.recipient_date}
                   onChange={this.handleRecipientChange}
@@ -568,6 +565,7 @@ class VolunteerChecking extends React.Component {
                 </Button>
                 </ButtonGroup>
                </div>
+               <h5>Please refresh this page to check the updated information.</h5>
             </Form>
           </Widget>
       </div>

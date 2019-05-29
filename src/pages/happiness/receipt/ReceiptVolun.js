@@ -300,10 +300,10 @@ class ReceiptVolun extends React.Component {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">기부 영수증 발급</li>
+          <li className="active breadcrumb-item">Issue Receipt</li>
         </ol>
 
-        <h1 className="page-title">수령증 발급하기</h1>
+        <h1 className="page-title">Issue Receipt</h1>
         {this.props.message && (
           <Alert size="sm" color="info">
             {this.props.message}
@@ -320,12 +320,12 @@ class ReceiptVolun extends React.Component {
             <Table striped>
               <thead>
               <tr>
-                <th>멤버사</th>
-                <th>기부물품</th>
-                <th>가격</th>
-                <th>수량</th>
-                <th>총액</th>
-                <th>수혜사</th>
+                <th>Member</th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>NPO</th>
               </tr>
               </thead>
 
@@ -348,7 +348,7 @@ class ReceiptVolun extends React.Component {
         </Widget>
 
         {this.state.selectedData &&
-            <Button onClick={this.generateReceipt}>수령증 PDF 다운로드</Button>}
+            <Button onClick={this.generateReceipt}>Download Receipt</Button>}
       </div>
 
 

@@ -113,7 +113,7 @@ class Sidebar extends React.Component {
       case 'volunteer':
         return (
           <ul className={s.nav}>
-            <LinksGroup
+          <LinksGroup
             header="Dashboard"
             headerLink="/app"
             glyph="dashboard"

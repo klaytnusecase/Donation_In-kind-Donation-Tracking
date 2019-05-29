@@ -57,7 +57,7 @@ class UploadReceipt extends React.Component {
     e.preventDefault() // Stop form submit
     this.fileUpload().then((response)=>{
       this.setState({
-      message: '파일을 업로드하였습니다',
+      message: 'Upload complete',
     })
     })
   }
@@ -80,10 +80,10 @@ class UploadReceipt extends React.Component {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">수령증 업로드하기</li>
+          <li className="active breadcrumb-item">Upload Signed Receipt</li>
         </ol>
 
-        <h1 className="page-title">수령증 업로드하기</h1>
+        <h1 className="page-title">Upload Signed Receipt</h1>
          {this.state.message && (
                     <Alert size="sm" color="info">
                       {this.state.message}

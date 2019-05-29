@@ -134,8 +134,8 @@ class Distributing extends React.Component {
       if (limit[i] < total[i]) check = false
       if (isNaN(total[i])) check = false
     }
-    if (check) window.confirm('정합성 체크가 완료 되었습니다. 제출할 준비가 되었습니다.')
-    else  window.confirm('값을 다시 확인해주세요.')
+    if (check) window.confirm('Feasibility check is done.')
+    else  window.confirm('Please check your quantity setting.')
     this.setState({feasibility: check});
   };
 
@@ -164,10 +164,10 @@ class Distributing extends React.Component {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">박스 분배 수량 정하기</li>
+          <li className="active breadcrumb-item">Box Distribution Simulation</li>
         </ol>
 
-        <h1 className="page-title">박스 분배 수량 정하기</h1>
+        <h1 className="page-title">Box Distribution Simulation</h1>
          {this.props.message && (
                     <Alert size="sm" color="info">
                       {this.props.message}
@@ -188,7 +188,7 @@ class Distributing extends React.Component {
                     {
                       this.state.collections && this.state.collections.map(collection =>
                         <th key={collection.id}>
-                          {collection.name} &emsp; (유통기한: {(JSON.parse(collection.expiration_date).length>0) ? new Date(Math.min.apply(null, JSON.parse(collection.expiration_date).map(date => new Date(date)))).toISOString().substring(0, 10) : "없음"})
+                          {collection.name} &emsp; (Expiration Date: {(JSON.parse(collection.expiration_date).length>0) ? new Date(Math.min.apply(null, JSON.parse(collection.expiration_date).map(date => new Date(date)))).toISOString().substring(0, 10) : "없음"})
                         </th>
                       )
                     }
@@ -235,10 +235,10 @@ class Distributing extends React.Component {
             <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
               <ButtonGroup>
                <Button color="warning" onClick={this.checkFeasibility}>
-                {'정합성 체크'}
+                {'Feasibility check'}
               </Button>
               <Button color="success" onClick={this.doDistributeBoxes} disabled={!this.state.feasibility}>
-                {this.props.isFetching ? '처리 중...' : '임시저장'}
+                {this.props.isFetching ? 'Processing...' : 'Save'}
               </Button>
               </ButtonGroup>
             </div>

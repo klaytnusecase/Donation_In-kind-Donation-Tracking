@@ -10,7 +10,6 @@ import VolunteerDashboard from './forVolunteer/ForVolunteer';
 class Dashboard extends React.Component {
 
   render() {
-    console.log(this.props);
     switch(this.props.orgType){
       case 'member':
         return (

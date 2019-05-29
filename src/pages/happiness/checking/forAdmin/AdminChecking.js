@@ -156,9 +156,9 @@ class AdminChecking extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>박스탐색</BreadcrumbItem>
+          <BreadcrumbItem active>Box Status</BreadcrumbItem>
         </Breadcrumb>
-        <h1>박스탐색 (from Blockchain) & 수혜내역 등록</h1>
+        <h1>Box Status</h1>
         {this.props.message && (
           <Alert size="sm" color="info">
             {this.props.message}
@@ -207,11 +207,11 @@ class AdminChecking extends React.Component {
               <thead>
               <tr>
                 <th>Box ID</th>
-                <th>상자종류</th>
-                <th>상자구성</th>
-                <th>수혜사 수령 일자</th>
-                <th>수혜대상 정보</th>
-                <th>수혜대상 수령 일자</th>
+                <th>Type</th>
+                <th>Items</th>
+                <th>Date of Receipt by NPO</th>
+                <th>Recipient Info</th>
+                <th>Date of Receipt by Recipient</th>
               </tr>
               </thead>
               <tbody>
@@ -220,7 +220,7 @@ class AdminChecking extends React.Component {
                   <tr key={box[0]}>
                       <td>{box[0]}</td>
                       <td>{box[1]}</td>
-                      <td id="details">{box[2].map(stuff => `${stuff.name} ${stuff.quantity}개,`)}</td>
+                      <td id="details">{box[2].map(stuff => `${stuff.name} ${stuff.quantity} unit(s),`)}</td>
                       <td>{box[3] ? new Date(box[3]).toISOString().substring(0, 10) : "X"}</td>
                       <td>{box[4]}</td>
                       <td>{box[5] ? new Date(box[5]).toISOString().substring(0, 10) : "X"}</td>

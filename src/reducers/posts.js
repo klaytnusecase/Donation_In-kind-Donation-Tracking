@@ -142,13 +142,13 @@ export default function posts(
       case UPDATE_BOX_SUCCESS:
         return Object.assign({}, state, {
           isFetching: false,
-          message: '최종 수혜자 정보 입력에 성공하였습니다.',
+          message: 'Success.',
         });
       case UPDATE_BOX_FAILURE:
         return Object.assign({}, state, {
           isFetching: false,
           message:
-            '최종 수혜자 정보 입력에 성공하였습니다. 관리자에게 문의해주세요.',
+            'Fail. Ask to admin.',
         });
 
     case EDIT_DONATION_INITIAL:
@@ -241,7 +241,7 @@ export default function posts(
       return Object.assign({}, state, {
         isFetching: false,
         npoBoxes: action.npoBoxes,
-        message: "정보를 받아왔습니다."
+        message: "Success."
       });
     case FETCH_NPO_FAILURE:
       return Object.assign({}, state, {
@@ -257,7 +257,7 @@ export default function posts(
         return Object.assign({}, state, {
           isFetching: false,
           npoBoxesForVolun: action.npoBoxesForVolun,
-          message: "정보를 받아왔습니다."
+          message: "Success."
         });
       case FETCH_NPOVOLUN_FAILURE:
         return Object.assign({}, state, {

@@ -66,56 +66,6 @@ class ForMember extends Component {
         </Breadcrumb>
         <h1 className="mb-lg">Dashboard for member</h1>
         <h1 className="mb-lg">Will be designed later</h1>
-
-        <Row>
-          <Col sm={12}>
-            <Widget
-              title={
-                <div>
-                  <div className="pull-right mt-n-xs">
-                    {/* eslint-disable */}
-                    {/* eslint-enable */}
-                  </div>
-                  <h5 className="mt-0 mb-0">
-                    기부 리스트 {' '}
-                  </h5>
-                  <p className="fs-sm mb-0 text-muted">
-                    멤버사로부터 기부 받은 내역
-                  </p>
-                </div>
-              }
-            >
-            <Table responsive borderless className={cx('mb-0', s.usersTable)}>
-                <thead>
-                  <tr>
-                    <th>멤버사 이름</th>
-                    <th>기부 ID</th>
-                    <th>신규/수정 상태</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {this.props.posts &&
-                this.props.posts.map(post => (
-                  <tr key={post.id}>
-                    <td>{post.company_id}</td>
-                    <td><Link to={`/app/donation/${post.donation_id}`}>{post.donation_id}</Link></td>
-                    <td>{post.is_new}</td>
-                  </tr>
-                ))}
-                {this.props.isFetching && (
-                  <tr>
-                    <td colSpan="100">불러오는 중입니다.</td>
-                  </tr>
-                )}
-                </tbody>
-              </Table>
-
-            </Widget>
-          </Col>
-          <Col sm={6}>
-            <img src={dbSchema} alt="DB Schema" width="80%" />
-          </Col>
-        </Row>
       </div>
     );
   }

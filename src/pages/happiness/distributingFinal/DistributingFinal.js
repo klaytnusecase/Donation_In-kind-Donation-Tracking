@@ -200,10 +200,10 @@ toggleModal = () => {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">박스 분배 수량 정하기</li>
+          <li className="active breadcrumb-item">Final Box Distribution</li>
         </ol>
 
-        <h1 className="page-title">박스 분배 수량 정하기</h1>
+        <h1 className="page-title">Final Box Distribution</h1>
         <CardDeck>
           <Card>
             <Widget>
@@ -214,7 +214,7 @@ toggleModal = () => {
                     {
                       this.state.collections && this.state.collections.map(collection =>
                         <th key={collection.id}>
-                          {collection.name} &emsp; (유통기한: {(JSON.parse(collection.expiration_date).length>0) ? new Date(Math.min.apply(null, JSON.parse(collection.expiration_date).map(date => new Date(date)))).toISOString().substring(0, 10) : "없음"})
+                          {collection.name} &emsp; (Expiration Date: {(JSON.parse(collection.expiration_date).length>0) ? new Date(Math.min.apply(null, JSON.parse(collection.expiration_date).map(date => new Date(date)))).toISOString().substring(0, 10) : "없음"})
                         </th>
                       )
                     }
@@ -262,17 +262,17 @@ toggleModal = () => {
         <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
           <ButtonGroup>
           <Button color="danger" onClick={this.toggleModal}>
-            {'분배확정'}
+            {'Distribute'}
           </Button>
           </ButtonGroup>
         </div>
 
         <Modal isOpen={this.state.isOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>
-            상자를 분배하시겠습니까? 되돌릴 수 없습니다.
+            Distribute boxes. These information cannot be modified.
           </ModalHeader>
           <ModalBody />
-          <h5>&emsp; 블록체인 등록 진행 상황</h5>
+          <h5>&emsp; Progress</h5>
           <div style={{ width: '80%' }}>
             <CircularProgressbar
               percentage={this.state.percent}
@@ -296,7 +296,7 @@ toggleModal = () => {
           </div>
           <Button color={(!this.state.isClicked) ? "danger" : ((this.state.percent!==100)? "info" : "success")} variant="primary"
           onClick={(!this.state.isClicked) ? this.doFinalDistribute : this.toggleModal}>
-            {(!this.state.isClicked) ? ('분배하기 (클릭 후 원이 완전히 찰때까지 기다려주세요)') : ((this.state.percent!==100) ? '분배 중... (원이 완전히 찰때까지 기다려주세요)' : '분배완료')}
+            {(!this.state.isClicked) ? ('Distribute (Please wait until the progress reaches 100%)') : ((this.state.percent!==100) ? 'Distributing... (Please wait)' : 'Completed')}
           </Button>
         </Modal>
 
