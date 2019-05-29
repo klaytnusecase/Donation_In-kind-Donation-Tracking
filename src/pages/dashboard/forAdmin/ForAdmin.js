@@ -59,13 +59,6 @@ class ForAdmin extends Component {
     super(props);
   }
 
-  initialize = () => {
-    this.props.dispatch(changeSwitchStatus({
-      'type': 'switch_3',
-      'status': false,
-    }));
-  }
-
   render() {
     console.log(this.props);
     return (
@@ -75,14 +68,6 @@ class ForAdmin extends Component {
           <BreadcrumbItem active>Dashboard</BreadcrumbItem>
         </Breadcrumb>
 
-        <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
-          <ButtonGroup>
-          <Button color="danger" onClick={this.initialize}>
-            {'테스트용 초기화'}
-          </Button>
-          </ButtonGroup>
-        </div>
-
         <h1 className="mb-lg">Current Status of Boxes {this.props.isFetching ? "(Loading...)" : ""}</h1>
         {!this.props.isFetching &&
         <Row>
@@ -91,7 +76,7 @@ class ForAdmin extends Component {
                 <h3 className="mb-lg">Before Receipt</h3>
             </div>
             <div className="d-flex justify-content-center">
-                <h3 className="mb-lg">{this.props.status.filter((x) => x=="0").length} 개</h3>
+                <h4 className="mb-lg">Donation Count: {this.props.status.filter((x) => x=="0").length}</h4>
             </div>
             <div className="d-flex justify-content-center">
             <Circle
@@ -114,7 +99,7 @@ class ForAdmin extends Component {
                 <h3 className="mb-lg">Receipt Complete</h3>
             </div>
             <div className="d-flex justify-content-center">
-                <h3 className="mb-lg">{this.props.status.filter((x) => x=="1").length} 개</h3>
+                <h4 className="mb-lg">Donation Count: {this.props.status.filter((x) => x=="1").length}</h4>
             </div>
             <div className="d-flex justify-content-center">
             <Circle
@@ -137,7 +122,7 @@ class ForAdmin extends Component {
                 <h3 className="mb-lg">Deliver Complete</h3>
             </div>
             <div className="d-flex justify-content-center">
-                <h3 className="mb-lg">{this.props.status.filter((x) => x=="2").length} 개</h3>
+                <h4 className="mb-lg">Donation Count: {this.props.status.filter((x) => x=="2").length}</h4>
             </div>
             <div className="d-flex justify-content-center">
             <Circle

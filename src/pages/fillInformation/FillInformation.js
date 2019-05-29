@@ -165,7 +165,7 @@ class RegisterDonation extends PureComponent {
                       type="password"
                       required
                       name="password_rep"
-                      placeholder="retype password"
+                      placeholder="Retype password"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -181,7 +181,7 @@ class RegisterDonation extends PureComponent {
                     />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">Representative_name</Label>
+                    <Label for="input-title">Representative name</Label>
                     <Input
                       className="no-border"
                       value={this.state.representative_name}
@@ -189,7 +189,7 @@ class RegisterDonation extends PureComponent {
                       type="text"
                       required
                       name="representative_name"
-                      placeholder="representative_name"
+                      placeholder="Representative name"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -201,7 +201,7 @@ class RegisterDonation extends PureComponent {
                         type="text"
                         required
                         name="address"
-                        placeholder="address"
+                        placeholder="Address"
                       />
                   </FormGroup>
                   <FormGroup>
@@ -213,11 +213,11 @@ class RegisterDonation extends PureComponent {
                         type="email"
                         required
                         name="e-mail"
-                        placeholder="e-mail"
+                        placeholder="E-mail"
                       />
                   </FormGroup>
                   <FormGroup>
-                    <Label for="input-title">Contacts</Label>
+                    <Label for="input-title">Phone</Label>
                       <Input
                         className="no-border"
                         value={this.state.contacts}
@@ -225,7 +225,7 @@ class RegisterDonation extends PureComponent {
                         type="tel"
                         required
                         name="contacts"
-                        placeholder="contacts"
+                        placeholder="Phone"
                       />
                   </FormGroup>
 

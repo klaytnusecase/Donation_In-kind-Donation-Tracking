@@ -83,7 +83,7 @@ export default function auth(
       return Object.assign({}, state, {
         isFetching: false,
         errorMessage: null,
-        message: '회원 등록에 성공하였습니다.',
+        message: 'Success',
       });
 
     /* fetch detail information */
@@ -94,7 +94,7 @@ export default function auth(
     case FETCH_INFORMATION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        errorMessage: 'Fail. Ask to admin.',
         message: null,
       });
     case FETCH_INFORMATION_SUCCESS:
@@ -118,7 +118,7 @@ export default function auth(
       return Object.assign({}, state, {
         isFetching: false,
         errorMessage: null,
-        message: '정보 변경에 성공하였습니다. 이름은 재접속해야 변경됩니다.',
+        message: 'Success. Changes will be made from the next login.',
       });
     /* fetch member user list*/
     case FETCH_MEMBERS_REQUEST:
@@ -128,7 +128,7 @@ export default function auth(
     case FETCH_MEMBERS_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        errorMessage: 'Fail. Ask to admin.',
         message: null,
       });
     case FETCH_MEMBERS_SUCCESS:
@@ -147,7 +147,7 @@ export default function auth(
     case FETCH_VOLUNTEERS_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        errorMessage: 'Fail. Ask to admin.',
         message: null,
       });
     case FETCH_VOLUNTEERS_SUCCESS:

@@ -32,8 +32,8 @@ class UserListMember extends React.Component {
   };
 
   static meta = {
-    title: '멤버사 목록',
-    description: '멤버사 목록',
+    title: 'Members List',
+    description: 'Members List',
   };
 
   componentWillMount() {
@@ -45,15 +45,15 @@ class UserListMember extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>멤버사 목록</BreadcrumbItem>
+          <BreadcrumbItem active>Members List</BreadcrumbItem>
         </Breadcrumb>
-        <h1>멤버사 목록</h1>
+        <h1>Members List</h1>
         <Widget
           className="pb-0"
           title={
             <div>
               <h5 className="mt-0">
-                <span className="fw-semi-bold">목록</span>
+                <span className="fw-semi-bold">List</span>
               </h5>
             </div>
           }
@@ -62,10 +62,10 @@ class UserListMember extends React.Component {
             <Table striped>
               <thead>
               <tr>
-                <th>유저 ID</th>
-                <th>법인</th>
-                <th>e-mail</th>
-                <th>연락처</th>
+                <th>User ID</th>
+                <th>Institution</th>
+                <th>E-mail</th>
+                <th>Phone</th>
               </tr>
               </thead>
               <tbody>
