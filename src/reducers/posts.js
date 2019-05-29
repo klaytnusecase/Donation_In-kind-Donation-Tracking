@@ -378,14 +378,14 @@ export default function posts(
     case REMOVE_COLLECTION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        message: '행복상자 컬렉션 삭제에 성공하였습니다',
+        message: 'Removed donation box complete successfully',
         errorMessage: null,
       });
     case REMOVE_COLLECTION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         message: null,
-        errorMessage: '행복상자 컬렉션 삭제에 실패하습니다. 관리자에게 문의하세요',
+        errorMessage: 'Fail. Ask to admin.',
       });
 
      /* change category actions */
