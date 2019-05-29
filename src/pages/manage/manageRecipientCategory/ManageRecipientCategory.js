@@ -136,7 +136,7 @@ class ManageRecipientCategory extends React.Component {
         <div className={s.root}>
           <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">User Management</li>
+          <li className="breadcrumb-item">Configuration</li>
           <li className="active breadcrumb-item">Manage Recipient Category</li>
         </ol>
 
