@@ -161,7 +161,7 @@ app.post('/register', (req, res) => {
   const org_type = req.body.org_type;
 
   if (password !== password_rep){
-    res.status(401).json({ message:'비밀번호가 다릅니다.' });
+    res.status(401).json({ message:'Passwords are different.' });
   }
   else {
     connection.query("select * from users where username = ?", [login], (err, rows) => {
@@ -169,7 +169,7 @@ app.post('/register', (req, res) => {
         res.status(401).json({message: err});
       }
       else if (rows.length) {
-        res.status(401).json({message: '이미 등록된 유저입니다'});
+        res.status(401).json({message: 'Already registered name'});
       }
       else {
         let salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';

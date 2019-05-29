@@ -83,7 +83,7 @@ export default function auth(
       return Object.assign({}, state, {
         isFetching: false,
         errorMessage: null,
-        message: '회원 등록에 성공하였습니다.',
+        message: 'Registered user successfully',
       });
 
     /* fetch detail information */
@@ -94,7 +94,7 @@ export default function auth(
     case FETCH_INFORMATION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: '정보 받아오기에 실패했습니다. 관리자에게 문의해주세요',
+        errorMessage: 'Fail to fetching information. Ask to admin.',
         message: null,
       });
     case FETCH_INFORMATION_SUCCESS:

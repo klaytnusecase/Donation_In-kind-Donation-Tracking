@@ -100,11 +100,11 @@ class RegisterUser extends React.Component {
         <div className={s.root}>
           <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">회원 관리</li>
-          <li className="active breadcrumb-item">회원 등록</li>
+          <li className="breadcrumb-item">User Management</li>
+          <li className="active breadcrumb-item">Register users</li>
         </ol>
 
-        <h1 className="page-title">회원 등록</h1>
+        <h1 className="page-title">Register users</h1>
           <Row>
             <Col>
               <Widget className={s.widget}>
@@ -127,7 +127,7 @@ class RegisterUser extends React.Component {
                       type="text"
                       required
                       name="username"
-                      placeholder="발급 아이디"
+                      placeholder="Id to issue"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -138,7 +138,7 @@ class RegisterUser extends React.Component {
                       type="password"
                       required
                       name="password"
-                      placeholder="비밀번호"
+                      placeholder="Password"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -149,7 +149,7 @@ class RegisterUser extends React.Component {
                       type="password"
                       required
                       name="password_rep"
-                      placeholder="비밀번호 재입력"
+                      placeholder="Retype Password"
                     />
                   </FormGroup>
                   <FormGroup>
@@ -161,9 +161,9 @@ class RegisterUser extends React.Component {
                       required
                       name="org_type"
                     >
-                    <option value ='' disabled hidden>단체 종류</option>
-                    <option value='member'>멤버사</option>
-                    <option value='volunteer'>전달기관</option>
+                    <option value ='' disabled hidden>Organization type</option>
+                    <option value='member'>Members</option>
+                    <option value='volunteer'>NPOs</option>
                     </Input>
                   </FormGroup>
                   <FormGroup className="form-group">
@@ -174,7 +174,7 @@ class RegisterUser extends React.Component {
                       type="text"
                       required
                       name="affiliation"
-                      placeholder="기관명"
+                      placeholder="Affiliation"
                     />
                   </FormGroup>
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
