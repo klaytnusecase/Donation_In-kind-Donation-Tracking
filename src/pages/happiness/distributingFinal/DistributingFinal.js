@@ -26,6 +26,10 @@ import Widget from '../../../components/Widget';
 import { fetchCollectionsDistribution, updateCollectionDistribution, fetchCollectionsAndDonations} from '../../../actions/happiness';
 import { distributeBox, getNumBoxesByYear } from '../../../actions/posts';
 import { fetchSwitch, changeSwitchStatus} from '../../../actions/configuration';
+import {caver, centerAddress, contractAddress, centerPrivateKey, password} from '../../../caver';
+const HappyAlliance = require('../../../../smart_contract/build/contracts/HappyAlliance.json');
+const happyAlliance = new caver.klay.Contract(HappyAlliance.abi, contractAddress);
+
 import CircularProgressbar from 'react-circular-progressbar';
 const crypto   = require('crypto');
 
@@ -154,6 +158,7 @@ toggleModal = () => {
     this.setState({
       isClicked: true,
     });
+    let count = 0;
 
     this.props
       .dispatch(
@@ -165,32 +170,37 @@ toggleModal = () => {
       ).then(
         this.props.dispatch(fetchCollectionsDistribution()))
         .then(this.state.volunteer_names.map((val, idx) =>
-        this.state.quantities[idx].map((q, idx2) =>
-          Array(...{length: q}).map(Number.call, Number).forEach(() =>
-            this.props.dispatch(
-              distributeBox({
-                boxId: crypto.createHash('sha1').update(`${new Date().getTime()}${numExistingBoxes++}`).digest('hex'),
+        this.state.quantities[idx].map((q, idx2) => {
+          caver.klay.getTransactionCount(centerAddress).then(firstNonce => {
+            for(let i=0; i<q; i++){
+              count+=1;
+              let builder = happyAlliance.methods.distributeBox(
+                crypto.createHash('sha1').update(`${new Date().getTime()}${numExistingBoxes++}`).digest('hex'),
                 //boxId: `${thisYear}-${pad_with_zeroes(numExistingBoxes++, 7)}`, // year + 7 digit box id (0000001~9999999)
-                serializedDonations: JSON.stringify(this.state.collectionsForMaking[idx2].donations),
-                npo: val,
-                year: thisYear,
-                expirationDate: this.state.collections[idx2].expiration_date,
-                boxType: this.state.collections[idx2].name,
+                this.state.collections[idx2].name,
+                thisYear,
+                JSON.stringify(this.state.collectionsForMaking[idx2].donations),
+                this.state.collections[idx2].expiration_date,
+                val);
+              let encodedBuilder = builder.encodeABI();
+              let transactionObject = {
+                  type: "SMART_CONTRACT_EXECUTION",
+                  from: centerAddress,
+                  to: contractAddress,
+                  data: encodedBuilder,
+                  nonce: firstNonce+i,
+                  gas: 20000000,
+              };
+              caver.klay.sendTransaction(transactionObject)
+              .on('error', (error) => console.log(error))
+              .on('receipt', (receipt) => console.log(receipt));
+              this.setState({
+                percent: 100*(count)/this.state.total.reduce((a,b) => a+b, 0),
               })
-            )
-            .then(res => setTimeout(()=>this.state.blockHash.push(res.blockHash), 500))
-            .then(() => setTimeout(() => this.setState({
-              percent: Math.ceil(100*this.state.blockHash.length/this.state.total.reduce((a,b) => a+b, 0))
-            }), 500))
-          ))))
-          .then(this.props.dispatch(changeSwitchStatus({
-            'type': 'switch_3',
-            'status': false,
-          })));
-
-
-    // window.confirm('상자를 분배하였습니다.');
-    // this.toggleModal();
+            }
+          })
+        })
+      ));
     e.preventDefault();
   };
 

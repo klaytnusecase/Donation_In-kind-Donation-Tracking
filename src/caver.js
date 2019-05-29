@@ -10,7 +10,7 @@ import Caver from 'caver-js'
 export const caver = new Caver('http://127.0.0.1:8551');
 export const centerAddress = "0xa56a3611381c7749a9bd9e4e6edfd2d7c8a8fc52";
 export const centerPrivateKey = "0xd447648abc237a38eda59a112b8d1700a93664ac94c8dc23ed6ca02c91bd8055";
-export const contractAddress = "0xd4fed851712538daeaf4f169d94666a93cb4639e";
+export const contractAddress = "0xcf0edc7c0366dce496cf49f5303530dbb748def4";
 export const password = "prisming1!";
 
 export default caver
