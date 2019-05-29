@@ -430,7 +430,7 @@ app.post('/donations/new', (req, res) => {
   parsed_data.push({ column: "Name", value: req.body.stuff_name, ispublic: nameispublic});
   parsed_data.push({ column: "Quantity", value: req.body.quantity, ispublic: quantityispublic});
   parsed_data.push({ column: "Price", value: req.body.price, ispublic: priceispublic});
-  parsed_data.push({ column: "Expiration Date", value: req.body.date, ispublic: dateispublic});
+  parsed_data.push({ column: "ExpirationDate", value: req.body.date, ispublic: dateispublic});
 
   const stringfy_data = JSON.stringify(parsed_data)
   const donation_id = crypto.createHash('sha1').update(stringfy_data).digest('hex');
