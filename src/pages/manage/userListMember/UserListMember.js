@@ -45,6 +45,7 @@ class UserListMember extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
+          <li className="breadcrumb-item">User Management</li>
           <BreadcrumbItem active>Members List</BreadcrumbItem>
         </Breadcrumb>
         <h1>Members List</h1>

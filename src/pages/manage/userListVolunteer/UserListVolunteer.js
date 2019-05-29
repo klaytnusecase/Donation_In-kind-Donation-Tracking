@@ -35,8 +35,8 @@ class UserListVolunteer extends React.Component {
   };
 
   static meta = {
-    title: '전달기관 목록',
-    description: '전달기관 목록',
+    title: 'NPOs LIST',
+    description: 'NPOs LIST',
   };
 
   componentWillMount() {
@@ -48,15 +48,16 @@ class UserListVolunteer extends React.Component {
       <div className={s.root}>
         <Breadcrumb>
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
-          <BreadcrumbItem active>전달기관 목록</BreadcrumbItem>
+          <li className="breadcrumb-item">User Management</li>
+          <BreadcrumbItem active>NPOs List</BreadcrumbItem>
         </Breadcrumb>
-        <h1>전달기관 목록</h1>
+        <h1>NPOs List</h1>
         <Widget
           className="pb-0"
           title={
             <div>
               <h5 className="mt-0">
-                <span className="fw-semi-bold">목록</span>
+                <span className="fw-semi-bold">List</span>
               </h5>
             </div>
           }
@@ -65,10 +66,10 @@ class UserListVolunteer extends React.Component {
             <Table striped>
               <thead>
               <tr>
-                <th>유저 ID</th>
-                <th>법인</th>
-                <th>e-mail</th>
-                <th>연락처</th>
+                <th>User ID</th>
+                <th>Institution</th>
+                <th>E-mail</th>
+                <th>Phone</th>
               </tr>
               </thead>
               <tbody>
@@ -84,7 +85,7 @@ class UserListVolunteer extends React.Component {
               {this.props.posts &&
               !this.props.posts.length && (
                 <tr>
-                  <td colSpan="100">No posts yet</td>
+                  <td colSpan="100">No NPOs yet</td>
                 </tr>
               )}
               {this.props.isFetching && (
