@@ -101,7 +101,7 @@ class Making extends React.Component {
         check = false
       }
     }
-    window.confirm('정합성 체크가 완료 되었습니다.')
+    window.confirm('Quantity settings are available.')
     this.setState({feasibility: check});
   };
 
@@ -149,9 +149,9 @@ class Making extends React.Component {
         <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item">Happiness Box</li>
-          <li className="active breadcrumb-item">박스 수량 정하기</li>
+          <li className="active breadcrumb-item">Quantity Setting</li>
         </ol>
-        <h1 className="page-title">박스 수량 정하기</h1>
+        <h1 className="page-title">Quantity Setting</h1>
         {this.props.message && (
                     <Alert size="sm" color="info">
                       {this.props.message}
@@ -172,7 +172,7 @@ class Making extends React.Component {
                     </button>
                     </CardHeader>
                         <CardBody>
-                          <h6> 구성 상품</h6>
+                          <h6>Items</h6>
                           <hr/>
                         {
                           collection.donations.map((donation, index) =>
@@ -180,7 +180,7 @@ class Making extends React.Component {
                           )
                         }
                         <hr/>
-                        만들 수량
+                        Quantity
                         <Input
                         value = {collection.collection_quantity}
                         onChange = {this.handleQuantity(index)}
@@ -191,20 +191,20 @@ class Making extends React.Component {
                         />
                         </CardBody>
                     <CardFooter>
-                      (유통기한: {(JSON.parse(collection.expiration_date).length>0) ? new Date(Math.min.apply(null, JSON.parse(collection.expiration_date).map(date => new Date(date)))).toISOString().substring(0, 10) : "없음"})
+                      (Expiration Date: {(JSON.parse(collection.expiration_date).length>0) ? new Date(Math.min.apply(null, JSON.parse(collection.expiration_date).map(date => new Date(date)))).toISOString().substring(0, 10) : "없음"})
                     </CardFooter>
                   </Card>
               )
             }
          </CardColumns>
-        <div style={{float: 'left'}}>* 정합성 체크를 해야 생성버튼이 활성화 됩니다</div>
+        <div style={{float: 'left'}}>* Please check the feasibility of quantity setting in order to activate the "Save" button</div>
          <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
            <ButtonGroup>
              <Button color="warning" onClick={this.checkFeasibility}>
-                {'정합성 체크'}
+                {'Check feasibility'}
               </Button>
               <Button color="success" type="submit" onClick= {this.doSetQuantity} disabled={!this.state.feasibility}>
-                {this.props.isFetching ? '저장...' : '수량 정하기'}
+                {this.props.isFetching ? 'Processing...' : 'Save'}
               </Button>
            </ButtonGroup>
          </div>

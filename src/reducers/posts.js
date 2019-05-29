@@ -318,7 +318,7 @@ export default function posts(
     case CREATE_COLLECTION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        message: '행복상자 컬랙션 생성에 성공하였습니다',
+        message: 'Success.',
         errorMessage: null,
       });
     case CREATE_COLLECTION_FAILURE:
@@ -357,14 +357,14 @@ export default function posts(
     case MODIFY_COLLECTION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        message: '행복상자 수량 정하기에 성공하였습니다',
+        message: 'Success.',
         errorMessage: null,
       });
     case MODIFY_COLLECTION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         message: null,
-        errorMessage: '행복상자 수량 정하기에 실패했습니다. 관리자에게 문의하세요',
+        errorMessage: 'Fail. Ask to admin.',
       });
     case REMOVE_COLLECTION_INITIAL:
       return Object.assign({}, state, {
@@ -378,14 +378,14 @@ export default function posts(
     case REMOVE_COLLECTION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        message: '행복상자 컬렉션 삭제에 성공하였습니다',
+        message: 'Success.',
         errorMessage: null,
       });
     case REMOVE_COLLECTION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         message: null,
-        errorMessage: '행복상자 컬렉션 삭제에 실패하습니다. 관리자에게 문의하세요',
+        errorMessage: 'Fail. Ask to admin.',
       });
 
      /* change category actions */
@@ -489,7 +489,7 @@ export default function posts(
     case CHANGE_SEASON_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: 'Fail to chang season. Ask to admin',
+        errorMessage: 'Fail to change season. Ask to admin',
         message: null
       });
 
@@ -533,14 +533,14 @@ export default function posts(
     case UPDATE_COLLECTION_DISTRIBUTION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        message: '분배 수량 정하기에 성공하였습니다.',
+        message: 'Success.',
         errorMessage: null,
       });
     case UPDATE_COLLECTION_DISTRIBUTION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         message: null,
-        errorMessage: '분배 수량 정하기에 실패하였습니다. 관리자에게 문의하세요.',
+        errorMessage: 'Fail. Ask to admin.',
       });
     case FETCH_RECEIPT_SUCCESS:
       return Object.assign({}, state, {

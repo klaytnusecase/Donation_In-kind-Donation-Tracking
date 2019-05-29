@@ -142,6 +142,7 @@ class Planning extends React.Component {
 
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <ol className="breadcrumb">
@@ -240,7 +241,6 @@ class Planning extends React.Component {
                     </span>
                     <hr/>
                   </div>
-                  // {this.state.InBoxDonations[0].유통기한 && this.state.InBoxDonations.reduce((min, p) => p.유통기한 < min ? p.유통기한 : min, this.state.InBoxDonations[0].유통기한)}
                 )}
 
               </div>
