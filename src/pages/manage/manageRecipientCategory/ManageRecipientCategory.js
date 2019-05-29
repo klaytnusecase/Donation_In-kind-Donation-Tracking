@@ -136,11 +136,11 @@ class ManageRecipientCategory extends React.Component {
         <div className={s.root}>
           <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">회원 관리</li>
-          <li className="active breadcrumb-item">수혜자 카테고리 관리</li>
+          <li className="breadcrumb-item">User Management</li>
+          <li className="active breadcrumb-item">Manage Recipient Category</li>
         </ol>
 
-        <h1 className="page-title">수혜자 카테고리 관리</h1>
+        <h1 className="page-title">Manage Recipient Category</h1>
           <Row>
             <Col>
                 {this.props.message && (
@@ -159,7 +159,7 @@ class ManageRecipientCategory extends React.Component {
             <Col sm ={6}>
               <Widget className={s.widget}>
                 <Form className="mt_1" onSubmit={this.doSubmitType1}>
-                  <Label for="input-content">연령 카테고리<br/></Label>
+                  <Label for="input-content">Age Category<br/></Label>
                 {this.state.categoryArrayType1.map((category, idx) => (
                   <React.Fragment key={`repetition${  idx}`}>
                   <FormGroup key = {`category${  idx}`}>
@@ -169,7 +169,7 @@ class ManageRecipientCategory extends React.Component {
                       onChange = {this.handleCategoryValueChangeType1(idx)}
                       type="text"
                       required
-                      placeholder = "추가할 카테고리"
+                      placeholder = "Category to add"
                       style={{ width:"70%" }}
                       />
                     <Button
@@ -177,7 +177,7 @@ class ManageRecipientCategory extends React.Component {
                     onClick={this.handleRemoveCategoryType1(idx)}
                     size="sm"
                     >
-                      지우기
+                      Remove
                     </Button>
                     </div>
                   </FormGroup>
@@ -189,13 +189,13 @@ class ManageRecipientCategory extends React.Component {
                 size="sm"
                 onClick = {this.handleAddCategoryType1}
               >
-              카테고리 추가
+              Add Category
               </Button>
 
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
                     <ButtonGroup>
                     <Button color="success">
-                      {this.props.isFetching ? 'Creating...' : 'Create'}
+                      {this.props.isFetching ? 'Saving...' : 'Save'}
                     </Button>
                     </ButtonGroup>
                   </div>
@@ -205,7 +205,7 @@ class ManageRecipientCategory extends React.Component {
             <Col sm ={6}>
               <Widget className={s.widget}>
                 <Form className="mt_2" onSubmit={this.doSubmitType2}>
-                  <Label for="input-content">특수 카테고리<br/></Label>
+                  <Label for="input-content">Special Category<br/></Label>
                 {this.state.categoryArrayType2.map((category, idx) => (
                   <React.Fragment key={`repetition${  idx}`}>
                   <FormGroup key = {`category${  idx}`}>
@@ -215,7 +215,7 @@ class ManageRecipientCategory extends React.Component {
                       onChange = {this.handleCategoryValueChangeType2(idx)}
                       type="text"
                       required
-                      placeholder = "추가할 카테고리"
+                      placeholder = "Category to add"
                       style={{ width:"70%" }}
                       />
                     <Button
@@ -235,12 +235,12 @@ class ManageRecipientCategory extends React.Component {
                 size="sm"
                 onClick = {this.handleAddCategoryType2}
               >
-              카테고리 추가
+              Add Category
               </Button>
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
                     <ButtonGroup>
                     <Button color="success">
-                      {this.props.isFetching ? 'Creating...' : 'Create'}
+                      {this.props.isFetching ? 'Saving...' : 'Save'}
                     </Button>
                     </ButtonGroup>
                   </div>

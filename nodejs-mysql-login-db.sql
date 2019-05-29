@@ -166,9 +166,9 @@ INSERT INTO `donation_column` (`donation_id`, `column_type`, `detail`, `is_publi
 
 
 INSERT INTO `configuration` (`type`, `stringify_data`) VALUES
-('recipientCategory_type_1', '[{"category":"영아(~3세)"},{"category":"유아(4세~6세)"},{"category":"아동(8세~13세)"},{"category":"청소년(14세 이상)"}]');
+('recipientCategory_type_1', '[{"category":"Infant(~3)"},{"category":"Child(4~6)"},{"category":"Child(8~13)"},{"category":"Youth(Over 14)"}]');
 INSERT INTO `configuration` (`type`, `stringify_data`) VALUES
-('recipientCategory_type_2', '[{"category":"다문화"},{"category":"장애"},{"category":"탈북민"}]');
+('recipientCategory_type_2', '[{"category":"Immigrant"},{"category":"Disabled"},{"category":"Poverty"}]');
 INSERT INTO `configuration` (`type`, `stringify_data`) VALUES
 ('switch_1', 'false');
 INSERT INTO `configuration` (`type`, `stringify_data`) VALUES

@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
             glyph="components"
           />
           <LinksGroup
-            header="Management Users"
+            header="User Management"
             headerLink="/app/manage/member"
             childrenLinks={[
               {
