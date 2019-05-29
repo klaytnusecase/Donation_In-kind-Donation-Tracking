@@ -405,7 +405,7 @@ export default function posts(
       return Object.assign({}, state, {
         isFetching: false,
         errorMessage: null,
-        message: '수헤자 카테고리 등록에 성공하였습니다.',
+        message: 'Saved recipient category successfully.',
       });
 
     /* fetch category actions */
@@ -489,7 +489,7 @@ export default function posts(
     case CHANGE_SEASON_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: '시즌 넘기기에 실패하였습니다. 관리자에게 문의하세요',
+        errorMessage: 'Fail to chang season. Ask to admin',
         message: null
       });
 
@@ -497,7 +497,7 @@ export default function posts(
       return Object.assign({}, state, {
         isFetching: false,
         errorMessage: null,
-        message: '시즌 넘기기에 성공하였습니다'
+        message: 'Change season successfully'
       });
 
     /* fetch collection distribution */

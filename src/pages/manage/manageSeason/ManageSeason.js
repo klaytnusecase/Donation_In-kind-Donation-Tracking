@@ -100,11 +100,11 @@ class manageSeason extends React.Component {
         <div className={s.root}>
           <ol className="breadcrumb">
           <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item">환경설정</li>
-          <li className="active breadcrumb-item">시즌 관리</li>
+          <li className="breadcrumb-item">Configuration</li>
+          <li className="active breadcrumb-item">Manage Season</li>
         </ol>
 
-        <h1 className="page-title">시즌 관리</h1>
+        <h1 className="page-title">Manage Season</h1>
           <Row>
             <Col>
                 {this.props.message && (
@@ -123,7 +123,7 @@ class manageSeason extends React.Component {
             <Col>
               <Widget className={s.widget}>
                 <Form className="mt_1" onSubmit={this.doSubmitType1}>
-                  <Label for="input-content">현재 시즌<br/></Label>
+                  <Label for="input-content">Current Season<br/></Label>
                   <FormGroup key = {`season`}>
                     <div  className="d-flex justify-content-start" key = {`season`}>
                     <Input
@@ -131,7 +131,6 @@ class manageSeason extends React.Component {
                       type="text"
                       onChange = {this.dummyChange}
                       required
-                      placeholder = "추가할 카테고리"
                       style={{ width:"70%" }}
                       disabled
                       />
@@ -140,7 +139,7 @@ class manageSeason extends React.Component {
                   <div className="d-flex justify-content-end" style={{marginTop: "10px"}}>
                     <ButtonGroup>
                     <Button color="success" onClick={this.toggle}>
-                      {this.props.isFetching ? 'Creating...' : '다음 시즌으로 넘어가기'}
+                      {this.props.isFetching ? 'Proecessing...' : 'Move to next season'}
                     </Button>
                     </ButtonGroup>
                   </div>
@@ -150,15 +149,14 @@ class manageSeason extends React.Component {
           </Row>
           <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop={this.state.backdrop}>
             <ModalHeader toggle={this.toggle}>
-              주의하세요!
+              Warning!
             </ModalHeader>
               <ModalBody>
-                다음 시즌으로 넘어갈지 다시 한 번 확인합니다.
-                {this.props.season.stringify_data}
+                Check again to see if you want to move to next season
               </ModalBody>
             <ModalFooter>
               <Button variant="primary" onClick={this.moveToNextSeason}>
-                넘어가기
+                Move to next season
               </Button>
             </ModalFooter>
           </Modal>
