@@ -378,7 +378,7 @@ export default function posts(
     case REMOVE_COLLECTION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        message: 'Success.',
+        message: 'Removed donation box complete successfully',
         errorMessage: null,
       });
     case REMOVE_COLLECTION_FAILURE:
