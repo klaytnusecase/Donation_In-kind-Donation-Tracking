@@ -30,10 +30,12 @@ We record donation information into a local database and/or the Klaytn because t
 4. [Local] The foundation temporally distributes boxes to NPOs.
     - This step needs for simulating a donation event before recording the box information into the Klaytn.
     - Temporal distributions are saved in a local database to be easily modified.
+    - [![box_simulation](http://img.youtube.com/vi/S-PxwciObQI/0.jpg)](http://www.youtube.com/watch?v=S-PxwciObQI "")
     
 5. [Klaytn] The foundation uploads box distribution details to the Klaytn. 
     - Each box has an identification number and is sent to a NPO. (method: __*distributeBox*__)
     - A box contains rich information including the identification number, box type, recipient, expiration date, and etc.
+    - [![final_dist](http://img.youtube.com/vi/G3eTcbA6w5I/0.jpg)](http://www.youtube.com/watch?v=G3eTcbA6w5I "")
     
 6. [Klaytn] NPOs update box information when they receive boxes and deliver them to recipients.
     - NPOs record the date when they receive boxes by using their private key (method: __*receiveBox*__)
@@ -41,6 +43,8 @@ We record donation information into a local database and/or the Klaytn because t
     - Private key is generated when the foundation creates ID of a NPO.
     - Keystore files are in the system, so that NPOs do not need to load them independently when signing a transaction.
     - NPOs delegate smart contract execution to the foundation. The foundation pays gas. 
+    - [![issue_reciept](http://img.youtube.com/vi/-MOe7hi_DHU/0.jpg)](http://www.youtube.com/watch?v=-MOe7hi_DHU "")
+    
     
     
     
