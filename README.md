@@ -40,6 +40,7 @@ We record donation information into a local database and/or the Klaytn because t
     - Private key is generated when the foundation creates ID of a NPO.
     - Keystore files are in the system, so that NPOs do not need to load them independently when signing a transaction.
     - NPOs delegate smart contract execution to the foundation. The foundation pays gas. 
+    ![GitHub Logo](/Clips/NPO_issue_receipt.mov)
     
     
     
