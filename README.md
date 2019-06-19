@@ -41,7 +41,6 @@ We record donation information into a local database and/or the Klaytn because t
     - Private key is generated when the foundation creates ID of a NPO.
     - Keystore files are in the system, so that NPOs do not need to load them independently when signing a transaction.
     - NPOs delegate smart contract execution to the foundation. The foundation pays gas. 
-    [![Audi R8](http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg)](https://www.youtube.com/watch?v=KOxbO0EI4MA "Audi R8")
     
     
     
@@ -179,9 +178,13 @@ This command will build the app from the source files (`/src`) into the output
 
 ## Configuration for foundation
 1. Issue account
+
 [![issue_account](http://img.youtube.com/vi/2OiT_iRBZ7I/0.jpg)](http://www.youtube.com/watch?v=2OiT_iRBZ7I "")
+
 2. Modify configuration for app
+
 [![modify_config](http://img.youtube.com/vi/SNAnuYUEYC4/0.jpg)](http://www.youtube.com/watch?v=SNAnuYUEYC4 "")
+
 
 
 ## To-do List
