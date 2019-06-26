@@ -4,6 +4,8 @@ This pilot project is for tracking "donation box" that has various goods, such a
 
 **Our codes are at a preliminary stage with a focus on the following procedure and smart contract methods.**
 
+**Please click the following images to watch how each procedure works**
+
 ## Flows
 
 We record donation information into a local database and/or the Klaytn because there are privacy issues in blockchain-based donation.
